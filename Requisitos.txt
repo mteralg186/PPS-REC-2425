@@ -1,0 +1,76 @@
+Quisiera una especie de kahoot para poder conectar a una sala y competir.
+
+Para permitir que los usuarios se conecten a una sala y muestren las preguntas en tiempo real, puedes utilizar Socket.IO junto con Express. Aquí tienes un ejemplo de cómo hacerlo:
+
+Instala Socket.IO:
+bash
+Copiar código
+npm install socket.io
+Modifica tu archivo index.js para incluir Socket.IO:
+javascript
+Copiar código
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html'); // Servirá tu archivo HTML para la interfaz de usuario
+});
+
+io.on('connection', (socket) => {
+  console.log('Usuario conectado');
+
+  // Manejar la conexión del usuario a una sala
+  socket.on('joinRoom', (roomId) => {
+    socket.join(roomId);
+    console.log(`Usuario conectado a la sala ${roomId}`);
+  });
+
+  // Manejar el envío de preguntas a la sala
+  socket.on('sendQuestion', (roomId, question) => {
+    io.to(roomId).emit('newQuestion', question);
+  });
+});
+
+server.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
+});
+Crea tu archivo HTML (index.html):
+html
+Copiar código
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kahoot</title>
+</head>
+<body>
+  <!-- Aquí puedes agregar tu interfaz de usuario -->
+  <h1>Bienvenido a la sala de Kahoot</h1>
+</body>
+</html>
+En tu interfaz de usuario (HTML/JavaScript), implementa la lógica para conectarse a la sala y mostrar las preguntas:
+html
+Copiar código
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  // Conectar a la sala
+  const roomId = 'sala-1'; // Puedes cambiar esto según tu lógica
+  socket.emit('joinRoom', roomId);
+
+  // Escuchar nuevas preguntas
+  socket.on('newQuestion', (question) => {
+    console.log('Nueva pregunta recibida:', question);
+    // Aquí puedes mostrar la pregunta en tu interfaz de usuario
+  });
+</script>
+Con este código, cuando un usuario se conecte a tu aplicación y entre en una sala, podrá recibir y mostrar las preguntas enviadas a esa sala en tiempo real. Asegúrate de adaptar este ejemplo según las necesidades específicas de tu aplicación Kahoot.
