@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas</title>
+</head>
+<body>
+    <h1>Preguntas</h1>
+    <form action="/tester" method="POST">
+        <% preguntas.forEach(function(pregunta, index) { %>
+            <div>
+                <h3>Pregunta <%= index + 1 %>:</h3>
+                <p><%= pregunta[0] %></p>
+                 <p><%= pregunta[1] %></p>
+                <select name="respuesta_<%= index %>">
+                    <% pregunta.opciones.forEach(function(opcion, i) { %>
+                        <option value="<%= i %>"><%= opcion %></option>
+                    <% }); %>
+                </select> 
+            </div>
+        <% }); %>
+        <button type="submit">Enviar Respuestas</button>
+    </form>
+</body>
+</html>
