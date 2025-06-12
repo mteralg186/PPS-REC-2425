@@ -5,11 +5,7 @@
     "bootstrap": "^5.3.3",
     "crypto": "^1.0.1",
     "ejs": "^3.1.9",
-<<<<<<< HEAD
-    "express": "^4.18.2",
-=======
     "express": "^4.21.2",
->>>>>>> 9e904a5 (Primera Version)
     "express-session": "^1.18.0",
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
