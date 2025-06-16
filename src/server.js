@@ -78,6 +78,7 @@ app.get('/gestionar-alumnos', (req, res) => {
 app.get('/unirse', (req, res) => {
     res.render('unirse', { title: 'Gestionar Alumnos' });
 });
+
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
