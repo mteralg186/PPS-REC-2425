@@ -1,0 +1,24 @@
+<%- include('partes/header') %>
+
+<h1><%= examen.nombre %></h1>
+<link href="/css/styles.css" rel="stylesheet">
+<form method="POST" action="/examen/<%= examenId %>">
+
+
+  <% examen.preguntas.forEach((pregunta, index) => { %>
+    <div>
+      <h3><%= index + 1 %>. <%= pregunta.texto %></h3>
+
+      <% pregunta.respuestas.forEach(respuesta => { %>
+        <div>
+          <input type="radio" id="r<%= respuesta.id %>" name="<%= pregunta.id %>" value="<%= respuesta.id %>" required>
+          <label for="r<%= respuesta.id %>"><%= respuesta.texto %></label>
+        </div>
+      <% }) %>
+    </div>
+  <% }) %>
+
+  <button type="submit">Enviar respuestas</button>
+</form>
+
+<%- include('partes/footer') %>

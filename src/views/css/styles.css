@@ -1,30 +1,38 @@
+.navbar {
+    position: fixed; /* Asegura que esté fija */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030; /* Asegura que esté por encima del contenido */
+    transition: top 0.6s;
+}
+
+.navbar-hidden {
+    top: -70px; /* Oculta la navbar (si usas JS para ello) */
+}
+
+/* ---------- BODY CON ESPACIO PARA NAVBAR ----------- */
+body {
+    padding-top: 70px; /* Deja espacio para la navbar */
+    padding-bottom: 100px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* ---------- IMAGEN DE PERFIL ----------- */
 .img-perfil {
-    width: 250px; /* Ajusta el tamaño según tus necesidades */
-    height: 250px; /* Ajusta el tamaño según tus necesidades */
+    width: 250px;
+    height: 250px;
     overflow: hidden;
     margin: 0 auto;
 }
-
 .img-perfil img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionarse */
+    object-fit: cover;
 }
 
-.navbar {
-    transition: top 0.6s;
-}
-.navbar-hidden {
-    top: -70px;
-}
-
-
-body {
-    padding-top: 70px; /* Espacio para la navbar fija */
-    padding-bottom: 100px;
-    background-color: #f8f9fa;
-    min-height: 100vh; /* Permite scroll si el contenido crece */
-}
+/* ---------- FORMULARIO DE REGISTRO ----------- */
 .register-container {
     background: white;
     padding: 2rem;
@@ -35,6 +43,7 @@ body {
     margin-bottom: 1rem;
 }
 
+/* ---------- CONSENTIMIENTO DE COOKIES ----------- */
 .cookie-consent {
     position: fixed;
     bottom: 20px;
@@ -47,14 +56,12 @@ body {
     display: none;
 }
 
+/* ---------- RADIO BUTTONS PERSONALIZADOS ----------- */
 .custom-radio .custom-control-label::before {
     border-radius: 50%;
 }
 
-.custom-radio .custom-control-label::before {
-    border-radius: 50%;
-}
-
+/* ---------- CONTENEDOR DE PREGUNTAS ----------- */
 .question-container {
     position: relative;
     margin-bottom: 20px;
@@ -104,3 +111,92 @@ body {
     background-color: green;
     color: white;
 }
+
+/* ---------- TITULOS ----------- */
+h1 {
+    text-align: center;
+    font-size: 2.8rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ---------- FORMULARIOS ----------- */
+form {
+    max-width: 650px;
+    margin: 0 auto 3rem;
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+form > div {
+    margin-bottom: 1.8rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1.2rem;
+}
+form h3 {
+    font-weight: 600;
+    color: #34495e;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+form div > div {
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+label {
+    font-size: 1rem;
+    color: #4a5568;
+    cursor: pointer;
+    user-select: none;
+}
+button[type="submit"] {
+    display: block;
+    margin: 2rem auto 0;
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+    padding: 0.9rem 3rem;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* ---------- LISTADO DE EXÁMENES ----------- */
+.login-background {
+  background-image: url('/img/portada.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* altura total viewport */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0; /* elimina márgenes */
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  padding: 30px;
+  width: 100%;
+  max-width: 480px;
+}
+

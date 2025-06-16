@@ -31,6 +31,10 @@
   </div>
 </main>
 
-
+<% if (mensaje && mensaje.length > 0) { %>
+  <div class="alert alert-info text-center">
+    <%= mensaje %>
+  </div>
+<% } %>
 
 <%- include('partes/footer') %>

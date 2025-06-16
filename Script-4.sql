@@ -50,16 +50,19 @@ CREATE TABLE IF NOT EXISTS respuestas (
 
 
 DROP TABLE IF EXISTS respondidas;
--- Creación de la tabla preguntas
+
 CREATE TABLE IF NOT EXISTS respondidas (
-    id_usuario int,
-    id_pregunta int,
-    mostrada int,
-    correcta int,
-    fallada int,
-    PRIMARY KEY (id_usuario, id_pregunta),
-    FOREIGN key (id_usuario) REFERENCES usuarios(id),
-    FOREIGN key (id_pregunta) REFERENCES preguntas(id)
+    id_usuario INT,
+    id_examen INT,
+    id_pregunta INT,
+    respuesta_id INT,
+    es_correcta BOOLEAN,
+    fecha_respuesta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_usuario, id_examen, id_pregunta),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_examen) REFERENCES examenes(id_examen) ON DELETE CASCADE,
+    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id) ON DELETE CASCADE,
+    FOREIGN KEY (respuesta_id) REFERENCES respuestas(id) ON DELETE CASCADE
 );
 
 -- Creación de la tabla de Clases
@@ -74,33 +77,48 @@ CREATE TABLE IF NOT EXISTS clases (
     FOREIGN key (id_categoria) REFERENCES categoria(id) ON DELETE CASCADE
 );
 
--- Creación de la tabla de Clases_asignadas
+DROP TABLE IF EXISTS clases_asignadas;
+
 CREATE TABLE IF NOT EXISTS clases_asignadas (
-    id_clase int,
-    Docente int,
-    Alumnos int,
-    PRIMARY KEY (id_clase),
-    FOREIGN key (Docente) REFERENCES clases(id_usuario) ON DELETE CASCADE
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_clase INT NOT NULL,
+    id_alumno INT NOT NULL,
+    fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_clase) REFERENCES clases(id_clase) ON DELETE CASCADE,
+    FOREIGN KEY (id_alumno) REFERENCES usuarios(id) ON DELETE CASCADE,
+    UNIQUE KEY (id_clase, id_alumno)
 );
-
 -- Creación de la tabla de Examenes
+DROP TABLE IF EXISTS examenes;
 CREATE TABLE IF NOT EXISTS examenes (
-    id_examen INT AUTO_INCREMENT,
-    nombre varchar(100),
-    id_categoria int,
-    id_clase int, 
-    id_pregunta int,
-    id_respuestas int,
+    id_examen INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    id_categoria INT,
+    id_clase INT,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id_examen),
-    FOREIGN key (id_categoria) REFERENCES categoria(id) ON DELETE CASCADE,
-    FOREIGN key (id_clase) REFERENCES clases(id_clase) ON DELETE CASCADE,
-    FOREIGN key (id_pregunta) REFERENCES preguntas(id) ON DELETE CASCADE,
-    FOREIGN key (id_respuestas) REFERENCES respuestas(id) ON DELETE CASCADE
+    FOREIGN KEY (id_categoria) REFERENCES categoria(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_clase) REFERENCES clases(id_clase) ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS examen_preguntas;
+CREATE TABLE IF NOT EXISTS examen_preguntas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_examen INT,
+  id_pregunta INT,
+  FOREIGN KEY (id_examen) REFERENCES examenes(id_examen) ON DELETE CASCADE,
+  FOREIGN KEY (id_pregunta) REFERENCES preguntas(id) ON DELETE CASCADE
+);
 
-
+CREATE TABLE IF NOT EXISTS examenes_realizados (
+    id_usuario INT,
+    id_examen INT,
+    nota DECIMAL(5,2),
+    aprobado BOOLEAN,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_usuario, id_examen),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_examen) REFERENCES examenes(id_examen)
+);
 
 
 #POPULANDO BD

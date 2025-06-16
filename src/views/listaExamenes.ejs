@@ -1,0 +1,22 @@
+<%- include('partes/header') %>
+
+<link href="/css/styles.css" rel="stylesheet">
+<div class="examenes-listado">
+  <h1><%= title %></h1>
+
+  <% if (mensaje) { %>
+    <p class="mensaje-examen"><%= mensaje %></p>
+  <% } %>
+
+  <ul class="lista-examenes">
+    <% examenes.forEach(examen => { %>
+      <li>
+        <a href="/examen/<%= examen.id_examen %>">
+          <%= examen.nombre_examen %> (Clase: <%= examen.nombre_clase %>)
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+</div>
+
+<%- include('partes/footer') %>

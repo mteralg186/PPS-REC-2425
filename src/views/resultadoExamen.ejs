@@ -1,0 +1,10 @@
+<h2>Resultado del examen</h2>
+<p>Preguntas totales: <%= totalPreguntas %></p>
+<p>Preguntas correctas: <%= correctas %></p>
+<p>Porcentaje: <%= porcentaje.toFixed(2) %> %</p>
+
+<% if (aprobado) { %>
+  <p style="color:green; font-weight:bold;">¡Felicidades! Has aprobado el examen.</p>
+<% } else { %>
+  <p style="color:red; font-weight:bold;">No has alcanzado el 50%, intenta de nuevo.</p>
+<% } %>
