@@ -19,15 +19,27 @@
         </select>
     </div>
 
+    <!-- Campo para nueva categoría -->
+    <div class="mb-4">
+        <label for="nueva_categoria">Crear una nueva categoría:</label>
+        <input id="nueva_categoria" type="text" class="form-control" placeholder="Nueva categoría (si aplica)">
+    </div>
+
     <!-- Select para clase -->
     <div class="mb-4">
         <label for="id_clase">Clase:</label>
         <select id="id_clase" required>
-        <option value="">Seleccione una clase</option>
-        <% clases.forEach(cl => { %>
-            <option value="<%= cl.id_clase %>"><%= cl.nombre %></option>
-        <% }) %>
+            <option value="">Seleccione una clase</option>
+            <% clases.forEach(cl => { %>
+                <option value="<%= cl.id_clase %>"><%= cl.nombre %></option>
+            <% }) %>
         </select>
+    </div>
+
+    <!-- Campo para fecha y hora disponible -->
+    <div class="mb-4">
+        <label for="fechaDisponible">Fecha y hora de disponibilidad del examen:</label>
+        <input id="fechaDisponible" type="datetime-local" class="form-control" required>
     </div>
 
     <div class="text-center mb-4">
@@ -51,7 +63,7 @@
 
     function addQuestion() {
         if (questionCounter >= 20) {
-            alert('Ya has alcanzado el máximo de 20 preguntas.');
+            alert('Has alcanzado el límite máximo de 20 preguntas por test.');
             return;
         }
         questionCounter++;
@@ -172,7 +184,7 @@
                 renderQuestionSummary(questionDiv, questionData);
                 updateQuestionCount();
             } else {
-                alert('Por favor, completa todos los campos y selecciona una respuesta correcta.');
+                alert('Por favor, completa el nombre de la pregunta, agrega respuestas y selecciona la respuesta correcta.');
             }
         });
 
@@ -237,16 +249,18 @@
         event.preventDefault();
 
         if (questions.length === 0) {
-            alert('No hay preguntas para enviar');
+            alert('No has añadido preguntas para enviar. Por favor, agrega al menos una pregunta.');
             return;
         }
 
         const nombreExamen = document.getElementById('nombreExamen').value.trim();
         const id_categoria = document.getElementById('id_categoria').value;
+        const nueva_categoria = document.getElementById('nueva_categoria').value.trim();
         const id_clase = document.getElementById('id_clase').value;
+        const fechaDisponible = document.getElementById('fechaDisponible').value;
 
-        if (!nombreExamen || !id_categoria || !id_clase) {
-            alert('Por favor, completa todos los campos del examen');
+        if (!nombreExamen || (!id_categoria && !nueva_categoria) || !id_clase || !fechaDisponible) {
+            alert('Por favor, completa todos los campos del examen, incluyendo la fecha y hora de disponibilidad.');
             return;
         }
 
@@ -255,25 +269,29 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 nombreExamen,
-                id_categoria: parseInt(id_categoria),
+                id_categoria: id_categoria ? parseInt(id_categoria) : null,
+                nueva_categoria: nueva_categoria ? nueva_categoria : null,
                 id_clase: parseInt(id_clase),
+                fechaDisponible,
                 questions
             })
         })
         .then(response => {
             if (response.ok) {
-                alert('Examen guardado correctamente');
+                alert('El examen se ha guardado correctamente.');
                 questions = [];
                 document.getElementById('questionsContainer').innerHTML = '';
                 updateQuestionCount();
                 document.getElementById('nombreExamen').value = '';
                 document.getElementById('id_categoria').value = '';
+                document.getElementById('nueva_categoria').value = '';
                 document.getElementById('id_clase').value = '';
+                document.getElementById('fechaDisponible').value = '';
             } else {
-                alert('Error al guardar el examen');
+                alert('Hubo un error al guardar el examen. Inténtalo de nuevo más tarde.');
             }
         })
-        .catch(() => alert('Error de red'));
+        .catch(() => alert('No se pudo conectar al servidor. Por favor, verifica tu conexión e inténtalo nuevamente.'));
     });
 </script>
 

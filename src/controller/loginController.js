@@ -98,57 +98,41 @@ async function VerificarPass(password, encriptPassword) {
     }
 }
 
- const postLogin =(req, res) => {
-    const username = req.body.username;
-    const password = req.body.contraseña;
-    const query = 'SELECT * FROM usuarios WHERE username = ?';
-    const query1 = 'SELECT rol from usuarios where username = ?';
-   
-    connection.query(query, [username], async (err, results) => {
-        if (err){
-            res.render('index', { mensaje: 'Usuario no valido' }); // Redirige al usuario de vuelta al formulario de inicio de sesión con un mensaje de error
- 
-        }else if (results.length > 0) {
-                    // Verificar si la contraseña coincide utilizando bcrypt.compare()
-                   const validPassword = await VerificarPass(password, results[0].contraseña);
+const postLogin = (req, res) => {
+  const username = req.body.username;
+  const password = req.body.contraseña;
+  const query = 'SELECT * FROM usuarios WHERE username = ?';
 
-                        if (validPassword) { // Redirige al usuario al panel de control (dashboard)
-                            req.session.loggedIn = true; // Establece la sesión como iniciada
-                            req.session.username = username; // Guarda el nombre de usuario en la sesión
-                            req.session.userId = results[0].id;
+  connection.query(query, [username], async (err, results) => {
+    if (err || results.length === 0) {
+      return res.render('index', { mensaje: 'Usuario no válido' });
+    }
 
-                     //Consultando el rol       
-                    connection.query(query1, [username], (err2, roleResults) => {
-                    if (err2 || roleResults.length === 0) {
-                        return res.render('index', { mensaje: 'Error al obtener el rol' });
-                    }
+    const user = results[0];
+    const validPassword = await VerificarPass(password, user.contraseña);
 
-                    const rol = roleResults[0].rol;
+    if (!validPassword) {
+      return res.render('index', { mensaje: 'Contraseña inválida' });
+    }
 
-                    if (rol === 'p') {
-                        return res.redirect('/profesor');
-                    } else {
-                        return res.redirect('/alumno');
-                    }
-                });
-                            
-                        } else {// Redirige al usuario de vuelta al formulario de inicio de sesión con un mensaje de error
-                            res.render('index', {
-                                title: 'login',
-                                mensaje: 'Contraseña inválida',
-                                username: '' });
-                        }
+    req.session.loggedIn = true;
+    req.session.username = user.username;
+    req.session.userId = user.id;
+    req.session.rol = user.rol;
 
-        }else{
-            res.render('index', {
-                title: 'login',
-                mensaje: 'Usuario no valido',
-                username: '' }); // Redirige al usuario de vuelta al formulario de inicio de sesión con un mensaje de error
-    
-        }
-
-    });
+    switch (user.rol) {
+      case 'p':
+        return res.redirect('/profesor');
+      case 'a':
+        return res.redirect('/alumno');
+      case 'h':
+        return res.redirect('/admin');
+      default:
+        return res.redirect('/'); // o una ruta por defecto
+    }
+  });
 };
+
 
 const getRegistro = (req, res) => {
     res.render('registro',
@@ -193,6 +177,33 @@ const getPerfil = (req, res) => {
     });
 };
 
+const getPerfilalumno = (req, res) => {
+    const username = req.session.username;
+    const mensaje = req.query.mensaje;
+    // Consulta SQL para obtener los datos del perfil del usuario
+    const sql = 'SELECT * FROM usuarios WHERE username = ?';
+    connection.query(sql, [username], (err, results) => {
+        if (err) {
+            console.error('Error al obtener datos del perfil:', err);
+            res.status(500).send('Error al obtener datos del perfil');
+            return;
+        }
+        const usuario = results[0];
+        // Comprobar si se encontraron resultados
+        if (results.length > 0) {
+            // Renderizar la plantilla 'perfil' con los datos del usuario
+            res.render('perfilalumno', {
+                title: 'Inicio',
+                mensaje: '' ,
+                username: username,
+                usuario
+            }); 
+            //, { username, usuario, mensaje}
+        } else {
+            res.status(404).send('Usuario no encontrado');
+        }
+    });
+};
 // Exporta las funciones y el enrutador
 module.exports = {
     getIndex,
@@ -202,6 +213,7 @@ module.exports = {
     getRegistro,
     postRegister,
     getError,
-    getPerfil
+    getPerfil,
+    getPerfilalumno
 
 };

@@ -3,6 +3,18 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4"><%= title %></h2>
 
+  <!-- Form filtro -->
+  <form method="GET" action="/gestionar-alumnos" class="mb-4 d-flex gap-2 align-items-center justify-content-center">
+    <label for="id_clase">Filtrar por clase:</label>
+    <select name="id_clase" id="id_clase" class="form-select w-auto">
+      <option value="">Todas las clases</option>
+      <% clases.forEach(clase => { %>
+        <option value="<%= clase.id_clase %>" <%= clase.id_clase == idClaseFiltro ? 'selected' : '' %>><%= clase.nombre %></option>
+      <% }) %>
+    </select>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+  </form>
+
   <% if (alumnos.length === 0) { %>
     <p class="text-center text-muted">No tienes alumnos asignados aún.</p>
   <% } else { %>
@@ -23,7 +35,7 @@
               <td><%= alumno.username %></td>
               <td><%= alumno.nombre_clase %></td>
               <td>
-                <form method="POST" action="/gestionar-alumnos/eliminar" onsubmit="return confirm('¿Estás seguro que deseas eliminar a este alumno de la clase?');">
+                <form method="POST" action="/gestionar-alumnos/eliminar">
                   <input type="hidden" name="id_alumno" value="<%= alumno.id_alumno %>">
                   <input type="hidden" name="id_clase" value="<%= alumno.id_clase %>">
                   <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>

@@ -13,15 +13,7 @@
               <label for="nombre" class="form-label fw-bold">Nombre de la Clase</label>
               <input type="text" id="nombre" name="nombre" class="form-control" required>
             </div>
-            <div class="mb-3">
-              <label for="categoria" class="form-label fw-bold">Categoría</label>
-              <select id="categoria" name="categoria" class="form-control" required>
-                <option value="" disabled selected>Selecciona una categoría</option>
-                <% categorias.forEach(categoria => { %>
-                  <option value="<%= categoria.id %>"><%= categoria.nombre %></option>
-                <% }); %>
-              </select>
-            </div>
+
 
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Crear Clase</button>

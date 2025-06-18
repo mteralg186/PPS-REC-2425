@@ -1,7 +1,5 @@
 <%- include('partes/headera') %>
 
-
-
 <div class="container mt-4">
 
   <% if (error) { %>
@@ -12,7 +10,7 @@
 
     <h1 class="mb-4"><%= examen.nombre %></h1>
 
-    <form method="POST" action="/examen/<%= examenId %>">
+    <form method="POST" action="/examen/respuestas">
       <% examen.preguntas.forEach((pregunta, index) => { %>
         <div class="mb-4">
           <h3><%= index + 1 %>. <%= pregunta.texto %></h3>
@@ -28,7 +26,7 @@
                 required
               >
               <label class="form-check-label" for="r<%= respuesta.id %>">
-                <%= respuesta.texto %>
+                <%= respuesta.nombre %>
               </label>
             </div>
           <% }) %>

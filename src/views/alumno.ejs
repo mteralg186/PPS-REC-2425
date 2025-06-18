@@ -1,4 +1,4 @@
-<%- include('partes/header') %>
+<%- include('partes/headera') %>
 
 <div class="container mt-5">
     <h2 class="text-center mb-5" style="color: #343a40;">Panel del Alumno</h2>
@@ -21,9 +21,9 @@
             <div class="card border-success shadow-lg" style="border-radius: 15px;">
                 <div class="card-body text-center">
                     <i class="fas fa-file-alt fa-3x text-success mb-3"></i>
-                    <h5 class="card-title text-dark">Exámenes en Activo</h5>
-                    <p class="card-text text-muted">Acceso a exámenes activos.</p>
-                    <a href="/crearTest" class="btn btn-outline-success rounded-pill px-4 py-2">Ir a Exámenes</a>
+                    <h5 class="card-title text-dark">Exámenes de Repaso</h5>
+                    <p class="card-text text-muted">Generado con T.Respondidas</p>
+                    <a href="/examenRespondidas" class="btn btn-outline-success rounded-pill px-4 py-2">Ir a Exámenes</a>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
                     <i class="fas fa-times-circle fa-3x text-danger mb-3"></i>
                     <h5 class="card-title text-dark">Salir de Clase</h5>
                     <p class="card-text text-muted">Salir del curso.</p>
-                    <a href="/profesor/gestion" class="btn btn-outline-danger rounded-pill px-4 py-2">Eliminar Curso</a>
+                    <a href="/clasesAsignadasAlumno" class="btn btn-outline-danger rounded-pill px-4 py-2">Eliminar Curso</a>
                 </div>
             </div>
         </div>

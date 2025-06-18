@@ -10,7 +10,11 @@ router
   .get('/unirse', clasesController.unirseClaseGet)
   .post('/unirse', clasesController.unirseClasePost)
   .get('/gestionar-alumnos',clasesController.verAlumnosProfesor)
-  .post('/gestionar-alumnos/eliminar', clasesController.eliminarAlumnoDeClase);
+  .post('/gestionar-alumnos/eliminar', clasesController.eliminarAlumnoDeClase)
+  .get('/misclases', clasesController.MisClases)
+  .get('/clasesAsignadasAlumno', clasesController.verClasesAsignadasAlumno)
+  .delete('/alumno/clases-asignadas/:idAsignacion', clasesController.eliminarClaseAsignada),
+
   
 
 module.exports = router;

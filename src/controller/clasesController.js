@@ -42,8 +42,8 @@ const crearClasePost = (req, res) => {
   const id_usuario = req.session.userId;
 
   const insertQuery = `
-    INSERT INTO clases (nombre, codigo, id_usuario, id_categoria)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO clases (nombre, codigo, id_usuario)
+    VALUES (?, ?, ?)
   `;
 
   connection.query(insertQuery, [nombre, codigo, id_usuario, categoria], (err) => {
@@ -157,9 +157,16 @@ const unirseClasePost = (req, res) => {
 
 const verAlumnosProfesor = async (req, res) => {
   const idProfesor = req.session.userId;
+  const idClaseFiltro = req.query.id_clase; // leer filtro (puede estar vacío)
 
   try {
-    const [alumnos] = await connection.promise().query(`
+    // Obtener clases del profesor para el filtro
+    const [clases] = await connection.promise().query(`
+      SELECT id_clase, nombre FROM clases WHERE id_usuario = ?
+    `, [idProfesor]);
+
+    // Consultar alumnos, con filtro si viene idClaseFiltro
+    let query = `
       SELECT 
         u.id AS id_alumno,
         u.nombre,
@@ -171,18 +178,31 @@ const verAlumnosProfesor = async (req, res) => {
       JOIN usuarios u ON ca.id_alumno = u.id
       JOIN clases c ON ca.id_clase = c.id_clase
       WHERE c.id_usuario = ?
-      ORDER BY c.nombre, u.nombre
-    `, [idProfesor]);
+    `;
+    let params = [idProfesor];
+
+    if (idClaseFiltro && idClaseFiltro !== '') {
+      query += ' AND ca.id_clase = ?';
+      params.push(idClaseFiltro);
+    }
+
+    query += ' ORDER BY c.nombre, u.nombre';
+
+    const [alumnos] = await connection.promise().query(query, params);
 
     res.render('gestionar-alumnos', {
       title: 'Gestionar Alumnos',
-      alumnos
+      alumnos,
+      clases,
+      idClaseFiltro 
     });
   } catch (error) {
     console.error('Error al obtener alumnos:', error.message);
     res.render('gestionar-alumnos', {
       title: 'Gestionar Alumnos',
       alumnos: [],
+      clases: [],
+      idClaseFiltro: '',
       mensaje: 'Hubo un error al cargar los alumnos.'
     });
   }
@@ -205,6 +225,124 @@ const eliminarAlumnoDeClase = async (req, res) => {
   }
 };
 
+const MisClases = (req, res) => {
+    if (!req.session.loggedIn) {
+        return res.redirect('/');
+    }
+
+    const userId = req.session.userId;
+
+    const query = `
+        SELECT c.nombre, c.codigo, COUNT(ca.id_alumno) AS cantidad_alumnos
+        FROM clases c
+        LEFT JOIN clases_asignadas ca ON c.id_clase = ca.id_clase
+        WHERE c.id_usuario = ?
+        GROUP BY c.id_clase, c.nombre, c.codigo
+    `;
+
+    connection.query(query, [userId], (err, results) => {
+        if (err) {
+            console.error('Error al obtener las clases del usuario:', err);
+            return res.status(500).send('Error al obtener las clases');
+        }
+
+        res.render('misclases', {
+            title: 'Mis Clases',
+            username: req.session.username,
+            clases: results
+        });
+    });
+};
+
+// Mostrar clases asignadas al alumno con filtro opcional
+const verClasesAsignadasAlumno = async (req, res) => {
+  if (!req.session.loggedIn) {
+    return res.redirect('/login'); // o donde quieras redirigir si no está logueado
+  }
+
+  try {
+    const idAlumno = req.session.userId;
+    const idClaseFiltro = req.query.id_clase || '';
+
+    // Obtener clases asignadas al alumno, con nombre de la clase
+    let query = `
+      SELECT ca.id, c.id_clase, c.nombre AS nombre_clase, c.codigo, ca.fecha_asignacion
+      FROM clases_asignadas ca
+      JOIN clases c ON ca.id_clase = c.id_clase
+      WHERE ca.id_alumno = ?
+    `;
+
+    const params = [idAlumno];
+
+    if (idClaseFiltro && idClaseFiltro !== '') {
+      query += ' AND c.id_clase = ?';
+      params.push(idClaseFiltro);
+    }
+
+    query += ' ORDER BY ca.fecha_asignacion DESC';
+
+    const [clasesAsignadas] = await connection.promise().query(query, params);
+
+    // Para el filtro, obtener todas las clases asignadas sin filtro para el select
+    const [clasesParaFiltro] = await connection.promise().query(`
+      SELECT DISTINCT c.id_clase, c.nombre 
+      FROM clases_asignadas ca
+      JOIN clases c ON ca.id_clase = c.id_clase
+      WHERE ca.id_alumno = ?
+    `, [idAlumno]);
+
+    res.render('clasesAsignadasAlumno', {
+      title: 'Mis clases asignadas',
+      username: req.session.username,
+      clasesAsignadas,
+      clasesParaFiltro,
+      idClaseFiltro,
+      mensaje: ''
+    });
+
+  } catch (error) {
+    console.error('Error al obtener clases asignadas:', error.message);
+    res.render('clasesAsignadasAlumno', {
+      title: 'Mis clases asignadas',
+      username: req.session.username,
+      clasesAsignadas: [],
+      clasesParaFiltro: [],
+      idClaseFiltro: '',
+      mensaje: 'Error al cargar las clases asignadas.'
+    });
+  }
+};
+
+// Eliminar asignación de clase (desasignarse)
+const eliminarClaseAsignada = async (req, res) => {
+  if (!req.session.loggedIn) {
+    return res.status(401).json({ mensaje: 'No autorizado' });
+  }
+
+  try {
+    const idAlumno = req.session.userId;
+    const idAsignacion = req.params.idAsignacion; // id de la fila en clases_asignadas
+
+    // Verificar que la asignación existe y pertenece al alumno
+    const [rows] = await connection.promise().query(`
+      SELECT * FROM clases_asignadas WHERE id = ? AND id_alumno = ?
+    `, [idAsignacion, idAlumno]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ mensaje: 'Asignación no encontrada' });
+    }
+
+    // Borrar la asignación
+    await connection.promise().query(`
+      DELETE FROM clases_asignadas WHERE id = ?
+    `, [idAsignacion]);
+
+    res.json({ mensaje: 'Clase eliminada correctamente' });
+  } catch (error) {
+    console.error('Error al eliminar clase asignada:', error.message);
+    res.status(500).json({ mensaje: 'Error al eliminar la clase asignada' });
+  }
+};
 
 // Exporta las funciones y el enrutador
 module.exports = {
@@ -213,5 +351,9 @@ module.exports = {
     unirseClaseGet,
     unirseClasePost,
     verAlumnosProfesor,
-    eliminarAlumnoDeClase
+    eliminarAlumnoDeClase,
+    MisClases,
+    verClasesAsignadasAlumno,
+    eliminarClaseAsignada
+
 };

@@ -8,11 +8,7 @@ const getquestion = (req, res) => {
     JOIN preguntas p ON p.id = random_ids.id 
     JOIN respuestas r ON r.id_pregunta = p.id 
     WHERE p.id_categoria IN ?`;
-  // Aquí debería ir la consulta real con connection.promise() y devolver resultados
-  // Por ejemplo:
-  // connection.promise().query(sql, [arrayCategorias])
-  //   .then(([rows]) => res.json(rows))
-  //   .catch(err => res.status(500).json({ error: err.message }));
+
 };
 
 // Renderizar formulario para crear test con categorías y clases (solo para usuarios logueados)
@@ -59,23 +55,52 @@ const postEnviarTest = (req, res) => {
 
 // Función para crear examen con preguntas y respuestas (usa transacciones)
 async function crearExamen(req, res) {
-  const { nombreExamen, id_categoria, id_clase, questions } = req.body;
+  let { nombreExamen, id_categoria, nueva_categoria, id_clase, questions, fechaDisponible } = req.body;
 
-  if (!nombreExamen || !id_categoria || !id_clase || !Array.isArray(questions) || questions.length === 0) {
+  if (
+    !nombreExamen ||
+    !id_clase ||
+    !Array.isArray(questions) ||
+    questions.length === 0
+  ) {
     return res.status(400).json({ error: 'Datos incompletos o preguntas inválidas' });
   }
 
   try {
     await connection.promise().beginTransaction();
 
-    // Insertar examen
+    if (
+      (!id_categoria || id_categoria === '' || id_categoria === '0') &&
+      nueva_categoria?.trim()
+    ) {
+      const nombreCategoria = nueva_categoria.trim();
+      const [categoriaResult] = await connection.promise().query(
+        'INSERT INTO categoria (nombre) VALUES (?)',
+        [nombreCategoria]
+      );
+      id_categoria = categoriaResult.insertId;
+    }
+
+    if (!id_categoria) {
+      throw new Error('No se ha proporcionado una categoría válida.');
+    }
+
+    if (typeof fechaDisponible === 'string' && fechaDisponible.trim() !== '') {
+      fechaDisponible = fechaDisponible.replace('T', ' ') + ':00';
+
+      if (new Date(fechaDisponible) < new Date()) {
+        throw new Error('La fecha de disponibilidad debe ser en el futuro.');
+      }
+    } else {
+      fechaDisponible = null;
+    }
+
     const [examenResult] = await connection.promise().query(
-      'INSERT INTO examenes (nombre, id_categoria, id_clase) VALUES (?, ?, ?)',
-      [nombreExamen, id_categoria, id_clase]
+      'INSERT INTO examenes (nombre, id_categoria, id_clase, fecha_hora_disponible) VALUES (?, ?, ?, ?)',
+      [nombreExamen, id_categoria, id_clase, fechaDisponible]
     );
     const id_examen = examenResult.insertId;
 
-    // Insertar preguntas y respuestas
     for (const q of questions) {
       const nombrePregunta = q.question;
       const respuestasTexto = q.answers;
@@ -85,14 +110,12 @@ async function crearExamen(req, res) {
         throw new Error(`La respuesta correcta "${respuestaCorrectaTexto}" no está en las respuestas de la pregunta "${nombrePregunta}"`);
       }
 
-      // Insertar pregunta
       const [preguntaResult] = await connection.promise().query(
         'INSERT INTO preguntas (nombre, id_categoria) VALUES (?, ?)',
         [nombrePregunta, id_categoria]
       );
       const id_pregunta = preguntaResult.insertId;
 
-      // Insertar respuestas
       const respuestasInsert = respuestasTexto.map(r => [
         id_pregunta,
         r,
@@ -103,7 +126,6 @@ async function crearExamen(req, res) {
         [respuestasInsert]
       );
 
-      // Asociar pregunta con examen
       await connection.promise().query(
         'INSERT INTO examen_preguntas (id_examen, id_pregunta) VALUES (?, ?)',
         [id_examen, id_pregunta]
@@ -120,6 +142,10 @@ async function crearExamen(req, res) {
     return res.status(500).json({ error: error.message });
   }
 }
+
+
+
+
 
 module.exports = {
   getquestion,
