@@ -6,11 +6,8 @@ const path = require('path');
 const loginRoutes = require('./routes/login');
 const imageRoutes = require('./routes/image');
 const preguntasRoutes = require('./routes/preguntas')
-<<<<<<< HEAD
-=======
 const clasesRoutes = require('./routes/clases')
 
->>>>>>> 9e904a5 (Primera Version)
 
 const app = express();
 const port = 3001;
@@ -28,14 +25,11 @@ app.use(session({
     saveUninitialized: true
 }));
 
-<<<<<<< HEAD
-=======
 app.use((req, res, next) => {
   res.locals.username = req.session.username || null;
   res.locals.title = 'FranApp'; 
   next();
 });
->>>>>>> 9e904a5 (Primera Version)
 
 // Configuración para servir archivos estáticos
 console.log(__dirname);
@@ -47,11 +41,6 @@ app.set('views', './src/views');
 // Routes
 app.use('/', loginRoutes);
 app.use('/', imageRoutes);
-<<<<<<< HEAD
-//tester
-app.use('/', preguntasRoutes);
-
-=======
 app.use('/', clasesRoutes);
 //tester
 app.use('/', preguntasRoutes);
@@ -89,7 +78,6 @@ app.get('/gestionar-alumnos', (req, res) => {
 app.get('/unirse', (req, res) => {
     res.render('unirse', { title: 'Gestionar Alumnos' });
 });
->>>>>>> 9e904a5 (Primera Version)
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
