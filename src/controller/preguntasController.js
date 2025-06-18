@@ -3,14 +3,14 @@ const connection = require('../conexion');
 const getquestion = (req, res) => {
     console.log(req.body);
 sql = 'SELECT p.*, r.* FROM ( SELECT id FROM preguntas ORDER BY RAND() LIMIT 5 ) AS random_ids JOIN preguntas p ON p.id = random_ids.id JOIN respuestas r ON r.id_pregunta = p.id where p.id_categoria IN ?';
-//res.render('tester',{ preguntas});
-//return preguntas;
+res.render('crearTest',{ preguntas});
+return preguntas;
 };
 
 const getCrearPreguntas = (req, res) => {
     if(req.session.loggedIn == true){
     res.render('crearTest', {
-        title: 'CrearTest',
+        title: 'crearTest',
         mensaje: '' ,
         username: req.session.username
     });

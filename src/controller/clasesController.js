@@ -1,0 +1,159 @@
+const connection = require('../conexion');
+
+const crearClase = (req, res) => {
+  if (req.session.loggedIn === true) {
+    const query = 'SELECT id, nombre FROM categoria'; 
+
+    connection.query(query, (err, categorias) => {
+      if (err) {
+        console.error('Error al obtener categorías:', err);
+        return res.render('crear-clase', {
+          title: 'Crear Clase',
+          mensaje: 'Error al cargar categorías',
+          username: req.session.username,
+          categorias: []
+        });
+      }
+
+      res.render('crear-clase', {
+        title: 'Crear Clase',
+        mensaje: '',
+        username: req.session.username,
+        categorias: categorias  
+      });
+    });
+
+  } else {
+    res.render('index', {
+      title: 'Inicio',
+      mensaje: 'No has iniciado sesión',
+      username: ''
+    });
+  }
+};
+
+const crearClasePost = (req, res) => {
+  if (!req.session.loggedIn) {
+    return res.redirect('/');
+  }
+
+  const { nombre, categoria } = req.body;
+  const codigo = Math.random().toString(36).substring(2, 8).toUpperCase(); // Código aleatorio
+  const id_usuario = req.session.userId;
+
+  const insertQuery = `
+    INSERT INTO clases (nombre, codigo, id_usuario, id_categoria)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  connection.query(insertQuery, [nombre, codigo, id_usuario, categoria], (err) => {
+    if (err) {
+      console.error('Error al crear clase:', err);
+      
+      return connection.query('SELECT id, nombre FROM categoria', (err2, categorias) => {
+        return res.render('crear-clase', {
+          title: 'Crear Clase',
+          mensaje: 'Error al crear la clase',
+          username: req.session.username,
+          categorias: categorias || []
+        });
+      });
+    }
+
+    connection.query('SELECT id, nombre FROM categoria', (err2, categorias) => {
+      res.render('crear-clase', {
+        title: 'Crear Clase',
+        mensaje: `Clase creada correctamente. Código: ${codigo}`,
+        username: req.session.username,
+        categorias: categorias || []
+      });
+    });
+  });
+};
+
+/////////////
+// Mostrar formulario
+const unirseClaseGet = (req, res) => {
+  res.render('unirse', {
+    title: 'Unirse a una clase',
+    mensaje: ''
+  });
+};
+
+// Procesar formulario
+const unirseClasePost = (req, res) => {
+  const codigoIngresado = req.body.codigo;
+  const idAlumno = req.session.userId;
+ 
+  if (!idAlumno) {
+    return res.redirect('/');
+  }
+
+  const queryClase = 'SELECT id_clase FROM clases WHERE codigo = ?';
+
+  connection.query(queryClase, [codigoIngresado], (err, resultados) => {
+    if (err) {
+      console.error('Error al buscar clase:', err);
+      return res.render('unirse', {
+        title: 'Unirse a una clase',
+        mensaje: 'Error al buscar la clase.'
+      });
+    }
+
+    if (resultados.length === 0) {
+      return res.render('unirse', {
+        title: 'Unirse a una clase',
+        mensaje: 'Código no válido. Inténtalo de nuevo.'
+      });
+    }
+
+    const idClase = resultados[0].id;
+    const idDocente = resultados[0].id_usuario;
+
+    // Verificar si ya está inscrito
+    const checkQuery = `
+      SELECT * FROM clases_asignadas 
+      WHERE id_clase = ? AND Alumnos = ?
+    `;
+
+    connection.query(checkQuery, [idClase, idAlumno], (errCheck, existe) => {
+      if (existe.length > 0) {
+        return res.render('unirse', {
+          title: 'Unirse a una clase',
+          mensaje: 'Ya estás inscrito en esta clase.'
+        });
+      }
+
+      // Insertar en clases_asignadas
+      const insertQuery = `
+        INSERT INTO clases_asignadas (id_clase, Docente, idAlumno)
+        VALUES (?, ?, ?)
+      `;
+
+      connection.query(insertQuery, [idClase, idDocente, idAlumno], (err2) => {
+        if (err2) {
+          console.error('Error al asignar clase:', err2);
+          return res.render('unirse', {
+            title: 'Unirse a una clase',
+            mensaje: 'Ocurrió un error al asignar la clase.'
+          });
+        }
+
+        res.render('unirse', {
+          title: 'Unirse a una clase',
+          mensaje: 'Te has unido a la clase exitosamente.'
+        });
+      });
+    });
+  });
+};
+
+
+
+// Exporta las funciones y el enrutador
+module.exports = {
+    crearClase,
+    crearClasePost,
+    unirseClaseGet,
+    unirseClasePost
+};

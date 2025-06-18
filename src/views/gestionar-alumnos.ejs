@@ -7,29 +7,17 @@
 </head>
 <body>
     <h1>Preguntas</h1>
-<<<<<<< HEAD
     <form action="/check_answers" method="POST">
-=======
-    <form action="/tester" method="POST">
->>>>>>> 9e904a5 (Primera Version)
         <% preguntas.forEach(function(pregunta, index) { %>
             <div>
                 <h3>Pregunta <%= index + 1 %>:</h3>
                 <p><%= pregunta[0] %></p>
-<<<<<<< HEAD
             <!--    <p><%= pregunta[1] %></p>
-=======
-                 <p><%= pregunta[1] %></p>
->>>>>>> 9e904a5 (Primera Version)
                 <select name="respuesta_<%= index %>">
                     <% pregunta.opciones.forEach(function(opcion, i) { %>
                         <option value="<%= i %>"><%= opcion %></option>
                     <% }); %>
-<<<<<<< HEAD
                 </select> -->
-=======
-                </select> 
->>>>>>> 9e904a5 (Primera Version)
             </div>
         <% }); %>
         <button type="submit">Enviar Respuestas</button>

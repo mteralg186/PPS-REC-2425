@@ -55,11 +55,11 @@ const getDashboard = (req, res) => {
  };
 
  const postRegister = async (req, res) => {
-    const { name, apellido, username, password, fecha_nacimiento, phone } = req.body;
+    const { name, apellido, username, rol, password, fecha_nacimiento, phone } = req.body;
     // Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
-    const insertQuery ='INSERT INTO usuarios (nombre, apellido, username, contraseña, fecha_nacimiento, telefono) VALUES (?, ?, ?, ?, ?, ?)';
-    const values = [name, apellido, username, hashedPassword, fecha_nacimiento, phone];
+    const insertQuery ='INSERT INTO usuarios (nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    const values = [name, apellido, username, rol, hashedPassword, fecha_nacimiento, phone];
     // Ejecutar la consulta INSERT
     connection.query(insertQuery, values, function(error, results, fields) {
     if (error) {
@@ -102,6 +102,7 @@ async function VerificarPass(password, encriptPassword) {
     const username = req.body.username;
     const password = req.body.contraseña;
     const query = 'SELECT * FROM usuarios WHERE username = ?';
+    const query1 = 'SELECT rol from usuarios where username = ?';
    
     connection.query(query, [username], async (err, results) => {
         if (err){
@@ -114,7 +115,23 @@ async function VerificarPass(password, encriptPassword) {
                         if (validPassword) { // Redirige al usuario al panel de control (dashboard)
                             req.session.loggedIn = true; // Establece la sesión como iniciada
                             req.session.username = username; // Guarda el nombre de usuario en la sesión
-                            res.redirect('/dashboard');
+                            req.session.userId = results[0].id;
+
+                     //Consultando el rol       
+                    connection.query(query1, [username], (err2, roleResults) => {
+                    if (err2 || roleResults.length === 0) {
+                        return res.render('index', { mensaje: 'Error al obtener el rol' });
+                    }
+
+                    const rol = roleResults[0].rol;
+
+                    if (rol === 'p') {
+                        return res.redirect('/profesor');
+                    } else {
+                        return res.redirect('/alumno');
+                    }
+                });
+                            
                         } else {// Redirige al usuario de vuelta al formulario de inicio de sesión con un mensaje de error
                             res.render('index', {
                                 title: 'login',
