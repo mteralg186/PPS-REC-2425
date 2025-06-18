@@ -1,0 +1,79 @@
+<%- include('partes/headera') %>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4"><%= title %></h2>
+
+  <!-- Filtro por clase -->
+  <form id="formFiltro" class="mb-4 d-flex gap-2 align-items-center justify-content-center" onsubmit="return false;">
+    <label for="id_clase">Filtrar por clase:</label>
+    <select name="id_clase" id="id_clase" class="form-select w-auto">
+      <option value="">Todas las clases</option>
+      <% clasesParaFiltro.forEach(clase => { %>
+        <option value="<%= clase.id_clase %>" <%= clase.id_clase == idClaseFiltro ? 'selected' : '' %>>
+          <%= clase.nombre %>
+        </option>
+      <% }) %>
+    </select>
+    <button id="btnFiltrar" class="btn btn-primary" type="button">Filtrar</button>
+  </form>
+
+  <% if (mensaje) { %>
+    <div class="alert alert-danger text-center"><%= mensaje %></div>
+  <% } %>
+
+  <% if (clasesAsignadas.length === 0) { %>
+    <p class="text-center text-muted">No tienes clases asignadas para este filtro.</p>
+  <% } else { %>
+    <div class="list-group">
+      <% clasesAsignadas.forEach(clase => { %>
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <h5><%= clase.nombre_clase %> (<%= clase.codigo %>)</h5>
+            <small>Asignada el: <%= new Date(clase.fecha_asignacion).toLocaleString() %></small>
+          </div>
+          <button class="btn btn-danger btn-sm btnEliminar" data-id="<%= clase.id %>">Eliminar</button>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+<script>
+  const btnFiltrar = document.getElementById('btnFiltrar');
+  const selectClase = document.getElementById('id_clase');
+
+  btnFiltrar.addEventListener('click', () => {
+    const filtro = selectClase.value;
+    const url = new URL(window.location.href);
+    if (filtro) {
+      url.searchParams.set('id_clase', filtro);
+    } else {
+      url.searchParams.delete('id_clase');
+    }
+    window.location.href = url.toString();
+  });
+
+  // Eliminar asignación (sin confirmación ni alertas)
+  document.querySelectorAll('.btnEliminar').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const idAsignacion = btn.getAttribute('data-id');
+
+      try {
+        const res = await fetch(`/alumno/clases-asignadas/${idAsignacion}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (res.ok) {
+          window.location.reload(); // recargar sin alertas
+        }
+      } catch (error) {
+        console.error('Error de conexión al eliminar:', error);
+      }
+    });
+  });
+</script>
+
+<%- include('partes/footer') %>

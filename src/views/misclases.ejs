@@ -1,0 +1,30 @@
+<%- include('partes/headera') %>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-5" style="color: #343a40;">Mis Clases</h2>
+
+    <% if (clases.length === 0) { %>
+        <p class="text-center text-muted">No tienes clases asignadas.</p>
+    <% } else { %>
+        <div class="row justify-content-center">
+            <% clases.forEach(clase => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-primary shadow-sm" style="border-radius: 15px;">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary"><%= clase.nombre %></h5>
+                            <p class="card-text"><strong>Código:</strong> <%= clase.codigo %></p>
+                            <p class="card-text"><strong>Alumnos inscritos:</strong> <%= clase.cantidad_alumnos %></p>
+
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+
+    <div class="text-center mt-4">
+        <a href="/dashboard" class="btn btn-secondary rounded-pill px-4 py-2">Volver al Dashboard</a>
+    </div>
+</div>
+
+<%- include('partes/footer') %>

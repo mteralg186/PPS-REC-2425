@@ -1,0 +1,32 @@
+<%- include('partes/headera') %>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-5" style="color: #343a40;"><%= title %></h2>
+
+  <% if (mensaje) { %>
+    <p class="text-center text-danger mb-4"><%= mensaje %></p>
+  <% } %>
+
+  <% if (examenes.length === 0) { %>
+    <p class="text-center text-muted">No hay exámenes disponibles.</p>
+  <% } else { %>
+    <div class="row justify-content-center">
+      <% examenes.forEach(examen => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card border-primary shadow-sm" style="border-radius: 15px; min-height: 150px;">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title text-primary"><%= examen.nombre_examen %></h5>
+              <p class="card-text mb-2"><strong>Clase:</strong> <%= examen.nombre_clase %></p>
+              <a href="/examen/<%= examen.id_examen %>" class="btn btn-outline-primary mt-auto align-self-start rounded-pill px-4 py-2">
+                Ver examen
+              </a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+
+
+
+<%- include('partes/footer') %>

@@ -1,0 +1,47 @@
+<%- include('partes/headera') %>
+
+
+
+<div class="container mt-4">
+
+  <% if (error) { %>
+    <div class="alert alert-danger text-center my-5">
+      <%= error %>
+    </div>
+  <% } else if (examen) { %>
+
+    <h1 class="mb-4"><%= examen.nombre %></h1>
+
+    <form method="POST" action="/examen/<%= examenId %>">
+      <% examen.preguntas.forEach((pregunta, index) => { %>
+        <div class="mb-4">
+          <h3><%= index + 1 %>. <%= pregunta.texto %></h3>
+
+          <% pregunta.respuestas.forEach(respuesta => { %>
+            <div class="form-check">
+              <input 
+                class="form-check-input" 
+                type="radio" 
+                id="r<%= respuesta.id %>" 
+                name="<%= pregunta.id %>" 
+                value="<%= respuesta.id %>" 
+                required
+              >
+              <label class="form-check-label" for="r<%= respuesta.id %>">
+                <%= respuesta.texto %>
+              </label>
+            </div>
+          <% }) %>
+        </div>
+      <% }) %>
+
+      <button type="submit" class="btn btn-primary">Enviar respuestas</button>
+    </form>
+
+  <% } else { %>
+    <p class="text-center text-muted">No hay examen para mostrar.</p>
+  <% } %>
+
+</div>
+
+<%- include('partes/footer') %>

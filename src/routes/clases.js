@@ -8,7 +8,13 @@ router
   .get('/crear-clase', clasesController.crearClase)
   .post('/crear-clase', clasesController.crearClasePost)
   .get('/unirse', clasesController.unirseClaseGet)
-  .post('/unirse', clasesController.unirseClasePost);
+  .post('/unirse', clasesController.unirseClasePost)
+  .get('/gestionar-alumnos',clasesController.verAlumnosProfesor)
+  .post('/gestionar-alumnos/eliminar', clasesController.eliminarAlumnoDeClase)
+  .get('/misclases', clasesController.MisClases)
+  .get('/clasesAsignadasAlumno', clasesController.verClasesAsignadasAlumno)
+  .delete('/alumno/clases-asignadas/:idAsignacion', clasesController.eliminarClaseAsignada),
+
   
 
 module.exports = router;

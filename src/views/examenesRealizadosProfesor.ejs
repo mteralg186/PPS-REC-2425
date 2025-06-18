@@ -1,0 +1,76 @@
+<%- include('partes/header') %>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4"><%= title %></h2>
+
+  <!-- Formulario de filtro por examen -->
+  <form id="formFiltro" class="mb-4 d-flex gap-2 align-items-center justify-content-center" onsubmit="return false;">
+    <label for="id_examen">Filtrar por examen:</label>
+    <select name="id_examen" id="id_examen" class="form-select w-auto">
+      <option value="">Todos los exámenes</option>
+      <% examenesDisponibles.forEach(examen => { %>
+        <option value="<%= examen.id_examen %>"><%= examen.nombre %></option>
+      <% }) %>
+    </select>
+    <button id="btnFiltrar" class="btn btn-primary" type="button">Filtrar</button>
+  </form>
+
+  <% if (typeof mensaje !== 'undefined' && mensaje) { %>
+    <div class="alert alert-danger text-center"><%= mensaje %></div>
+  <% } %>
+
+  <% if (resultados.length === 0) { %>
+    <p class="text-center text-muted">No hay exámenes realizados para ese filtro.</p>
+  <% } else { %>
+    <div class="table-responsive">
+      <table id="tablaResultados" class="table table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Alumno</th>
+            <th>Examen</th>
+            <th>Nota</th>
+            <th>Aprobado</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% resultados.forEach(examen => { %>
+            <tr data-id-examen="<%= examen.id_examen %>">
+              <td><%= examen.nombre_alumno %></td>
+              <td><%= examen.nombre_examen %></td>
+              <td><%= examen.nota %></td>
+              <td>
+                <span class="badge <%= examen.aprobado ? 'bg-success' : 'bg-danger' %>">
+                  <%= examen.aprobado ? 'Sí' : 'No' %>
+                </span>
+              </td>
+              <td><%= new Date(examen.fecha).toLocaleString() %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+
+<script>
+  const btnFiltrar = document.getElementById('btnFiltrar');
+  const selectExamen = document.getElementById('id_examen');
+  const tabla = document.getElementById('tablaResultados');
+  const filas = tabla ? tabla.querySelectorAll('tbody tr') : [];
+
+  btnFiltrar.addEventListener('click', () => {
+    const filtro = selectExamen.value;
+
+    filas.forEach(fila => {
+      const idExamen = fila.getAttribute('data-id-examen');
+      if (!filtro || filtro === idExamen) {
+        fila.style.display = ''; 
+      } else {
+        fila.style.display = 'none'; 
+      }
+    });
+  });
+</script>
+
+<%- include('partes/footer') %>

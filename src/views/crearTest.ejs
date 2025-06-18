@@ -2,13 +2,52 @@
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">Crear Test</h1>
+
+    <!-- Campo para el nombre del examen -->
+    <div class="mb-4">
+        <input id="nombreExamen" type="text" class="form-control" placeholder="Nombre del examen" required>
+    </div>
+
+    <!-- Select para categoría -->
+    <div class="mb-4">
+        <label for="id_categoria">Categoría:</label>
+        <select id="id_categoria" class="form-select" required>
+            <option value="">Selecciona una categoría</option>
+            <% categorias.forEach(c => { %>
+                <option value="<%= c.id %>"><%= c.nombre %></option>
+            <% }) %>
+        </select>
+    </div>
+
+    <!-- Campo para nueva categoría -->
+    <div class="mb-4">
+        <label for="nueva_categoria">Crear una nueva categoría:</label>
+        <input id="nueva_categoria" type="text" class="form-control" placeholder="Nueva categoría (si aplica)">
+    </div>
+
+    <!-- Select para clase -->
+    <div class="mb-4">
+        <label for="id_clase">Clase:</label>
+        <select id="id_clase" required>
+            <option value="">Seleccione una clase</option>
+            <% clases.forEach(cl => { %>
+                <option value="<%= cl.id_clase %>"><%= cl.nombre %></option>
+            <% }) %>
+        </select>
+    </div>
+
+    <!-- Campo para fecha y hora disponible -->
+    <div class="mb-4">
+        <label for="fechaDisponible">Fecha y hora de disponibilidad del examen:</label>
+        <input id="fechaDisponible" type="datetime-local" class="form-control" required>
+    </div>
+
     <div class="text-center mb-4">
-        <span id="questionCount">0</span>
-        <span>/20 preguntas</span>
+        <span id="questionCount">0</span><span>/20 preguntas</span>
     </div>
     <button id="newQuestionBtn" class="btn btn-primary mb-4">Añadir Pregunta</button>
 
-    <form id="testForm" action="/enviaTest" method="POST">
+    <form id="testForm">
         <div id="questionsContainer"></div>
         <button type="submit" class="btn btn-success mt-4">Enviar Test</button>
     </form>
@@ -18,155 +57,149 @@
     let questionCounter = 0;
     let questions = [];
 
+    function updateQuestionCount() {
+        document.getElementById('questionCount').textContent = `${questionCounter}`;
+    }
+
     function addQuestion() {
         if (questionCounter >= 20) {
-            alert('Ya has alcanzado el máximo de 20 preguntas.');
+            alert('Has alcanzado el límite máximo de 20 preguntas por test.');
             return;
         }
         questionCounter++;
         const questionTitle = `${questionCounter}.`;
         const questionDiv = document.createElement('div');
         questionDiv.classList.add('question-container');
-
         showQuestionForm(questionDiv, questionTitle);
-
         document.getElementById('questionsContainer').appendChild(questionDiv);
         updateQuestionCount();
     }
 
     function showQuestionForm(questionDiv, questionTitle, questionData = null) {
-    // Limpiar contenido preservando el nodo
-    while (questionDiv.firstChild) {
-        questionDiv.removeChild(questionDiv.firstChild);
-    }
+        questionDiv.innerHTML = '';
+        const form = document.createElement('div');
 
-    const form = document.createElement('div');
+        const questionInput = document.createElement('input');
+        questionInput.type = 'text';
+        questionInput.placeholder = 'Escribe el nombre de la pregunta';
+        questionInput.classList.add('form-control', 'mb-3');
+        if (questionData) questionInput.value = questionData.question;
+        form.appendChild(questionInput);
 
-    const questionInput = document.createElement('input');
-    questionInput.setAttribute('type', 'text');
-    questionInput.setAttribute('placeholder', 'Escribe el nombre de la pregunta');
-    questionInput.classList.add('form-control', 'mb-3');
-    if (questionData) {
-        questionInput.value = questionData.question;
-    }
-    form.appendChild(questionInput);
+        const answersContainer = document.createElement('div');
+        answersContainer.classList.add('answers-container');
 
-    const answersContainer = document.createElement('div');
-    answersContainer.classList.add('answers-container');
+        let correctAnswerIndex = questionData ? questionData.answers.indexOf(questionData.correctAnswer) : null;
 
-    let correctAnswerIndex = questionData ? questionData.answers.indexOf(questionData.correctAnswer) : null;
+        function addAnswer(answerText = '') {
+            const answerContainer = document.createElement('div');
+            answerContainer.classList.add('answer-container', 'd-flex', 'align-items-center', 'mb-2', 'gap-2');
 
-    function addAnswer(answerText = '') {
-        const answerContainer = document.createElement('div');
-        answerContainer.classList.add('answer-container', 'd-flex', 'align-items-center', 'mb-2', 'gap-2');
+            const answerInput = document.createElement('input');
+            answerInput.type = 'text';
+            answerInput.placeholder = 'Escribe una respuesta';
+            answerInput.classList.add('form-control', 'answer-input');
+            answerInput.value = answerText;
 
-        const answerInput = document.createElement('input');
-        answerInput.setAttribute('type', 'text');
-        answerInput.setAttribute('placeholder', 'Escribe una respuesta');
-        answerInput.classList.add('form-control', 'answer-input');
-        answerInput.value = answerText;
+            const correctAnswerBtn = document.createElement('button');
+            correctAnswerBtn.textContent = '✓';
+            correctAnswerBtn.classList.add('btn', 'btn-outline-success', 'correct-answer');
 
-        const correctAnswerBtn = document.createElement('button');
-        correctAnswerBtn.textContent = '✓';
-        correctAnswerBtn.classList.add('btn', 'btn-outline-success', 'correct-answer');
+            if (correctAnswerIndex !== null && answersContainer.children.length === correctAnswerIndex) {
+                correctAnswerBtn.classList.add('btn-success');
+                correctAnswerBtn.classList.remove('btn-outline-success');
+            }
 
-        if (correctAnswerIndex !== null && answersContainer.children.length === correctAnswerIndex) {
-            correctAnswerBtn.classList.add('btn-success');
-            correctAnswerBtn.classList.remove('btn-outline-success');
+            correctAnswerBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                correctAnswerIndex = Array.from(answersContainer.children).indexOf(answerContainer);
+                updateCorrectAnswerIndex();
+            });
+
+            const removeBtn = document.createElement('button');
+            removeBtn.innerHTML = '&#10005;';
+            removeBtn.classList.add('btn', 'btn-outline-danger', 'delete-answer');
+            removeBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                const index = Array.from(answersContainer.children).indexOf(answerContainer);
+                answersContainer.removeChild(answerContainer);
+                if (correctAnswerIndex === index) {
+                    correctAnswerIndex = null;
+                } else if (correctAnswerIndex > index) {
+                    correctAnswerIndex--;
+                }
+                updateCorrectAnswerIndex();
+            });
+
+            answerContainer.appendChild(answerInput);
+            answerContainer.appendChild(correctAnswerBtn);
+            answerContainer.appendChild(removeBtn);
+            answersContainer.appendChild(answerContainer);
         }
 
-        correctAnswerBtn.addEventListener('click', function (event) {
-            event.preventDefault();
-            correctAnswerIndex = Array.from(answersContainer.children).indexOf(answerContainer);
-            updateCorrectAnswerIndex();
-        });
-
-        const removeBtn = document.createElement('button');
-        removeBtn.innerHTML = '&#10005;';
-        removeBtn.classList.add('btn', 'btn-outline-danger', 'delete-answer');
-        removeBtn.addEventListener('click', function (event) {
-            event.preventDefault();
-            const index = Array.from(answersContainer.children).indexOf(answerContainer);
-            answersContainer.removeChild(answerContainer);
-            if (correctAnswerIndex === index) {
-                correctAnswerIndex = null;
-            } else if (correctAnswerIndex > index) {
-                correctAnswerIndex--;
-            }
-            updateCorrectAnswerIndex();
-        });
-
-        answerContainer.appendChild(answerInput);
-        answerContainer.appendChild(correctAnswerBtn);
-        answerContainer.appendChild(removeBtn);
-        answersContainer.appendChild(answerContainer);
-    }
-
-    function updateCorrectAnswerIndex() {
-        Array.from(answersContainer.children).forEach((child, index) => {
-            const btn = child.querySelector('.correct-answer');
-            if (index === correctAnswerIndex) {
-                btn.classList.add('btn-success');
-                btn.classList.remove('btn-outline-success');
-            } else {
-                btn.classList.remove('btn-success');
-                btn.classList.add('btn-outline-success');
-            }
-        });
-    }
-
-    const addAnswerBtn = document.createElement('button');
-    addAnswerBtn.textContent = 'Añadir Respuesta';
-    addAnswerBtn.classList.add('btn', 'btn-secondary', 'mb-2');
-    addAnswerBtn.style.display = 'block';
-    addAnswerBtn.addEventListener('click', function (event) {
-        event.preventDefault();
-        addAnswer();
-    });
-
-    const submitBtn = document.createElement('button');
-    submitBtn.textContent = 'Aceptar Pregunta';
-    submitBtn.classList.add('btn', 'btn-success', 'mb-2');
-    submitBtn.style.display = 'block';
-    submitBtn.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        const questionName = questionInput.value.trim();
-        const answers = Array.from(answersContainer.querySelectorAll('.answer-input')).map(input => input.value.trim()).filter(v => v !== '');
-
-        if (questionName && answers.length > 0 && correctAnswerIndex !== null) {
-            const questionIndex = questions.findIndex(q => q.questionTitle === questionTitle);
-            const questionData = {
-                questionTitle,
-                question: questionName,
-                answers,
-                correctAnswer: answers[correctAnswerIndex]
-            };
-
-            if (questionIndex > -1) {
-                questions[questionIndex] = questionData;
-            } else {
-                questions.push(questionData);
-            }
-
-            renderQuestionSummary(questionDiv, questionData);
-            updateQuestionCount();
-        } else {
-            alert('Por favor, completa todos los campos y selecciona una respuesta correcta.');
+        function updateCorrectAnswerIndex() {
+            Array.from(answersContainer.children).forEach((child, index) => {
+                const btn = child.querySelector('.correct-answer');
+                btn.classList.toggle('btn-success', index === correctAnswerIndex);
+                btn.classList.toggle('btn-outline-success', index !== correctAnswerIndex);
+            });
         }
-    });
 
-    form.appendChild(addAnswerBtn);
-    form.appendChild(answersContainer);
-    form.appendChild(submitBtn);
-    questionDiv.appendChild(form);
+        const addAnswerBtn = document.createElement('button');
+        addAnswerBtn.textContent = 'Añadir Respuesta';
+        addAnswerBtn.classList.add('btn', 'btn-secondary', 'mb-2');
+        addAnswerBtn.style.display = 'block';
+        addAnswerBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            addAnswer();
+        });
 
-    if (questionData && questionData.answers.length > 0) {
-        questionData.answers.forEach(answer => addAnswer(answer));
+        const submitBtn = document.createElement('button');
+        submitBtn.textContent = 'Aceptar Pregunta';
+        submitBtn.classList.add('btn', 'btn-success', 'mb-2');
+        submitBtn.style.display = 'block';
+        submitBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const questionName = questionInput.value.trim();
+            const answers = Array.from(answersContainer.querySelectorAll('.answer-input'))
+                .map(input => input.value.trim())
+                .filter(v => v !== '');
+
+            if (questionName && answers.length > 0 && correctAnswerIndex !== null) {
+                const questionIndex = questions.findIndex(q => q.questionTitle === questionTitle);
+                const questionData = {
+                    questionTitle,
+                    question: questionName,
+                    answers,
+                    correctAnswer: answers[correctAnswerIndex]
+                };
+
+                if (questionIndex > -1) {
+                    questions[questionIndex] = questionData;
+                } else {
+                    questions.push(questionData);
+                }
+
+                renderQuestionSummary(questionDiv, questionData);
+                updateQuestionCount();
+            } else {
+                alert('Por favor, completa el nombre de la pregunta, agrega respuestas y selecciona la respuesta correcta.');
+            }
+        });
+
+        form.appendChild(addAnswerBtn);
+        form.appendChild(answersContainer);
+        form.appendChild(submitBtn);
+        questionDiv.appendChild(form);
+
+        if (questionData?.answers?.length > 0) {
+            questionData.answers.forEach(answer => addAnswer(answer));
+        }
+
+        questionInput.focus();
     }
 
-    questionInput.focus();
-}
     function renderQuestionSummary(questionDiv, questionData) {
         questionDiv.innerHTML = '';
 
@@ -178,7 +211,8 @@
         const removeButton = document.createElement('button');
         removeButton.innerHTML = '&#10005;';
         removeButton.classList.add('delete-question');
-        removeButton.addEventListener('click', function () {
+        removeButton.style.display = 'none';
+        removeButton.addEventListener('click', function() {
             document.getElementById('questionsContainer').removeChild(questionDiv);
             questions = questions.filter(q => q.questionTitle !== questionData.questionTitle);
             updateQuestionNumbers();
@@ -189,16 +223,10 @@
         description.textContent = `${questionData.question} (${questionData.answers.length} opciones)`;
         questionDiv.appendChild(description);
 
-        questionDiv.addEventListener('mouseover', function () {
-            removeButton.style.display = 'inline';
-        });
-        questionDiv.addEventListener('mouseout', function () {
-            removeButton.style.display = 'none';
-        });
+        questionDiv.addEventListener('mouseover', () => removeButton.style.display = 'inline');
+        questionDiv.addEventListener('mouseout', () => removeButton.style.display = 'none');
 
-        questionNumber.addEventListener('click', function () {
-            showQuestionForm(questionDiv, questionData.questionTitle, questionData);
-        });
+        questionNumber.addEventListener('click', () => showQuestionForm(questionDiv, questionData.questionTitle, questionData));
     }
 
     function updateQuestionNumbers() {
@@ -207,93 +235,64 @@
         questionDivs.forEach((questionDiv, index) => {
             questionCounter++;
             const questionTitle = `${questionCounter}.`;
-            const oldTitle = questionDiv.querySelector('.question-title')?.textContent;
+            const oldTitle = questionDiv.querySelector('.question-title').textContent;
             questionDiv.querySelector('.question-title').textContent = questionTitle;
-
             const i = questions.findIndex(q => q.questionTitle === oldTitle);
             if (i >= 0) questions[i].questionTitle = questionTitle;
         });
         updateQuestionCount();
     }
 
-    function updateQuestionCount() {
-        document.getElementById('questionCount').textContent = `${questionCounter}`;
-    }
-
     document.getElementById('newQuestionBtn').addEventListener('click', addQuestion);
 
     document.getElementById('testForm').addEventListener('submit', function (event) {
         event.preventDefault();
-        if (questions.length > 0) {
-            fetch('/enviaTest', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(questions)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Datos enviados correctamente');
-                    } else {
-                        console.error('Error al enviar los datos');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error de red:', error);
-                });
-        } else {
-            alert('No hay preguntas para enviar');
+
+        if (questions.length === 0) {
+            alert('No has añadido preguntas para enviar. Por favor, agrega al menos una pregunta.');
+            return;
         }
-    });
 
-    function loadQuestions() {
-        questions.forEach(questionData => {
-            const questionDiv = document.createElement('div');
-            questionDiv.classList.add('question-container');
-            renderQuestionSummary(questionDiv, questionData);
-            document.getElementById('questionsContainer').appendChild(questionDiv);
-        });
-        updateQuestionNumbers();
-    }
+        const nombreExamen = document.getElementById('nombreExamen').value.trim();
+        const id_categoria = document.getElementById('id_categoria').value;
+        const nueva_categoria = document.getElementById('nueva_categoria').value.trim();
+        const id_clase = document.getElementById('id_clase').value;
+        const fechaDisponible = document.getElementById('fechaDisponible').value;
 
-    loadQuestions();
+        if (!nombreExamen || (!id_categoria && !nueva_categoria) || !id_clase || !fechaDisponible) {
+            alert('Por favor, completa todos los campos del examen, incluyendo la fecha y hora de disponibilidad.');
+            return;
+        }
 
-
-
-        
-//Nueva parte
-
-
-document.getElementById('testForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-    // Verificar si hay preguntas para enviar
-    if (questions.length > 0) {
-        // Realizar la solicitud POST con Fetch
         fetch('/enviaTest', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(questions) // Convertir los datos a formato JSON
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                nombreExamen,
+                id_categoria: id_categoria ? parseInt(id_categoria) : null,
+                nueva_categoria: nueva_categoria ? nueva_categoria : null,
+                id_clase: parseInt(id_clase),
+                fechaDisponible,
+                questions
+            })
         })
         .then(response => {
             if (response.ok) {
-                // La solicitud fue exitosa, hacer algo con la respuesta si es necesario
-                console.log('Datos enviados correctamente');
+                alert('El examen se ha guardado correctamente.');
+                questions = [];
+                document.getElementById('questionsContainer').innerHTML = '';
+                updateQuestionCount();
+                document.getElementById('nombreExamen').value = '';
+                document.getElementById('id_categoria').value = '';
+                document.getElementById('nueva_categoria').value = '';
+                document.getElementById('id_clase').value = '';
+                document.getElementById('fechaDisponible').value = '';
             } else {
-                // Hubo un problema con la solicitud
-                console.error('Error al enviar los datos');
+                alert('Hubo un error al guardar el examen. Inténtalo de nuevo más tarde.');
             }
         })
-        .catch(error => {
-            console.error('Error de red:', error);
-        });
-    } else {
-        // No hay preguntas para enviar, mostrar un mensaje de error
-        alert('No hay preguntas para enviar');
-    }
-});
+        .catch(() => alert('No se pudo conectar al servidor. Por favor, verifica tu conexión e inténtalo nuevamente.'));
+    });
 </script>
+
 <%- include('partes/footer') %>

@@ -12,6 +12,7 @@ router
     .post('/register',loginController.postRegister)
     .get('/registro',loginController.getRegistro)
     .get('/perfil',loginController.getPerfil)
+    .get('/perfilalumno',loginController.getPerfilalumno)
     .get('/error',loginController.getError);
 
 module.exports = router;
