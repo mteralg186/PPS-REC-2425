@@ -7,8 +7,9 @@ const imageRoutes = require('./routes/image');
 const preguntasRoutes = require('./routes/preguntas');
 const clasesRoutes = require('./routes/clases');
 const examenesRouter = require('./routes/examenes');
-const generalRoutes = require('./routes/general');
+const alumnoRoutes = require('./routes/panelAlumno');
 const adminRoutes = require('./routes/admin');
+const profesorRoutes = require('./routes/panelProfesor');
 const app = express();
 const port = 3001;
 
@@ -43,8 +44,9 @@ app.use('/', imageRoutes);
 app.use('/', clasesRoutes);
 app.use('/', preguntasRoutes);
 app.use('/', examenesRouter);
-app.use('/', generalRoutes);
+app.use('/alumno', alumnoRoutes);
 app.use('/admin', adminRoutes);
+app.use('/profesor', profesorRoutes);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);

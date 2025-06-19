@@ -42,4 +42,4 @@ router.get('/clasesAsignadasAlumno', (req, res) => {
 });
 
 
-module.exports = router;S
+module.exports = router;
