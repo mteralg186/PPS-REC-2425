@@ -44,9 +44,9 @@ app.use('/', imageRoutes);
 app.use('/', clasesRoutes);
 app.use('/', preguntasRoutes);
 app.use('/', examenesRouter);
-app.use('/alumno', alumnoRoutes);
-app.use('/admin', adminRoutes);
-app.use('/profesor', profesorRoutes);
+app.use('/', alumnoRoutes);
+app.use('/', adminRoutes);
+app.use('/', profesorRoutes);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
