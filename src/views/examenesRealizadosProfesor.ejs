@@ -3,15 +3,24 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4"><%= title %></h2>
 
-  <!-- Formulario de filtro por examen -->
+  <!-- Formulario de filtro por clase y examen -->
   <form id="formFiltro" class="mb-4 d-flex gap-2 align-items-center justify-content-center" onsubmit="return false;">
+    <label for="id_clase">Filtrar por clase:</label>
+    <select name="id_clase" id="id_clase" class="form-select w-auto">
+      <option value="">Todas las clases</option>
+      <% clasesDisponibles.forEach(clase => { %>
+        <option value="<%= clase.id_clase %>" <%= idClaseFiltro == clase.id_clase ? 'selected' : '' %>><%= clase.nombre %></option>
+      <% }) %>
+    </select>
+
     <label for="id_examen">Filtrar por examen:</label>
     <select name="id_examen" id="id_examen" class="form-select w-auto">
       <option value="">Todos los exámenes</option>
       <% examenesDisponibles.forEach(examen => { %>
-        <option value="<%= examen.id_examen %>"><%= examen.nombre %></option>
+        <option value="<%= examen.id_examen %>" <%= idExamenFiltro == examen.id_examen ? 'selected' : '' %>><%= examen.nombre %></option>
       <% }) %>
     </select>
+
     <button id="btnFiltrar" class="btn btn-primary" type="button">Filtrar</button>
   </form>
 
@@ -27,6 +36,7 @@
         <thead class="table-dark">
           <tr>
             <th>Alumno</th>
+            <th>Clase</th>
             <th>Examen</th>
             <th>Nota</th>
             <th>Aprobado</th>
@@ -35,8 +45,9 @@
         </thead>
         <tbody>
           <% resultados.forEach(examen => { %>
-            <tr data-id-examen="<%= examen.id_examen %>">
-              <td><%= examen.nombre_alumno %></td>
+            <tr data-id-examen="<%= examen.id_examen %>" data-id-clase="<%= examen.id_clase %>">
+              <td><%= examen.nombre_alumno %> <%= examen.apellido_alumno %></td>
+              <td><%= examen.nombre_clase %></td>
               <td><%= examen.nombre_examen %></td>
               <td><%= examen.nota %></td>
               <td>
@@ -55,19 +66,26 @@
 
 <script>
   const btnFiltrar = document.getElementById('btnFiltrar');
+  const selectClase = document.getElementById('id_clase');
   const selectExamen = document.getElementById('id_examen');
   const tabla = document.getElementById('tablaResultados');
   const filas = tabla ? tabla.querySelectorAll('tbody tr') : [];
 
   btnFiltrar.addEventListener('click', () => {
-    const filtro = selectExamen.value;
+    const filtroClase = selectClase.value;
+    const filtroExamen = selectExamen.value;
 
     filas.forEach(fila => {
+      const idClase = fila.getAttribute('data-id-clase');
       const idExamen = fila.getAttribute('data-id-examen');
-      if (!filtro || filtro === idExamen) {
-        fila.style.display = ''; 
+
+      const claseMatch = !filtroClase || filtroClase === idClase;
+      const examenMatch = !filtroExamen || filtroExamen === idExamen;
+
+      if (claseMatch && examenMatch) {
+        fila.style.display = '';
       } else {
-        fila.style.display = 'none'; 
+        fila.style.display = 'none';
       }
     });
   });

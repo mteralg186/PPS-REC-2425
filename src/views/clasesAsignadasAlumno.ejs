@@ -53,27 +53,31 @@
     window.location.href = url.toString();
   });
 
-  // Eliminar asignación (sin confirmación ni alertas)
-  document.querySelectorAll('.btnEliminar').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const idAsignacion = btn.getAttribute('data-id');
+  // Eliminar asignación con confirmación
+document.querySelectorAll('.btnEliminar').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const idAsignacion = btn.getAttribute('data-id');
+    if (!confirm('¿Estás seguro que deseas eliminar esta asignación? Esta acción no se puede deshacer.')) return;
 
-      try {
-        const res = await fetch(`/alumno/clases-asignadas/${idAsignacion}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
+    try {
+      const res = await fetch(`/alumno/clases-asignadas/${idAsignacion}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
 
-        if (res.ok) {
-          window.location.reload(); // recargar sin alertas
-        }
-      } catch (error) {
-        console.error('Error de conexión al eliminar:', error);
+      if (res.ok) {
+        alert(data.mensaje);
+        window.location.reload();
+      } else {
+        alert(data.mensaje || 'No fue posible eliminar la asignación en este momento. Por favor, inténtalo de nuevo más tarde.');
       }
-    });
+    } catch {
+      alert('Error de conexión. Por favor, revisa tu conexión a internet e inténtalo nuevamente.');
+    }
   });
+});
+
 </script>
 
 <%- include('partes/footer') %>

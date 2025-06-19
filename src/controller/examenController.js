@@ -198,14 +198,14 @@ const corregirExamen = (req, res) => {
 // Función para listar todos los exámenes
 const listarExamenes = (req, res) => {
   const idAlumno = req.session.userId;
-  const { fechaInicio, fechaFin } = req.query; // Ej: '2025-06-17 15:30:00'
+  const { fechaInicio, fechaFin } = req.query;
 
   if (!idAlumno) {
     return res.redirect('/');
   }
 
   let sql = `
-    SELECT e.id_examen, e.nombre AS nombre_examen, c.nombre AS nombre_clase, e.fecha_hora_disponible
+    SELECT e.id_examen, e.nombre AS nombre_examen, c.nombre AS nombre_clase, e.fecha_hora_disponible, e.fecha_hora_fin
     FROM examenes e
     JOIN clases c ON e.id_clase = c.id_clase
     JOIN clases_asignadas ca ON ca.id_clase = c.id_clase
@@ -215,18 +215,16 @@ const listarExamenes = (req, res) => {
   const params = [idAlumno];
 
   if (fechaInicio && fechaFin) {
-    sql += ` AND e.fecha_hora_disponible BETWEEN ? AND ? `;
-    params.push(fechaInicio, fechaFin);
+    sql += ` AND e.fecha_hora_disponible <= ? AND e.fecha_hora_fin >= ? `;
+    params.push(fechaFin, fechaInicio);
   } else if (fechaInicio) {
-    sql += ` AND e.fecha_hora_disponible >= ? `;
+    sql += ` AND e.fecha_hora_fin >= ? `;
     params.push(fechaInicio);
   } else if (fechaFin) {
     sql += ` AND e.fecha_hora_disponible <= ? `;
     params.push(fechaFin);
   } else {
-    // Si no envías ninguna fecha, puedes decidir qué hacer:
-    // Por ejemplo, mostrar sólo exámenes ya disponibles
-    sql += ` AND e.fecha_hora_disponible <= NOW()`;
+    sql += ` AND e.fecha_hora_disponible <= NOW() AND (e.fecha_hora_fin IS NULL OR e.fecha_hora_fin >= NOW())`;
   }
 
   connection.query(sql, params, (err, resultados) => {
@@ -313,18 +311,26 @@ const verResultadosTodos = async (req, res) => {
   try {
     const idProfesor = req.session.userId; 
     const idExamenFiltro = req.query.id_examen || '';
+    const idClaseFiltro = req.query.id_clase || '';
 
     if (!idProfesor) {
       return res.render('examenesRealizadosProfesor', {
         title: 'Resultados de tus exámenes',
         resultados: [],
         examenesDisponibles: [],
+        clasesDisponibles: [],
         idExamenFiltro: '',
+        idClaseFiltro: '',
         mensaje: 'No has iniciado sesión como profesor.'
       });
     }
 
-    // Obtener los exámenes disponibles para las clases del profesor
+    // Obtener las clases disponibles para el profesor
+    const [clasesDisponibles] = await connection.promise().query(`
+      SELECT id_clase, nombre FROM clases WHERE id_usuario = ?
+    `, [idProfesor]);
+
+    // Obtener los exámenes disponibles para esas clases
     const [examenesDisponibles] = await connection.promise().query(`
       SELECT e.id_examen, e.nombre 
       FROM examenes e
@@ -336,16 +342,23 @@ const verResultadosTodos = async (req, res) => {
       SELECT 
         er.*, 
         e.nombre AS nombre_examen, 
+        e.id_clase,
+        c.nombre AS nombre_clase,
         u.nombre AS nombre_alumno,
         u.apellido AS apellido_alumno
       FROM examenes_realizados er
       JOIN examenes e ON er.id_examen = e.id_examen
-      JOIN usuarios u ON er.id_usuario = u.id
       JOIN clases c ON e.id_clase = c.id_clase
+      JOIN usuarios u ON er.id_usuario = u.id
       WHERE c.id_usuario = ?
     `;
 
     let params = [idProfesor];
+
+    if (idClaseFiltro && idClaseFiltro !== '') {
+      query += ' AND e.id_clase = ?';
+      params.push(idClaseFiltro);
+    }
 
     if (idExamenFiltro && idExamenFiltro !== '') {
       query += ' AND er.id_examen = ?';
@@ -360,7 +373,9 @@ const verResultadosTodos = async (req, res) => {
       title: 'Resultados de tus exámenes',
       resultados,
       examenesDisponibles,
+      clasesDisponibles,
       idExamenFiltro,
+      idClaseFiltro,
       mensaje: ''
     });
 
@@ -370,13 +385,16 @@ const verResultadosTodos = async (req, res) => {
       title: 'Resultados de tus exámenes',
       resultados: [],
       examenesDisponibles: [],
+      clasesDisponibles: [],
       idExamenFiltro: '',
+      idClaseFiltro: '',
       mensaje: 'Error al cargar los datos.'
     });
   }
 };
 
-//Función examenes basado en la tabla respondidas
+
+// Función para obtener examen con preguntas falladas por el usuario
 const obtenerExamenFalladas = (req, res) => {
   const usuarioId = req.session.userId;
 
@@ -384,91 +402,96 @@ const obtenerExamenFalladas = (req, res) => {
     return res.redirect('/');
   }
 
-  const obtenerPreguntasRespondidas = () => {
+  // Obtener preguntas que el usuario respondió incorrectamente (de respondidas)
+  const obtenerPreguntasFalladas = () => {
     return new Promise((resolve, reject) => {
-      connection.query(`
-        SELECT DISTINCT p.id, p.nombre
+      const sql = `
+        SELECT DISTINCT p.id AS id_pregunta, p.nombre AS texto
         FROM respondidas r
         JOIN preguntas p ON r.id_pregunta = p.id
-        WHERE r.id_usuario = ?
-      `, [usuarioId], (error, results) => {
+        WHERE r.id_usuario = ? AND r.es_correcta = 0
+        LIMIT 10
+      `;
+      connection.query(sql, [usuarioId], (error, results) => {
         if (error) reject(error);
         else resolve(results);
       });
     });
   };
 
+  // Obtener respuestas posibles para cada pregunta
   const obtenerRespuestas = (idPregunta) => {
     return new Promise((resolve, reject) => {
-      connection.query(`
-        SELECT id AS id_respuesta, nombre AS texto, esCorrecta
+      const sql = `
+        SELECT id AS id_respuesta, nombre AS texto
         FROM respuestas
         WHERE id_pregunta = ?
-      `, [idPregunta], (error, results) => {
+      `;
+      connection.query(sql, [idPregunta], (error, results) => {
         if (error) reject(error);
         else resolve(results);
       });
     });
   };
 
-  obtenerPreguntasRespondidas()
-    .then(async (preguntasRespondidas) => {
-      if (preguntasRespondidas.length === 0) {
-        return res.render('examenRespondidas', { 
-          error: 'No hay preguntas respondidas para generar un examen.', 
-          examen: null 
-        });
+  obtenerPreguntasFalladas()
+    .then(async (preguntasFalladas) => {
+      if (preguntasFalladas.length === 0) {
+        return res.render('examenRespondidas', { error: 'No hay preguntas incorrectas para generar un examen.', examen: null });
       }
 
       const preguntasConRespuestas = [];
-      for (const pregunta of preguntasRespondidas) {
-        const respuestas = await obtenerRespuestas(pregunta.id);
+      for (const pregunta of preguntasFalladas) {
+        const respuestas = await obtenerRespuestas(pregunta.id_pregunta);
         preguntasConRespuestas.push({
-          id: pregunta.id,
-          texto: pregunta.nombre,
+          id: pregunta.id_pregunta,
+          texto: pregunta.texto,
           respuestas
         });
       }
 
       res.render('examenRespondidas', {
-        error: null,
         examen: {
-          nombre: 'Preguntas respondidas anteriormente',
+          nombre: 'Preguntas Incorrectas',
           preguntas: preguntasConRespuestas
-        }
+        },
+        error: null
       });
     })
     .catch((error) => {
-      console.error('Error al generar el examen:', error);
-      res.render('examenRespondidas', { 
-        error: 'Error al generar el examen: ' + error.message, 
-        examen: null 
-      });
+      console.error(error);
+      res.render('examenRespondidas', { error: 'Error al generar el examen.', examen: null });
     });
 };
 
+// Función para procesar respuestas enviadas sin guardar en base de datos
 const procesarRespuestasExamen = (req, res) => {
+  const usuarioId = req.session.userId;
+  const respuestas = req.body; 
+
   if (!req.session.loggedIn) {
     return res.redirect('/');
   }
 
-  const respuestasUsuario = req.body;
-
+  // Verifica si la respuesta es correcta
   const verificarRespuesta = (idRespuesta) => {
     return new Promise((resolve, reject) => {
-      connection.query(`
-        SELECT esCorrecta
+      const sql = `
+        SELECT esCorrecta AS es_correcta
         FROM respuestas
         WHERE id = ?
-      `, [idRespuesta], (error, results) => {
+      `;
+      connection.query(sql, [idRespuesta], (error, results) => {
         if (error) reject(error);
-        else resolve(results[0].esCorrecta);
+        else if (results.length === 0) reject(new Error('Respuesta no encontrada'));
+        else resolve(results[0].es_correcta);
       });
     });
   };
 
-  const promesas = Object.entries(respuestasUsuario).map(async ([idPregunta, idRespuesta]) => {
+  const promesas = Object.entries(respuestas).map(async ([idPregunta, idRespuesta]) => {
     const esCorrecta = await verificarRespuesta(idRespuesta);
+    
     return {
       idPregunta,
       idRespuesta,
@@ -485,13 +508,13 @@ const procesarRespuestasExamen = (req, res) => {
       });
     })
     .catch(error => {
-      console.error('Error al procesar respuestas:', error);
-      res.render('examenRespondidas', { 
-        error: 'Error al procesar las respuestas: ' + error.message, 
-        examen: null 
-      });
+      console.error(error);
+      res.render('examenRespondidas', { error: 'Error al procesar las respuestas.', examen: null });
     });
 };
+
+
+
 module.exports = {
   listarExamenes,
   mostrarExamen,

@@ -47,7 +47,7 @@ const getCrearPreguntas = async (req, res) => {
   }
 };
 
-// Recibir y manejar el envío del test desde el front (opcional, solo log para ahora)
+// Recibir y manejar el envío del test desde el front 
 const postEnviarTest = (req, res) => {
   console.log(req.body);
   res.status(200).send('Recibido');
@@ -55,8 +55,9 @@ const postEnviarTest = (req, res) => {
 
 // Función para crear examen con preguntas y respuestas (usa transacciones)
 async function crearExamen(req, res) {
-  let { nombreExamen, id_categoria, nueva_categoria, id_clase, questions, fechaDisponible } = req.body;
+  let { nombreExamen, id_categoria, nueva_categoria, id_clase, questions, fechaDisponible, fechaFin } = req.body;
 
+  // Validación básica
   if (
     !nombreExamen ||
     !id_clase ||
@@ -69,6 +70,7 @@ async function crearExamen(req, res) {
   try {
     await connection.promise().beginTransaction();
 
+    // Crear nueva categoría si aplica
     if (
       (!id_categoria || id_categoria === '' || id_categoria === '0') &&
       nueva_categoria?.trim()
@@ -85,9 +87,9 @@ async function crearExamen(req, res) {
       throw new Error('No se ha proporcionado una categoría válida.');
     }
 
+    // Procesar fechas y validarlas
     if (typeof fechaDisponible === 'string' && fechaDisponible.trim() !== '') {
       fechaDisponible = fechaDisponible.replace('T', ' ') + ':00';
-
       if (new Date(fechaDisponible) < new Date()) {
         throw new Error('La fecha de disponibilidad debe ser en el futuro.');
       }
@@ -95,12 +97,23 @@ async function crearExamen(req, res) {
       fechaDisponible = null;
     }
 
+    if (typeof fechaFin === 'string' && fechaFin.trim() !== '') {
+      fechaFin = fechaFin.replace('T', ' ') + ':00';
+      if (new Date(fechaFin) <= new Date(fechaDisponible)) {
+        throw new Error('La fecha fin debe ser posterior a la fecha de disponibilidad.');
+      }
+    } else {
+      fechaFin = null;
+    }
+
+    // Insertar examen con fecha_hora_fin
     const [examenResult] = await connection.promise().query(
-      'INSERT INTO examenes (nombre, id_categoria, id_clase, fecha_hora_disponible) VALUES (?, ?, ?, ?)',
-      [nombreExamen, id_categoria, id_clase, fechaDisponible]
+      'INSERT INTO examenes (nombre, id_categoria, id_clase, fecha_hora_disponible, fecha_hora_fin) VALUES (?, ?, ?, ?, ?)',
+      [nombreExamen, id_categoria, id_clase, fechaDisponible, fechaFin]
     );
     const id_examen = examenResult.insertId;
 
+    // Guardar preguntas y respuestas (igual que antes)
     for (const q of questions) {
       const nombrePregunta = q.question;
       const respuestasTexto = q.answers;
@@ -138,11 +151,10 @@ async function crearExamen(req, res) {
 
   } catch (error) {
     await connection.promise().rollback();
-    console.error('Error creando examen:', error);
+    console.error('Error por parte del usuario rellenando el examen:', error);
     return res.status(500).json({ error: error.message });
   }
 }
-
 
 
 

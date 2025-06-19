@@ -13,8 +13,10 @@ router
   .post('/gestionar-alumnos/eliminar', clasesController.eliminarAlumnoDeClase)
   .get('/misclases', clasesController.MisClases)
   .get('/clasesAsignadasAlumno', clasesController.verClasesAsignadasAlumno)
-  .delete('/alumno/clases-asignadas/:idAsignacion', clasesController.eliminarClaseAsignada),
-
+  .delete('/alumno/clases-asignadas/:idAsignacion', clasesController.eliminarClaseAsignada)
+  .get('/clases_examen_delete', clasesController.verGestionProfesor)
+  .delete('/profesor/clases/:id', clasesController.eliminarClase)
+  .delete('/profesor/examenes/:id', clasesController.eliminarExamen);
   
 
 module.exports = router;

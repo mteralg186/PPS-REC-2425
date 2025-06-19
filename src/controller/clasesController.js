@@ -344,6 +344,103 @@ const eliminarClaseAsignada = async (req, res) => {
   }
 };
 
+const eliminarClase = async (req, res) => {
+  try {
+    const idClase = req.params.id;
+    const idProfesor = req.session.userId;
+
+    // Verificar que la clase pertenece al profesor
+    const [clase] = await connection.promise().query(
+      'SELECT id_clase FROM clases WHERE id_clase = ? AND id_usuario = ?',
+      [idClase, idProfesor]
+    );
+
+    if (clase.length === 0) {
+      return res.status(403).json({ error: 'No autorizado para eliminar esta clase.' });
+    }
+
+    // Eliminar clase (ON DELETE CASCADE eliminará exámenes, etc.)
+    await connection.promise().query('DELETE FROM clases WHERE id_clase = ?', [idClase]);
+
+    return res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al eliminar la clase.' });
+  }
+};
+
+const eliminarExamen = async (req, res) => {
+  try {
+    const idExamen = req.params.id;
+    const idProfesor = req.session.userId;
+
+    // Verificar que el examen pertenece a una clase del profesor
+    const [examen] = await connection.promise().query(
+      `SELECT e.id_examen 
+       FROM examenes e
+       JOIN clases c ON e.id_clase = c.id_clase
+       WHERE e.id_examen = ? AND c.id_usuario = ?`,
+      [idExamen, idProfesor]
+    );
+
+    if (examen.length === 0) {
+      return res.status(403).json({ error: 'No autorizado para eliminar este examen.' });
+    }
+
+    // Eliminar examen (cascade eliminará preguntas asociadas)
+    await connection.promise().query('DELETE FROM examenes WHERE id_examen = ?', [idExamen]);
+
+    return res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al eliminar el examen.' });
+  }
+};
+
+const verGestionProfesor = async (req, res) => {
+  try {
+    const idProfesor = req.session.userId;
+    const idClaseFiltro = req.query.id_clase || '';
+
+    // Obtener clases del profesor, con posible filtro
+    let queryClases = `SELECT id_clase, nombre, codigo, fecha_creacion FROM clases WHERE id_usuario = ?`;
+    const paramsClases = [idProfesor];
+
+    if (idClaseFiltro) {
+      queryClases += ' AND id_clase = ?';
+      paramsClases.push(idClaseFiltro);
+    }
+
+    const [clases] = await connection.promise().query(queryClases, paramsClases);
+
+    // Obtener exámenes del profesor (uniendo con la clase para mostrar nombre de clase)
+    let queryExamenes = `
+      SELECT e.id_examen, e.nombre, e.fecha_creacion, e.fecha_hora_disponible, e.fecha_hora_fin, c.nombre AS nombre_clase
+      FROM examenes e
+      JOIN clases c ON e.id_clase = c.id_clase
+      WHERE c.id_usuario = ?
+    `;
+    const paramsExamenes = [idProfesor];
+
+    if (idClaseFiltro) {
+      queryExamenes += ' AND c.id_clase = ?';
+      paramsExamenes.push(idClaseFiltro);
+    }
+
+    const [examenes] = await connection.promise().query(queryExamenes, paramsExamenes);
+
+    res.render('clases_examen_delete', {
+      title: 'Gestión de Clases y Exámenes',
+      clases,
+      examenes,
+      idClaseFiltro
+    });
+
+  } catch (error) {
+    console.error('Error al cargar gestión profesor:', error);
+    res.status(500).send('Error al cargar la página de gestión.');
+  }
+};
 // Exporta las funciones y el enrutador
 module.exports = {
     crearClase,
@@ -354,6 +451,9 @@ module.exports = {
     eliminarAlumnoDeClase,
     MisClases,
     verClasesAsignadasAlumno,
-    eliminarClaseAsignada
+    eliminarClaseAsignada,
+    eliminarClase,
+    eliminarExamen,
+    verGestionProfesor
 
 };
