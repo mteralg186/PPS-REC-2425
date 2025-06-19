@@ -117,646 +117,901 @@ CREATE TABLE IF NOT EXISTS examenes_realizados (
     FOREIGN KEY (id_examen) REFERENCES examenes(id_examen) ON DELETE CASCADE
 );
 
+-- usuarios
+
+-- Profesores
+INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1100, 'Paco', 'Perez Gomez', 'perez', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 626845694, 'foto_perez.jpg', '1985-10-20');
+INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1101, 'Alvaro', 'Guerrero Garcia', 'alvaro', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 626845694, 'foto_alvaro.jpg', '1985-10-20');
+INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1102, 'Ana', 'Rodriguez Dianez', 'ana', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 626845694, 'foto_ana.jpg', '1985-10-20');
+INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1103, 'Gustavo', 'Guillen Guerrero', 'gustavo', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 626845694, 'foto_gustavo.jpg', '1985-10-20');
+
+-- Alumnos
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES
+(1200, 'Carlos', 'López Martínez', 'carloslm', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-03-15', 628765432, 'foto_carlos.jpg', '2025-06-19'),
+(1201, 'María', 'Pérez Gómez', 'mariapg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1988-07-22', 617654321, 'foto_maria.jpg', '2025-06-19'),
+(1202, 'Javier', 'García Sánchez', 'javiergs', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-11-02', 619876543, 'foto_javier.jpg', '2025-06-19'),
+(1203, 'Lucía', 'Fernández Ruiz', 'luciafr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1995-04-10', 622345678, 'foto_lucia.jpg', '2025-06-19'),
+(1204, 'Sergio', 'Hernández Díaz', 'sergiohd', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1987-01-25', 624567890, 'foto_sergio.jpg', '2025-06-19'),
+(1205, 'Ana', 'Ramírez Torres', 'anart', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-08-13', 629876543, 'foto_ana.jpg', '2025-06-19'),
+(1206, 'Pablo', 'Gómez López', 'pablogl', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-05-19', 621234567, 'foto_pablo.jpg', '2025-06-19'),
+(1207, 'Claudia', 'Ruiz Martín', 'claudiarm', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1994-10-21', 623456789, 'foto_claudia.jpg', '2025-06-19'),
+(1208, 'Jorge', 'Santos García', 'jorgesg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-02-18', 627654321, 'foto_jorge.jpg', '2025-06-19'),
+(1209, 'Marta', 'Jiménez Díaz', 'martajd', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1989-12-07', 626543210, 'foto_marta.jpg', '2025-06-19'),
+(1210, 'Luis', 'Navarro Vega', 'luisnv', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-03-09', 625432198, 'foto_luis.jpg', '2025-06-19'),
+(1211, 'Sara', 'Moreno Torres', 'saramt', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-06-23', 624789012, 'foto_sara.jpg', '2025-06-19'),
+(1212, 'Iván', 'Martínez Gómez', 'ivanmg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1988-09-15', 628901234, 'foto_ivan.jpg', '2025-06-19'),
+(1213, 'Elena', 'Ortiz Fernández', 'elenaof', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-11-19', 627098765, 'foto_elena.jpg', '2025-06-19'),
+(1214, 'Fernando', 'Lara Gómez', 'fernandolg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-01-30', 625890123, 'foto_fernando.jpg', '2025-06-19'),
+(1215, 'Isabel', 'Ramos Pérez', 'isabelrp', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1987-08-08', 624567809, 'foto_isabel.jpg', '2025-06-19'),
+(1216, 'Manuel', 'Gil Hernández', 'manuelgh', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-04-20', 629012345, 'foto_manuel.jpg', '2025-06-19'),
+(1217, 'Alicia', 'Sanz Martínez', 'aliciasm', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-05-15', 622345098, 'foto_alicia.jpg', '2025-06-19'),
+(1218, 'Gabriel', 'Molina Gómez', 'gabrielmg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1989-10-10', 623210987, 'foto_gabriel.jpg', '2025-06-19'),
+(1219, 'Laura', 'Cano López', 'lauracl', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-12-25', 624098765, 'foto_laura.jpg', '2025-06-19'),
+(1220, 'Pedro', 'Blanco Torres', 'pedrobt', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-03-11', 629876012, 'foto_pedro.jpg', '2025-06-19'),
+(1221, 'Laura', 'Cruz González', 'lauracg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-04-04', 630123456, 'foto_laura_cruz.jpg', '2025-06-19'),
+(1222, 'David', 'Ramírez Jiménez', 'davidrj', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1989-07-25', 629987654, 'foto_david.jpg', '2025-06-19'),
+(1223, 'Mónica', 'Herrera López', 'monicalh', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-11-17', 628654789, 'foto_monica.jpg', '2025-06-19'),
+(1224, 'Antonio', 'Rojas Sánchez', 'antoniorj', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-09-29', 627432198, 'foto_antonio.jpg', '2025-06-19'),
+(1225, 'Patricia', 'Soler Gómez', 'patriciasg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-02-18', 626789012, 'foto_patricia.jpg', '2025-06-19'),
+(1226, 'Ricardo', 'Campos Martín', 'ricardocm', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1988-06-15', 625098764, 'foto_ricardo.jpg', '2025-06-19'),
+(1227, 'Angela', 'Martín Pérez', 'angelamp', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-03-24', 624567890, 'foto_angela.jpg', '2025-06-19'),
+(1228, 'Eduardo', 'Ramírez López', 'eduardorl', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-05-13', 623456789, 'foto_eduardo.jpg', '2025-06-19'),
+(1229, 'Nuria', 'Hidalgo Torres', 'nuriahg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1989-12-10', 622345678, 'foto_nuria.jpg', '2025-06-19'),
+(1230, 'Francisco', 'López García', 'franciscolg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-01-21', 621234567, 'foto_francisco.jpg', '2025-06-19'),
+(1231, 'Beatriz', 'Sánchez Ruiz', 'beatrizsr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-07-19', 629876543, 'foto_beatriz.jpg', '2025-06-19'),
+(1232, 'Victor', 'Martínez Torres', 'victormt', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-03-14', 628765432, 'foto_victor.jpg', '2025-06-19'),
+(1233, 'Natalia', 'Gómez Jiménez', 'nataliagj', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-08-05', 627654321, 'foto_natalia.jpg', '2025-06-19'),
+(1234, 'Raúl', 'Mendoza Sánchez', 'raulms', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1989-02-26', 626543210, 'foto_raul.jpg', '2025-06-19'),
+(1235, 'Victoria', 'Jiménez Ramírez', 'victoriajr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-11-16', 625432198, 'foto_victoria.jpg', '2025-06-19'),
+(1236, 'Diego', 'Ortega González', 'diegog', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-09-01', 624789012, 'foto_diego.jpg', '2025-06-19'),
+(1237, 'Sandra', 'López Fernández', 'sandralf', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-04-18', 623456789, 'foto_sandra.jpg', '2025-06-19'),
+(1238, 'Alejandro', 'González López', 'alejandrogl', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1988-06-10', 622345678, 'foto_alejandro.jpg', '2025-06-19'),
+(1239, 'Marina', 'Gutiérrez Sánchez', 'marinags', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-08-30', 621234567, 'foto_marina.jpg', '2025-06-19'),
+(1240, 'Daniel', 'Morales Jiménez', 'danielmj', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-03-12', 628345987, 'foto_daniel.jpg', '2025-06-19'),
+(1241, 'Silvia', 'Rojas Fernández', 'silviarf', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-05-20', 623456098, 'foto_silvia.jpg', '2025-06-19'),
+(1242, 'Carlos', 'Torres Gómez', 'carlostg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-07-15', 627890123, 'foto_carlos.jpg', '2025-06-19'),
+(1243, 'Lorena', 'Martínez Ruiz', 'lorenamr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-09-03', 621567890, 'foto_lorena.jpg', '2025-06-19'),
+(1244, 'Raquel', 'Fernández López', 'raquelfl', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-01-18', 626098734, 'foto_raquel.jpg', '2025-06-19'),
+(1245, 'Tomás', 'García Díaz', 'tomasgd', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1988-11-23', 624567890, 'foto_tomas.jpg', '2025-06-19'),
+(1246, 'Nerea', 'Cruz Martín', 'nereacm', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-03-08', 628098765, 'foto_nerea.jpg', '2025-06-19'),
+(1247, 'Rubén', 'Hernández Pérez', 'rubenhp', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1989-04-25', 627654321, 'foto_ruben.jpg', '2025-06-19'),
+(1248, 'Miriam', 'Vega García', 'miriamvg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-12-14', 623456789, 'foto_miriam.jpg', '2025-06-19'),
+(1249, 'José', 'Álvarez Torres', 'joseat', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-05-09', 629098765, 'foto_jose.jpg', '2025-06-19'),
+(1250, 'Patricia', 'Roldán López', 'patriciarl', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-07-15', 622567890, 'foto_patricia.jpg', '2025-06-19'),
+(1251, 'Alberto', 'Gómez Ruiz', 'albertogr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1987-06-21', 627098654, 'foto_alberto.jpg', '2025-06-19'),
+(1252, 'Clara', 'Domínguez Ruiz', 'claradr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-07-14', 629012346, 'foto_clara.jpg', '2025-06-19'),
+(1253, 'Enrique', 'Vega Morales', 'enriquemv', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1989-11-22', 628765433, 'foto_enrique.jpg', '2025-06-19'),
+(1254, 'Rocío', 'Santos Ruiz', 'rociors', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-05-07', 627654322, 'foto_rocio.jpg', '2025-06-19'),
+(1255, 'Tomás', 'Cruz Herrera', 'tomasch', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-02-17', 626543211, 'foto_tomas.jpg', '2025-06-19'),
+(1256, 'Inés', 'Medina López', 'inesml', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-09-03', 625432199, 'foto_ines.jpg', '2025-06-19'),
+(1257, 'Miguel', 'Castillo García', 'miguelcg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1988-12-12', 624789013, 'foto_miguel.jpg', '2025-06-19'),
+(1258, 'Natalia', 'Vargas Torres', 'nataliavt', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-03-25', 623456780, 'foto_natalia2.jpg', '2025-06-19'),
+(1259, 'Sergio', 'Herrera Molina', 'sergiohm', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-10-19', 622345679, 'foto_sergio2.jpg', '2025-06-19'),
+(1260, 'Cristina', 'García Navarro', 'cristinagn', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1989-06-21', 621234568, 'foto_cristina.jpg', '2025-06-19'),
+(1261, 'David', 'Morales López', 'davidml', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-04-29', 629876011, 'foto_david2.jpg', '2025-06-19'),
+(1262, 'Eva', 'Ramírez Sánchez', 'evars', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-08-08', 628765434, 'foto_eva.jpg', '2025-06-19'),
+(1263, 'Héctor', 'Navarro Ruiz', 'hectornr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-12-11', 627654323, 'foto_hector.jpg', '2025-06-19'),
+(1264, 'Lorena', 'Sánchez Morales', 'lorenasm', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-01-20', 626543212, 'foto_lorena.jpg', '2025-06-19'),
+(1265, 'Raúl', 'Gómez Fernández', 'raulgf', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1988-06-04', 625432200, 'foto_raul2.jpg', '2025-06-19'),
+(1266, 'Miriam', 'Castro Ruiz', 'miriamcr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-11-17', 624789014, 'foto_miriam.jpg', '2025-06-19'),
+(1267, 'Óscar', 'Pérez García', 'oscarpg', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1993-04-03', 623456781, 'foto_oscar.jpg', '2025-06-19'),
+(1268, 'Silvia', 'Moreno López', 'silvialm', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-08-19', 622345680, 'foto_silvia.jpg', '2025-06-19'),
+(1269, 'Rubén', 'Ortiz Torres', 'rubento', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1989-05-10', 621234569, 'foto_ruben.jpg', '2025-06-19'),
+(1270, 'Paula', 'Jiménez Díaz', 'paulajd', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1992-10-23', 629876010, 'foto_paula.jpg', '2025-06-19'),
+(1271, 'Javier', 'Molina Sánchez', 'javierms', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1991-07-12', 628765435, 'foto_javier2.jpg', '2025-06-19'),
+(1272, 'Natalia', 'González Ruiz', 'nataliagr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1990-02-28', 627654324, 'foto_natalia3.jpg', '2025-06-19');
+
+
+-- categorias
+INSERT INTO categoria (id, nombre)
+VALUES
+    (200, 'Sistemas Operativos'),
+    (201, 'Redes y Comunicaciones'),
+    (202, 'HLC'),
+    (203, 'Seguridad Informática'),
+    (204, 'Desarrollo Web'),
+    (300, 'Matemáticas Básicas'),
+    (301, 'Física Aplicada'),
+    (302, 'Química General'),
+    (303, 'Estadística'),
+    (400, 'Música y Composición'),
+    (401, 'Historia del Arte'),
+    (402, 'Literatura Universal'),
+    (403, 'Cine y Teatro');
 
 #POPULANDO BD
 
-INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1344, 'Carlos', 'Ramos Ramirez', 'Carara', 'p',				'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 633649874, 'foto_carlos.jpg',  '1985-10-20');
-INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (3431, 'Alfonso', 'Hernández Delgado', 'Alhede', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 636854924, 'foto_alfonso.jpg', '1985-10-20');
-INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1343, 'Daniel', 'Sánchez Jiménez', 'Dasaji', 'p', 			'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 635987494, 'foto_daniel.jpg',  '1985-10-20');
-INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1323, 'Gustavo', 'Guillen Guerrero', 'gustavo', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 626845694, 'foto_gustavo.jpg', '1985-10-20');
-
--- Usuarios
-
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (100, 'María', 'Jiménez Cruz', 'MaJiCr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 668978406, 'MaJiCr.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (431, 'Isabel', 'López Delgado', 'IsLóDe', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 637729020, 'IsLóDe.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (432, 'Ana', 'Delgado Silva', 'AnDeSi', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 616432816, 'AnDeSi.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (433, 'Sergio', 'García González', 'SeGaGo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 637713243, 'SeGaGo.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (443, 'Lucía', 'Castillo Cruz', 'LuCaCr', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 610778163, 'LuCaCr.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (435, 'Isabel', 'López Morales', 'IsLóMo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 696797573, 'IsLóMo.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (463, 'Sergio', 'Rodríguez Torres', 'SeRoTo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 628919693, 'SeRoTo.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (437, 'Diego', 'Flores Vargas', 'DiFlVa', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 693621426, 'DiFlVa.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (438, 'Fernando', 'Flores Torres', 'FeFlTo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 644350844, 'FeFlTo.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (439, 'Paula', 'Jiménez Flores', 'PaJiFl', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 695870044, 'PaJiFl.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (530, 'Paula', 'García Martínez', 'PaGaMa', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 668687550, 'PaGaMa.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (531, 'Jorge', 'López Castillo', 'JoLóCa', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 684305163, 'JoLóCa.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (52, 'Lucía', 'López González', 'LuLóGo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 696039319, 'LuLóGo.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (53, 'Carlos', 'Jiménez Castillo', 'CaJiCa', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 669011704, 'CaJiCa.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (54, 'Pedro', 'Flores Ortega', 'PeFlOr', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 610651978, 'PeFlOr.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (55, 'Andrés', 'Silva López', 'AnSiLó', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 637263361, 'AnSiLó.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (56, 'Andrés', 'Ortega Delgado', 'AnOrDe', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 673423938, 'AnOrDe.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (57, 'Sofía', 'Ramírez Flores', 'SoRaFl', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 671478007, 'SoRaFl.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (538, 'Laura', 'Jiménez Castillo', 'LaJiCa', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 615832230, 'LaJiCa.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (519, 'Laura', 'Rodríguez Ortega', 'LaRoOr', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 640282943, 'LaRoOr.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (60, 'Laura', 'Rodríguez Pérez', 'LaRoPé', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 642155485, 'LaRoPé.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (58, 'Javier', 'López Ramírez', 'JaLóRa', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 628473910, 'JaLóRa.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (59, 'Natalia', 'García Sánchez', 'NaGaSá', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 676482309, 'NaGaSá.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (610, 'Pedro', 'Morales Ortega', 'PeMoOr', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 690284761, 'PeMoOr.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (613, 'Sofía', 'Ramírez Pérez', 'SoRaPé', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 648273910, 'SoRaPé.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (622, 'Carlos', 'Silva Morales', 'CaSiMo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 617493028, 'CaSiMo.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (631, 'Lucía', 'González Sánchez', 'LuGoSá', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 635192847, 'LuGoSá.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (643, 'Andrés', 'Castillo Flores', 'AnCaFl', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 629473918, 'AnCaFl.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (651, 'Isabel', 'Rodríguez Torres', 'IsRoTo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 645928371, 'IsRoTo.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (663, 'Jorge', 'Flores Morales', 'JoFlMo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 618273945, 'JoFlMo.jpg', '1985-10-20');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (672, 'Laura', 'Silva Pérez', 'LaSiPé', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 640128374, 'LaSiPé.jpg', '1985-10-20');
-
--- Categorias
-insert into categoria (nombre) values ('Bash');
-insert into categoria (nombre) values ('Mysql');
-insert into categoria (nombre) values ('IPv6');
-insert into categoria (nombre) values ('Redes');
-
-
-
--- Preguntas
-	-- pregunta 1
-insert into preguntas (nombre,id_categoria) values('echo [opciones] cadenas ¿Que resultado se obtiene con EJEMPLO: echo "\tHola, ¿Qué tal?"?',1);
-insert into preguntas (nombre,id_categoria) values('¿Como  creo un archivo vacio y lo ejecuto una distribucion linux?',1);
-insert into preguntas (nombre,id_categoria) values('¿Qué contiene la variable $? ?',1);
-insert into preguntas (nombre,id_categoria) values('¿Qué contiene la variable $$ ?',1);
-insert into preguntas (nombre,id_categoria) values('¿Qué contiene la variable $@ ?',1);
-insert into preguntas (nombre,id_categoria) values('¿Qué contiene la variable $* ?',1);
-
-
-
--- Respuesta
- -- respuestas pregunta 1
-insert into respuestas (id_pregunta,nombre, esCorrecta) values (1,'\tHola, ¿Qué tal?',1),
-												  (1,'Hola, ¿Qué tal?',0),
-												  (1,'      Hola, ¿Qué tal?',0),
-												  (1,' =>Hola, ¿Qué tal?',0);
- -- respuestas pregunta 2
- insert into respuestas (id_pregunta,nombre, esCorrecta) values (2,'touch vacio.sh chmod 755 vacio.sh ./vacio.sh',1),
-												  (2,'gedit vacio.txt chmod 755 vacio.txt ./vacio.txt',0),
-												  (2,'gedit vacio.sh chmod 555 vacio.sh ./vacio.sh',0),
-												  (2,'gedit vacio.sh chmod 755 vacio.sh run vacio.sh',0);										 
- -- respuestas pregunta 3
-insert into respuestas (id_pregunta,nombre, esCorrecta) 
-values (3,'Estado de salida del último comando o script ejecutado.',1),
-	   (3,'El PID de la shell.',0),
-	   (3,'Los parámetros pasados al script.',0),
-	   (3,'Número de parámetros con los que se ha invocado el script. Es muy útil paracomprobar el número de argumentos pasados en la ejecución de un Shell script.',0),
-	   (3,'Corresponde a los primeros 9 parámetros con los que se llamó el script.',0),
-	   (3,'el nombre del script.',0);
- -- respuestas pregunta 4
-insert into respuestas (id_pregunta,nombre, esCorrecta) 
-values (4,'Estado de salida del último comando o script ejecutado.',0),
-	   (4,'El PID de la shell.',1),
-	   (4,'Los parámetros pasados al script.',0),
-	   (4,'Número de parámetros con los que se ha invocado el script. Es muy útil paracomprobar el número de argumentos pasados en la ejecución de un Shell script.',0),
-	   (4,'Corresponde a los primeros 9 parámetros con los que se llamó el script.',0),
-	   (4,'el nombre del script.',0);
- -- respuestas pregunta 5
-insert into respuestas (id_pregunta,nombre, esCorrecta) 
-values (5,'Estado de salida del último comando o script ejecutado.',0),
-	   (5,'El PID de la shell.',0),
-	   (5,'Los parámetros pasados al script.',1),
-	   (5,'Número de parámetros con los que se ha invocado el script. Es muy útil paracomprobar el número de argumentos pasados en la ejecución de un Shell script.',0),
-	   (5,'Corresponde a los primeros 9 parámetros con los que se llamó el script.',0),
-	   (5,'el nombre del script.',0);
- -- respuestas pregunta 6
-insert into respuestas (id_pregunta,nombre, esCorrecta) 
-values (5,'Estado de salida del último comando o script ejecutado.',0),
-	   (5,'El PID de la shell.',0),
-	   (5,'Los parámetros pasados al script.',1),
-	   (5,'Número de parámetros con los que se ha invocado el script. Es muy útil paracomprobar el número de argumentos pasados en la ejecución de un Shell script.',0),
-	   (5,'Corresponde a los primeros 9 parámetros con los que se llamó el script.',0),
-	   (5,'el nombre del script.',0);	
-
-
+-- clases Ana
 INSERT INTO clases (id_clase, nombre, codigo, id_usuario)
 VALUES 
-(1323, 'Clase A', 'A01', 1323),
-(1343, 'Clase B', 'B01', 1343),
-(1344, 'Clase C', 'C01', 1344),
-(3431, 'Clase D', 'D01', 3431);
+(100, '1A', 'A01', 1102),
+(101, '1B', 'B01', 1102),
+(102, '2A', 'C01', 1102),
+(103, '2B', 'D01', 1102);
 
+-- clases Alvaro
+INSERT INTO clases (id_clase, nombre, codigo, id_usuario)
+VALUES 
+(200, '3A', 'j02', 1101),
+(201, '3B', 'Ejj', 1101),
+(202, '4A', 'jv2', 1101),
+(203, '4B', 'jk2', 1101);
 
-INSERT INTO clases (id_clase, nombre, codigo, id_usuario) VALUES
-(4001, 'Clase E', 'E01', 1323),
-(4002, 'Clase F', 'F01', 1323),
-(4003, 'Clase G', 'G01', 1323),
-(4004, 'Clase H', 'H01', 1323);
+-- clases paco
+INSERT INTO clases (id_clase, nombre, codigo, id_usuario)
+VALUES 
+(300, '5A', 'xas', 1100),
+(301, '5B', 'xed3', 1100),
+(302, '6A', '34ax', 1100),
+(303, '6B', 'Sxear', 1100);
 
-
-
-
--- Asignar usuarios a clases (clases_asignadas)
-
-
+-- clases Gustavo
+INSERT INTO clases (id_clase, nombre, codigo, id_usuario)
+VALUES 
+(400, '7A', 'Z01', 1103),
+(401, '7B', 'Z21', 1103),
+(402, '8A', 'CZ1', 1103),
+(403, '8B', 'S01', 1103);
 
 -- Asignar alumnos a las clases
+
+-- Alumnos-Clases Ana
 INSERT INTO clases_asignadas (id_clase, id_alumno) VALUES
-(1323, 52), (1323, 53), (1323, 54), -- Clase A
-(1343, 55), (1343, 56), (1343, 57), -- Clase B
-(1344, 58), (1344, 59), (1344, 60), -- Clase C
-(3431, 100), (3431, 431), (3431, 432); -- Clase D
+(100, 1200), (100, 1201), (100, 1203), (100, 1204), 
+(101, 1205), (101, 1206), (101, 1207), (101, 1208), 
+(102, 1209), (100, 1210), (102, 1211), (102, 1212), 
+(103, 1213), (103, 1214), (103, 1215), (103, 1216); 
 
-INSERT IGNORE INTO clases_asignadas (id_clase, id_alumno)
-VALUES
-(1323, 100),
-(1323, 431),
-(1323, 432),
-(1323, 433),
-(1323, 443),
-(1323, 435),
-(1323, 463),
-(1323, 437),
-(1323, 438),
-(1323, 439),
-(1323, 530),
-(1323, 531),
-(1323, 52),
-(1323, 53),
-(1323, 54),
-(1323, 55),
-(1323, 56),
-(1323, 57),
-(1323, 538),
-(1323, 519),
-(1323, 60),
-(1323, 58),
-(1323, 59),
-(1323, 610),
-(1323, 613),
-(1323, 622),
-(1323, 631),
-(1323, 643),
-(1323, 651),
-(1323, 663),
-(1323, 672);
+-- Alumnos-Clases Alvaro
 INSERT INTO clases_asignadas (id_clase, id_alumno) VALUES
-((SELECT id_clase FROM clases WHERE codigo = 'E01'), 52),
-((SELECT id_clase FROM clases WHERE codigo = 'E01'), 53),
-((SELECT id_clase FROM clases WHERE codigo = 'F01'), 54),
-((SELECT id_clase FROM clases WHERE codigo = 'F01'), 55),
-((SELECT id_clase FROM clases WHERE codigo = 'G01'), 56),
-((SELECT id_clase FROM clases WHERE codigo = 'G01'), 57),
-((SELECT id_clase FROM clases WHERE codigo = 'H01'), 58),
-((SELECT id_clase FROM clases WHERE codigo = 'H01'), 59);
+(200, 1217), (200, 1218), (200, 1219), (200, 1220), 
+(201, 1221), (201, 1222), (201, 1223), (201, 1224), 
+(202, 1225), (200, 1226), (202, 1227), (202, 1228), 
+(203, 1229), (203, 1230), (203, 1231), (203, 1232); 
+
+-- Alumnos-Clases Paco
+INSERT INTO clases_asignadas (id_clase, id_alumno) VALUES
+(300, 1233), (300, 1234), (300, 1235), (300, 1236), 
+(301, 1237), (301, 1238), (301, 1239), (301, 1240), 
+(302, 1241), (302, 1242), (302, 1243), (302, 1244), 
+(303, 1245), (303, 1246), (303, 1247), (303, 1248); 
+
+-- Alumnos-Clases Gustavo
+INSERT INTO clases_asignadas (id_clase, id_alumno) VALUES
+(400, 1248), (400, 1249), (400, 1250), (400, 1251), 
+(401, 1252), (401, 1253), (401, 1254), (401, 1255), 
+(402, 1256), (402, 1257), (402, 1258), (402, 1259), 
+(403, 1260), (403, 1261), (403, 1262), (403, 1263), 
+(403, 1264), (403, 1265), (403, 1266), (403, 1267), 
+(403, 1268), (403, 1269), (403, 1270), (403, 1271), 
+(403, 1272);
 
 
--- Crear examenes para cada clase
+-- -- Crear examenes para cada clase de Ana
 INSERT INTO examenes (nombre, id_categoria, id_clase, fecha_hora_disponible, fecha_hora_fin) VALUES
-('Examen Redes', 1, 1323, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
-('Examen Base de Datos', 2, 1343, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
-('Examen Administración de Sistemas', 3, 1344, '2025-07-03 09:00:00', '2025-07-03 11:00:00'),
-('Examen Fundamentos de Hardware', 4, 3431, '2025-07-04 09:00:00', '2025-07-04 11:00:00');
+('Examen SO', 200, 100, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
+('Windows', 200, 100, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
+('Examen Redes', 201, 101, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
+('Cisco', 201, 101, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
+('Programacion', 202, 103, '2025-07-03 09:00:00', '2025-07-03 11:00:00'),
+('Aplicacion', 202, 103, '2025-07-03 09:00:00', '2025-07-03 11:00:00');
 
+-- -- Crear examenes para Clase Alvaro
 INSERT INTO examenes (nombre, id_categoria, id_clase, fecha_hora_disponible, fecha_hora_fin) VALUES
-('html', 1, 4001, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
-('css', 2, 4002, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
-('php', 3, 4003, '2025-07-03 09:00:00', '2025-07-03 11:00:00'),
-('docker', 4, 4004, '2025-07-04 09:00:00', '2025-07-04 11:00:00');
+('Zap', 203, 200, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
+('Autopsy', 203, 200, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
+('python', 204, 201, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
+('java', 204, 201, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
+('C++', 204, 203, '2025-07-03 09:00:00', '2025-07-03 11:00:00'),
+('Javascript', 204, 203, '2025-07-03 09:00:00', '2025-07-03 11:00:00');
 
+-- -- Crear examenes para Clase Paco
+INSERT INTO examenes (nombre, id_categoria, id_clase, fecha_hora_disponible, fecha_hora_fin) VALUES
+('Ecuaciones', 300, 300, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
+('Estadistica', 301, 300, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
+('tabla periodica', 302, 301, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
+('probabilidad', 303, 301, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
+('Graficas', 303, 302, '2025-07-03 09:00:00', '2025-07-03 11:00:00'),
+('Matrices', 204, 303, '2025-07-03 09:00:00', '2025-07-03 11:00:00');
 
--- Suponemos que los examenes creados tienen ids 1, 2, 3, 4 respectivamente
--- Añadir preguntas para cada categoría (1 a 4)
-INSERT INTO preguntas (nombre, id_categoria) VALUES
-('¿Qué protocolo se usa en la capa de red?', 1),
-('¿Qué sentencia SQL sirve para obtener datos?', 2),
-('¿Cómo reiniciar un servicio en Linux?', 3),
-('¿Qué componente almacena datos de forma volátil?', 4);
-INSERT INTO preguntas (nombre, id_categoria) VALUES
-('¿Qué protocolo se usa en la capa de red?', 1),
-('¿Qué sentencia SQL sirve para obtener datos?', 2),
-('¿Cómo reiniciar un servicio en Linux?', 3),
-('¿Qué componente almacena datos de forma volátil?', 4);
+-- -- Crear examenes para Clase gustavo
+INSERT INTO examenes (nombre, id_categoria, id_clase, fecha_hora_disponible, fecha_hora_fin) VALUES
+('Musicos', 400, 400, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
+('Escritores', 401, 401, '2025-07-01 09:00:00', '2025-07-01 11:00:00'),
+('Autores', 402, 401, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
+('Obras', 403, 402, '2025-07-02 09:00:00', '2025-07-02 11:00:00'),
+('Actores', 403, 403, '2025-07-03 09:00:00', '2025-07-03 11:00:00'),
+('Peliculas', 403, 403, '2025-07-03 09:00:00', '2025-07-03 11:00:00');
 
+-- Preguntas para Sistemas Operativos
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(201, '¿Qué es un sistema operativo?', 200),
+(202, '¿Cómo se configura un servicio en Linux?', 200);
 
--- Suponemos que estas preguntas tienen ids 1, 2, 3, 4 respectivamente
-
--- Insertar respuestas para cada pregunta, una correcta marcada con esCorrecta=1
+-- Respuestas para preguntas de Sistemas Operativos
 INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
--- Pregunta 1 (Redes)
-(1, 'TCP/IP', 0),
-(1, 'IP', 1),
-(1, 'HTTP', 0),
-(1, 'FTP', 0),
+(201, 'Es un software que gestiona el hardware', 1),
+(201, 'Es un tipo de hardware', 0),
+(201, 'Es un navegador web', 0),
+(202, 'Editando el archivo de configuración en /etc', 1),
+(202, 'Instalando un paquete sin más', 0),
+(202, 'Reiniciando el sistema', 0);
 
--- Pregunta 2 (Base de Datos)
-(2, 'SELECT', 1),
-(2, 'UPDATE', 0),
-(2, 'DELETE', 0),
-(2, 'INSERT', 0),
+-- Preguntas para Redes y Comunicaciones
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(203, '¿Qué significa TCP?', 201),
+(204, '¿Qué es una dirección IP?', 201);
 
--- Pregunta 3 (Administración de Sistemas)
-(3, 'systemctl restart servicio', 1),
-(3, 'start servicio', 0),
-(3, 'restart servicio', 0),
-(3, 'service stop servicio', 0),
+-- Respuestas para preguntas de Redes y Comunicaciones
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(203, 'Protocolo de control de transmisión', 1),
+(203, 'Protocolo de comunicaciones temporales', 0),
+(203, 'Protocolo de conexión de terminales', 0),
+(204, 'Es un identificador único para dispositivos en una red', 1),
+(204, 'Es el nombre de un archivo en un servidor', 0),
+(204, 'Es un puerto de comunicación', 0);
 
--- Pregunta 4 (Hardware)
-(4, 'RAM', 1),
-(4, 'ROM', 0),
-(4, 'Disco Duro', 0),
-(4, 'CPU', 0);
+-- Preguntas para Matemáticas Básicas
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(205, '¿Qué es una ecuación cuadrática?', 300),
+(206, '¿Cuál es el resultado de 2+2?', 300);
+
+-- Respuestas para preguntas de Matemáticas Básicas
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(205, 'Una ecuación de grado 2', 1),
+(205, 'Una ecuación de grado 1', 0),
+(205, 'Una ecuación que no tiene variables', 0),
+(206, '4', 1),
+(206, '5', 0),
+(206, '3', 0);
+
+-- Preguntas para Historia del Arte
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(207, '¿Qué caracteriza al estilo gótico?', 401),
+(208, '¿Quién pintó La Última Cena?', 401);
+
+-- Respuestas para preguntas de Historia del Arte
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(207, 'Altas catedrales con vitrales elaborados', 1),
+(207, 'Cúpulas circulares', 0),
+(207, 'Edificios bajos y anchos', 0),
+(208, 'Leonardo da Vinci', 1),
+(208, 'Miguel Ángel', 0),
+(208, 'Rafael', 0);
+
+-- Preguntas y respuestas para Redes y Comunicaciones (201)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(209, '¿Qué es una máscara de subred?', 201),
+(210, '¿Cuál es la función del protocolo DHCP?', 201);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(209, 'Determina la parte de la red y la parte del host en una IP', 1),
+(209, 'Es un tipo de firewall', 0),
+(209, 'Es un servidor de correo', 0),
+(210, 'Asignar direcciones IP automáticamente', 1),
+(210, 'Encriptar datos en la red', 0),
+(210, 'Monitorear el tráfico de red', 0);
+
+-- Preguntas y respuestas para HLC (202)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(211, '¿Qué es un registro en un procesador?', 202),
+(212, '¿Qué función cumple la unidad aritmético lógica (ALU)?', 202);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(211, 'Pequeña unidad de almacenamiento dentro del CPU', 1),
+(211, 'Memoria RAM externa', 0),
+(211, 'Un tipo de disco duro', 0),
+(212, 'Realiza operaciones matemáticas y lógicas', 1),
+(212, 'Gestiona la alimentación eléctrica', 0),
+(212, 'Controla la velocidad del reloj', 0);
+
+-- Preguntas y respuestas para Seguridad Informática (203)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(213, '¿Qué es un firewall?', 203),
+(214, '¿Para qué se utiliza la criptografía?', 203);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(213, 'Filtrar y controlar el tráfico de red', 1),
+(213, 'Es un tipo de virus', 0),
+(213, 'Un programa de edición de imágenes', 0),
+(214, 'Proteger la información mediante cifrado', 1),
+(214, 'Eliminar virus del sistema', 0),
+(214, 'Mejorar la velocidad de conexión', 0);
+
+-- Preguntas y respuestas para Desarrollo Web (204)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(215, '¿Qué es HTML?', 204),
+(216, '¿Para qué sirve CSS?', 204);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(215, 'Lenguaje para estructurar páginas web', 1),
+(215, 'Un sistema operativo', 0),
+(215, 'Un tipo de base de datos', 0),
+(216, 'Para dar estilo a las páginas web', 1),
+(216, 'Para programar la lógica del servidor', 0),
+(216, 'Para almacenar datos', 0);
+
+-- Preguntas y respuestas para Matemáticas Básicas (300)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(217, '¿Qué es un número primo?', 300),
+(218, '¿Cuál es la fórmula del área del círculo?', 300);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(217, 'Número divisible solo entre 1 y sí mismo', 1),
+(217, 'Número divisible entre 2 y 3', 0),
+(217, 'Número par mayor que 10', 0),
+(218, 'π por radio al cuadrado', 1),
+(218, '2 por π por radio', 0),
+(218, 'Base por altura dividido entre 2', 0);
+
+-- Preguntas y respuestas para Física Aplicada (301)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(219, '¿Qué es la ley de la inercia?', 301),
+(220, '¿Cuál es la unidad de medida de la fuerza?', 301);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(219, 'Un objeto en reposo o movimiento constante mantiene su estado', 1),
+(219, 'La fuerza es igual a la masa por la aceleración', 0),
+(219, 'La energía no se crea ni se destruye', 0),
+(220, 'Newton (N)', 1),
+(220, 'Joule (J)', 0),
+(220, 'Watt (W)', 0);
+
+-- Preguntas y respuestas para Química General (302)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(221, '¿Qué es un enlace covalente?', 302),
+(222, '¿Cuál es el símbolo químico del sodio?', 302);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(221, 'Compartir electrones entre átomos', 1),
+(221, 'Transferencia de electrones', 0),
+(221, 'Fuerza entre iones de carga opuesta', 0),
+(222, 'Na', 1),
+(222, 'So', 0),
+(222, 'Sd', 0);
+
+-- Preguntas y respuestas para Estadística (303)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(223, '¿Qué es la media aritmética?', 303),
+(224, '¿Qué representa la desviación estándar?', 303);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(223, 'El promedio de un conjunto de datos', 1),
+(223, 'El valor más frecuente', 0),
+(223, 'El valor central de los datos', 0),
+(224, 'La dispersión o variabilidad de los datos', 1),
+(224, 'El número total de datos', 0),
+(224, 'El valor mínimo de los datos', 0);
+
+-- Preguntas y respuestas para Música y Composición (400)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(225, '¿Qué es una escala musical?', 400),
+(226, '¿Qué función tiene un compás en la música?', 400);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(225, 'Conjunto ordenado de notas musicales', 1),
+(225, 'Un instrumento de cuerda', 0),
+(225, 'Un tipo de ritmo', 0),
+(226, 'Dividir el tiempo en partes iguales', 1),
+(226, 'El volumen de una canción', 0),
+(226, 'La melodía principal', 0);
+
+-- Preguntas y respuestas para Historia del Arte (401)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(227, '¿Quién fue Pablo Picasso?', 401),
+(228, '¿Qué caracteriza al barroco?', 401);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(227, 'Pintor y escultor español, fundador del cubismo', 1),
+(227, 'Un arquitecto renacentista', 0),
+(227, 'Un compositor barroco', 0),
+(228, 'Estilo con mucho detalle y dramatismo', 1),
+(228, 'Estilo simple y minimalista', 0),
+(228, 'Arte abstracto', 0);
+
+-- Preguntas y respuestas para Literatura Universal (402)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(229, '¿Quién escribió "Don Quijote de la Mancha"?', 402),
+(230, '¿Qué es una metáfora?', 402);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(229, 'Miguel de Cervantes', 1),
+(229, 'Gabriel García Márquez', 0),
+(229, 'Pablo Neruda', 0),
+(230, 'Figura retórica que compara sin usar "como"', 1),
+(230, 'Una rima consonante', 0),
+(230, 'Un tipo de narrador', 0);
+
+-- Preguntas y respuestas para Cine y Teatro (403)
+INSERT INTO preguntas (id, nombre, id_categoria) VALUES
+(231, '¿Qué es un guion en cine?', 403),
+(232, '¿Quién fue William Shakespeare?', 403);
+
+INSERT INTO respuestas (id_pregunta, nombre, esCorrecta) VALUES
+(231, 'Documento que contiene el diálogo y acciones de la película', 1),
+(231, 'El director de fotografía', 0),
+(231, 'Un tipo de cámara', 0),
+(232, 'Dramaturgo y poeta inglés, autor de Hamlet', 1),
+(232, 'Actor de cine mudo', 0),
+(232, 'Director de cine italiano', 0);
+
 
 INSERT INTO examen_preguntas (id_examen, id_pregunta) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(2, 4),
-(2, 5),
-(2, 6),
-(3, 7),
-(3, 8),
-(4, 9),
-(4, 10);
+-- Examenes SO (categoria 200)
+(1, 201),
+(1, 202),
+(2, 201),
+(2, 202),
 
-INSERT INTO examen_preguntas (id_examen, id_pregunta) VALUES
-(1, 1),  -- Pregunta 1 para examen html
-(2, 2),  -- Pregunta 2 para examen css
-(3, 3),  -- Pregunta 3 para examen php
-(4, 4);  -- Pregunta 4 para examen docker
+-- Examenes Redes (categoria 201)
+(3, 203),
+(3, 204),
+(3, 209),
+(3, 210),
+(4, 203),
+(4, 204),
+(4, 209),
+(4, 210),
 
+-- Examenes HLC (categoria 202)
+(5, 211),
+(5, 212),
+(6, 211),
+(6, 212),
 
--- === INSERCIÓN DE DATOS ADICIONALES ===
+-- Examenes Seguridad (categoria 203)
+(7, 213),
+(7, 214),
+(8, 213),
+(8, 214),
 
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra5');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra6');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra7');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra8');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra9');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra10');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra11');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra12');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra13');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra14');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra15');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra16');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra17');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra18');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra19');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra20');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra21');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra22');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra23');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra24');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra25');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra26');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra27');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra28');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra29');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra30');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra31');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra32');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra33');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra34');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra35');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra36');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra37');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra38');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra39');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra40');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra41');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra42');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra43');
-INSERT INTO categoria (nombre) VALUES ('CategoriaExtra44');
+-- Examenes Desarrollo Web (categoria 204)
+(9, 215),
+(9, 216),
+(10, 215),
+(10, 216),
+(11, 215),
+(11, 216),
+(12, 215),
+(12, 216),
+(18, 215),
+(18, 216),
 
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5000, '¿Pregunta extra de la categoría 5?', 5);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10000, 5000, 'Respuesta 1 para pregunta 5000', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10001, 5000, 'Respuesta 2 para pregunta 5000', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10002, 5000, 'Respuesta 3 para pregunta 5000', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10003, 5000, 'Respuesta 4 para pregunta 5000', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5001, '¿Pregunta extra de la categoría 6?', 6);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10004, 5001, 'Respuesta 1 para pregunta 5001', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10005, 5001, 'Respuesta 2 para pregunta 5001', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10006, 5001, 'Respuesta 3 para pregunta 5001', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10007, 5001, 'Respuesta 4 para pregunta 5001', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5002, '¿Pregunta extra de la categoría 7?', 7);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10008, 5002, 'Respuesta 1 para pregunta 5002', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10009, 5002, 'Respuesta 2 para pregunta 5002', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10010, 5002, 'Respuesta 3 para pregunta 5002', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10011, 5002, 'Respuesta 4 para pregunta 5002', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5003, '¿Pregunta extra de la categoría 8?', 8);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10012, 5003, 'Respuesta 1 para pregunta 5003', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10013, 5003, 'Respuesta 2 para pregunta 5003', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10014, 5003, 'Respuesta 3 para pregunta 5003', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10015, 5003, 'Respuesta 4 para pregunta 5003', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5004, '¿Pregunta extra de la categoría 9?', 9);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10016, 5004, 'Respuesta 1 para pregunta 5004', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10017, 5004, 'Respuesta 2 para pregunta 5004', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10018, 5004, 'Respuesta 3 para pregunta 5004', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10019, 5004, 'Respuesta 4 para pregunta 5004', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5005, '¿Pregunta extra de la categoría 10?', 10);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10020, 5005, 'Respuesta 1 para pregunta 5005', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10021, 5005, 'Respuesta 2 para pregunta 5005', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10022, 5005, 'Respuesta 3 para pregunta 5005', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10023, 5005, 'Respuesta 4 para pregunta 5005', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5006, '¿Pregunta extra de la categoría 11?', 11);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10024, 5006, 'Respuesta 1 para pregunta 5006', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10025, 5006, 'Respuesta 2 para pregunta 5006', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10026, 5006, 'Respuesta 3 para pregunta 5006', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10027, 5006, 'Respuesta 4 para pregunta 5006', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5007, '¿Pregunta extra de la categoría 12?', 12);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10028, 5007, 'Respuesta 1 para pregunta 5007', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10029, 5007, 'Respuesta 2 para pregunta 5007', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10030, 5007, 'Respuesta 3 para pregunta 5007', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10031, 5007, 'Respuesta 4 para pregunta 5007', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5008, '¿Pregunta extra de la categoría 13?', 13);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10032, 5008, 'Respuesta 1 para pregunta 5008', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10033, 5008, 'Respuesta 2 para pregunta 5008', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10034, 5008, 'Respuesta 3 para pregunta 5008', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10035, 5008, 'Respuesta 4 para pregunta 5008', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5009, '¿Pregunta extra de la categoría 14?', 14);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10036, 5009, 'Respuesta 1 para pregunta 5009', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10037, 5009, 'Respuesta 2 para pregunta 5009', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10038, 5009, 'Respuesta 3 para pregunta 5009', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10039, 5009, 'Respuesta 4 para pregunta 5009', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5010, '¿Pregunta extra de la categoría 15?', 15);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10040, 5010, 'Respuesta 1 para pregunta 5010', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10041, 5010, 'Respuesta 2 para pregunta 5010', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10042, 5010, 'Respuesta 3 para pregunta 5010', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10043, 5010, 'Respuesta 4 para pregunta 5010', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5011, '¿Pregunta extra de la categoría 16?', 16);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10044, 5011, 'Respuesta 1 para pregunta 5011', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10045, 5011, 'Respuesta 2 para pregunta 5011', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10046, 5011, 'Respuesta 3 para pregunta 5011', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10047, 5011, 'Respuesta 4 para pregunta 5011', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5012, '¿Pregunta extra de la categoría 17?', 17);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10048, 5012, 'Respuesta 1 para pregunta 5012', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10049, 5012, 'Respuesta 2 para pregunta 5012', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10050, 5012, 'Respuesta 3 para pregunta 5012', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10051, 5012, 'Respuesta 4 para pregunta 5012', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5013, '¿Pregunta extra de la categoría 18?', 18);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10052, 5013, 'Respuesta 1 para pregunta 5013', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10053, 5013, 'Respuesta 2 para pregunta 5013', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10054, 5013, 'Respuesta 3 para pregunta 5013', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10055, 5013, 'Respuesta 4 para pregunta 5013', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5014, '¿Pregunta extra de la categoría 19?', 19);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10056, 5014, 'Respuesta 1 para pregunta 5014', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10057, 5014, 'Respuesta 2 para pregunta 5014', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10058, 5014, 'Respuesta 3 para pregunta 5014', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10059, 5014, 'Respuesta 4 para pregunta 5014', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5015, '¿Pregunta extra de la categoría 20?', 20);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10060, 5015, 'Respuesta 1 para pregunta 5015', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10061, 5015, 'Respuesta 2 para pregunta 5015', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10062, 5015, 'Respuesta 3 para pregunta 5015', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10063, 5015, 'Respuesta 4 para pregunta 5015', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5016, '¿Pregunta extra de la categoría 21?', 21);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10064, 5016, 'Respuesta 1 para pregunta 5016', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10065, 5016, 'Respuesta 2 para pregunta 5016', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10066, 5016, 'Respuesta 3 para pregunta 5016', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10067, 5016, 'Respuesta 4 para pregunta 5016', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5017, '¿Pregunta extra de la categoría 22?', 22);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10068, 5017, 'Respuesta 1 para pregunta 5017', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10069, 5017, 'Respuesta 2 para pregunta 5017', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10070, 5017, 'Respuesta 3 para pregunta 5017', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10071, 5017, 'Respuesta 4 para pregunta 5017', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5018, '¿Pregunta extra de la categoría 23?', 23);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10072, 5018, 'Respuesta 1 para pregunta 5018', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10073, 5018, 'Respuesta 2 para pregunta 5018', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10074, 5018, 'Respuesta 3 para pregunta 5018', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10075, 5018, 'Respuesta 4 para pregunta 5018', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5019, '¿Pregunta extra de la categoría 24?', 24);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10076, 5019, 'Respuesta 1 para pregunta 5019', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10077, 5019, 'Respuesta 2 para pregunta 5019', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10078, 5019, 'Respuesta 3 para pregunta 5019', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10079, 5019, 'Respuesta 4 para pregunta 5019', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5020, '¿Pregunta extra de la categoría 25?', 25);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10080, 5020, 'Respuesta 1 para pregunta 5020', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10081, 5020, 'Respuesta 2 para pregunta 5020', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10082, 5020, 'Respuesta 3 para pregunta 5020', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10083, 5020, 'Respuesta 4 para pregunta 5020', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5021, '¿Pregunta extra de la categoría 26?', 26);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10084, 5021, 'Respuesta 1 para pregunta 5021', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10085, 5021, 'Respuesta 2 para pregunta 5021', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10086, 5021, 'Respuesta 3 para pregunta 5021', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10087, 5021, 'Respuesta 4 para pregunta 5021', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5022, '¿Pregunta extra de la categoría 27?', 27);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10088, 5022, 'Respuesta 1 para pregunta 5022', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10089, 5022, 'Respuesta 2 para pregunta 5022', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10090, 5022, 'Respuesta 3 para pregunta 5022', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10091, 5022, 'Respuesta 4 para pregunta 5022', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5023, '¿Pregunta extra de la categoría 28?', 28);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10092, 5023, 'Respuesta 1 para pregunta 5023', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10093, 5023, 'Respuesta 2 para pregunta 5023', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10094, 5023, 'Respuesta 3 para pregunta 5023', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10095, 5023, 'Respuesta 4 para pregunta 5023', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5024, '¿Pregunta extra de la categoría 29?', 29);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10096, 5024, 'Respuesta 1 para pregunta 5024', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10097, 5024, 'Respuesta 2 para pregunta 5024', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10098, 5024, 'Respuesta 3 para pregunta 5024', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10099, 5024, 'Respuesta 4 para pregunta 5024', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5025, '¿Pregunta extra de la categoría 30?', 30);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10100, 5025, 'Respuesta 1 para pregunta 5025', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10101, 5025, 'Respuesta 2 para pregunta 5025', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10102, 5025, 'Respuesta 3 para pregunta 5025', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10103, 5025, 'Respuesta 4 para pregunta 5025', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5026, '¿Pregunta extra de la categoría 31?', 31);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10104, 5026, 'Respuesta 1 para pregunta 5026', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10105, 5026, 'Respuesta 2 para pregunta 5026', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10106, 5026, 'Respuesta 3 para pregunta 5026', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10107, 5026, 'Respuesta 4 para pregunta 5026', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5027, '¿Pregunta extra de la categoría 32?', 32);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10108, 5027, 'Respuesta 1 para pregunta 5027', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10109, 5027, 'Respuesta 2 para pregunta 5027', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10110, 5027, 'Respuesta 3 para pregunta 5027', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10111, 5027, 'Respuesta 4 para pregunta 5027', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5028, '¿Pregunta extra de la categoría 33?', 33);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10112, 5028, 'Respuesta 1 para pregunta 5028', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10113, 5028, 'Respuesta 2 para pregunta 5028', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10114, 5028, 'Respuesta 3 para pregunta 5028', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10115, 5028, 'Respuesta 4 para pregunta 5028', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5029, '¿Pregunta extra de la categoría 34?', 34);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10116, 5029, 'Respuesta 1 para pregunta 5029', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10117, 5029, 'Respuesta 2 para pregunta 5029', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10118, 5029, 'Respuesta 3 para pregunta 5029', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10119, 5029, 'Respuesta 4 para pregunta 5029', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5030, '¿Pregunta extra de la categoría 35?', 35);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10120, 5030, 'Respuesta 1 para pregunta 5030', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10121, 5030, 'Respuesta 2 para pregunta 5030', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10122, 5030, 'Respuesta 3 para pregunta 5030', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10123, 5030, 'Respuesta 4 para pregunta 5030', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5031, '¿Pregunta extra de la categoría 36?', 36);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10124, 5031, 'Respuesta 1 para pregunta 5031', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10125, 5031, 'Respuesta 2 para pregunta 5031', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10126, 5031, 'Respuesta 3 para pregunta 5031', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10127, 5031, 'Respuesta 4 para pregunta 5031', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5032, '¿Pregunta extra de la categoría 37?', 37);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10128, 5032, 'Respuesta 1 para pregunta 5032', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10129, 5032, 'Respuesta 2 para pregunta 5032', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10130, 5032, 'Respuesta 3 para pregunta 5032', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10131, 5032, 'Respuesta 4 para pregunta 5032', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5033, '¿Pregunta extra de la categoría 38?', 38);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10132, 5033, 'Respuesta 1 para pregunta 5033', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10133, 5033, 'Respuesta 2 para pregunta 5033', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10134, 5033, 'Respuesta 3 para pregunta 5033', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10135, 5033, 'Respuesta 4 para pregunta 5033', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5034, '¿Pregunta extra de la categoría 39?', 39);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10136, 5034, 'Respuesta 1 para pregunta 5034', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10137, 5034, 'Respuesta 2 para pregunta 5034', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10138, 5034, 'Respuesta 3 para pregunta 5034', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10139, 5034, 'Respuesta 4 para pregunta 5034', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5035, '¿Pregunta extra de la categoría 40?', 40);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10140, 5035, 'Respuesta 1 para pregunta 5035', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10141, 5035, 'Respuesta 2 para pregunta 5035', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10142, 5035, 'Respuesta 3 para pregunta 5035', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10143, 5035, 'Respuesta 4 para pregunta 5035', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5036, '¿Pregunta extra de la categoría 41?', 41);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10144, 5036, 'Respuesta 1 para pregunta 5036', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10145, 5036, 'Respuesta 2 para pregunta 5036', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10146, 5036, 'Respuesta 3 para pregunta 5036', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10147, 5036, 'Respuesta 4 para pregunta 5036', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5037, '¿Pregunta extra de la categoría 42?', 42);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10148, 5037, 'Respuesta 1 para pregunta 5037', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10149, 5037, 'Respuesta 2 para pregunta 5037', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10150, 5037, 'Respuesta 3 para pregunta 5037', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10151, 5037, 'Respuesta 4 para pregunta 5037', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5038, '¿Pregunta extra de la categoría 43?', 43);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10152, 5038, 'Respuesta 1 para pregunta 5038', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10153, 5038, 'Respuesta 2 para pregunta 5038', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10154, 5038, 'Respuesta 3 para pregunta 5038', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10155, 5038, 'Respuesta 4 para pregunta 5038', 0);
-INSERT INTO preguntas (id, nombre, id_categoria) VALUES (5039, '¿Pregunta extra de la categoría 44?', 44);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10156, 5039, 'Respuesta 1 para pregunta 5039', 1);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10157, 5039, 'Respuesta 2 para pregunta 5039', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10158, 5039, 'Respuesta 3 para pregunta 5039', 0);
-INSERT INTO respuestas (id, id_pregunta, nombre, esCorrecta) VALUES (10159, 5039, 'Respuesta 4 para pregunta 5039', 0);
+-- Examenes Matematicas (categoria 300)
+(13, 205),
+(13, 206),
 
--- Insertar preguntas en exámenes (preguntas del 1 al 10 y exámenes del 1 al 4)
--- Insertar preguntas en exámenes (preguntas del 1 al 10 y exámenes del 1 al 4)
-INSERT INTO examen_preguntas (id_examen, id_pregunta) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(2, 4),
-(2, 5),
-(2, 6),
-(3, 7),
-(3, 8),
-(4, 9),
-(4, 10);
+-- Examenes Estadistica y Física Aplicada (categorias 301, 303)
+(14, 219),
+(14, 220),
+(16, 223),
+(16, 224),
+(17, 223),
+(17, 224),
 
--- Insertar respuestas respondidas por usuarios
-INSERT INTO respondidas (id_usuario, id_examen, id_pregunta, respuesta_id, es_correcta) VALUES
-(52, 1, 1, 20001, TRUE),  -- correcta
-(53, 1, 2, 20002, FALSE), -- incorrecta
-(54, 1, 3, 20003, TRUE),  -- correcta
-(55, 2, 4, 20004, FALSE), -- incorrecta
-(56, 2, 5, 20005, TRUE),  -- correcta
-(57, 2, 6, 20006, FALSE), -- incorrecta
-(58, 3, 7, 20007, TRUE),  -- correcta
-(59, 3, 8, 20008, FALSE), -- incorrecta
-(60, 4, 9, 20009, TRUE),  -- correcta
-(100, 4, 10, 20010, FALSE); -- incorrecta
+-- Examen Quimica General (categoria 302)
+(15, 221),
+(15, 222),
 
--- Respuestas del alumno 52
-INSERT INTO respondidas (id_usuario, id_examen, id_pregunta, respuesta_id, es_correcta) VALUES
-(52, 1, 1, 2, TRUE),   -- correcta
-(52, 1, 2, 6, FALSE),  -- incorrecta
-(52, 1, 3, 10, TRUE);  -- correcta
+-- Examenes Musica (categoria 400)
+(19, 225),
+(19, 226),
 
-INSERT INTO examenes_realizados (id_usuario, id_examen, nota, aprobado) VALUES
-(52, 1, 6.66, TRUE);
+-- Examenes Historia del Arte (categoria 401)
+(20, 227),
+(20, 228),
 
--- Respuestas del alumno 53
-INSERT INTO respondidas (id_usuario, id_examen, id_pregunta, respuesta_id, es_correcta) VALUES
-(53, 1, 1, 1, FALSE),  -- incorrecta
-(53, 1, 2, 7, TRUE),   -- correcta
-(53, 1, 3, 9, FALSE);  -- incorrecta
+-- Examen Literatura Universal (categoria 402)
+(21, 229),
+(21, 230),
 
-INSERT INTO examenes_realizados (id_usuario, id_examen, nota, aprobado) VALUES
-(53, 1, 3.33, FALSE);
-
--- Respuestas del alumno 54
-INSERT INTO respondidas (id_usuario, id_examen, id_pregunta, respuesta_id, es_correcta) VALUES
-(54, 1, 1, 2, TRUE),   -- correcta
-(54, 1, 2, 7, TRUE),   -- correcta
-(54, 1, 3, 13, FALSE); -- incorrecta
-
--- Insertar resultados para otros alumnos
--- Insertar o actualizar resultados para otros alumnos
-INSERT INTO examenes_realizados (id_usuario, id_examen, nota, aprobado) 
-VALUES
-(52, 1, 7.50, TRUE),
-(53, 1, 5.00, TRUE),
-(54, 1, 4.50, FALSE),
-(55, 1, 8.00, TRUE),
-(56, 1, 6.00, TRUE),
-(57, 1, 7.75, TRUE),
-(58, 1, 9.00, TRUE),
-(59, 1, 3.25, FALSE),
-(60, 1, 6.50, TRUE),
-(100, 1, 5.75, TRUE),
-(431, 1, 8.50, TRUE),
-(432, 1, 9.75, TRUE),
-(433, 1, 6.25, TRUE),
-(435, 1, 4.75, FALSE),
-(437, 1, 5.50, TRUE),
-(438, 1, 3.00, FALSE),
-(439, 1, 7.25, TRUE),
-(443, 1, 8.75, TRUE),
-(463, 1, 9.25, TRUE),
-(519, 1, 6.50, TRUE),
-(530, 1, 7.00, TRUE),
-(531, 1, 6.75, TRUE),
-(538, 1, 8.25, TRUE),
-(610, 1, 5.25, TRUE)
-ON DUPLICATE KEY UPDATE
-nota = VALUES(nota),
-aprobado = VALUES(aprobado);
-
-INSERT INTO examenes_realizados (id_usuario, id_examen, nota, aprobado) VALUES
--- Examen 2 (Base de Datos)
-(56, 2, 6.00, TRUE),
-(57, 2, 7.75, TRUE),
-(58, 2, 9.00, TRUE),
-(59, 2, 3.25, FALSE),
-
--- Examen 3 (Admin. Sistemas)
-(60, 3, 6.50, TRUE),
-(100, 3, 5.75, TRUE),
-(431, 3, 8.50, TRUE),
-(432, 3, 9.75, TRUE),
-
--- Examen 4 (Fundamentos Hardware)
-(433, 4, 6.25, TRUE),
-(435, 4, 4.75, FALSE),
-(437, 4, 5.50, TRUE),
-(438, 4, 3.00, FALSE),
-
--- Algunos más en otros exámenes
-(519, 2, 6.50, TRUE),
-(530, 3, 7.00, TRUE),
-(531, 4, 6.75, TRUE),
-(610, 2, 5.25, TRUE)
-
-ON DUPLICATE KEY UPDATE
-nota = VALUES(nota),
-aprobado = VALUES(aprobado);
-
+-- Examenes Cine y Teatro (categoria 403)
+(22, 231),
+(22, 232),
+(23, 231),
+(23, 232),
+(24, 231),
+(24, 232)
+;
 
 
 INSERT INTO examenes_realizados (id_usuario, id_examen, nota, aprobado) VALUES
--- Examen 5 (simulación)
-(56, 5, 7.20, TRUE),
-(57, 5, 5.50, TRUE),
-(58, 5, 8.00, TRUE),
-(59, 5, 4.00, FALSE),
+(1200, 1, 5.0, TRUE),
+(1201, 1, 5.0, TRUE),
+(1203, 1, 10.0, TRUE),
+(1204, 1, 0.0, FALSE),
+(1210, 1, 5.0, TRUE),
+(1200, 2, 5.0, TRUE),
+(1201, 2, 0.0, FALSE),
+(1203, 2, 5.0, TRUE),
+(1204, 2, 5.0, TRUE),
+(1210, 2, 0.0, FALSE),
+(1205, 3, 2.5, FALSE),
+(1206, 3, 2.5, FALSE),
+(1207, 3, 2.5, FALSE),
+(1208, 3, 2.5, FALSE),
+(1205, 4, 0.0, FALSE),
+(1206, 4, 5.0, TRUE),
+(1207, 4, 0.0, FALSE),
+(1208, 4, 0.0, FALSE),
+(1213, 5, 0.0, FALSE),
+(1214, 5, 10.0, TRUE),
+(1215, 5, 5.0, TRUE),
+(1216, 5, 0.0, FALSE),
+(1213, 6, 5.0, TRUE),
+(1214, 6, 5.0, TRUE),
+(1215, 6, 10.0, TRUE),
+(1216, 6, 0.0, FALSE),
+(1217, 7, 5.0, TRUE),
+(1218, 7, 0.0, FALSE),
+(1219, 7, 5.0, TRUE),
+(1220, 7, 5.0, TRUE),
+(1226, 7, 5.0, TRUE),
+(1217, 8, 0.0, FALSE),
+(1218, 8, 5.0, TRUE),
+(1219, 8, 0.0, FALSE),
+(1220, 8, 5.0, TRUE),
+(1226, 8, 5.0, TRUE),
+(1221, 9, 5.0, TRUE),
+(1222, 9, 0.0, FALSE),
+(1223, 9, 5.0, TRUE),
+(1224, 9, 10.0, TRUE),
+(1221, 10, 0.0, FALSE),
+(1222, 10, 0.0, FALSE),
+(1223, 10, 10.0, TRUE),
+(1224, 10, 0.0, FALSE),
+(1229, 11, 5.0, TRUE),
+(1230, 11, 0.0, FALSE),
+(1231, 11, 0.0, FALSE),
+(1232, 11, 10.0, TRUE),
+(1229, 12, 5.0, TRUE),
+(1230, 12, 10.0, TRUE),
+(1231, 12, 5.0, TRUE),
+(1232, 12, 5.0, TRUE),
+(1233, 13, 10.0, TRUE),
+(1234, 13, 5.0, TRUE),
+(1235, 13, 10.0, TRUE),
+(1236, 13, 5.0, TRUE),
+(1233, 14, 5.0, TRUE),
+(1234, 14, 10.0, TRUE),
+(1235, 14, 5.0, TRUE),
+(1236, 14, 5.0, TRUE),
+(1237, 15, 5.0, TRUE),
+(1238, 15, 5.0, TRUE),
+(1239, 15, 0.0, FALSE),
+(1240, 15, 0.0, FALSE),
+(1237, 16, 0.0, FALSE),
+(1238, 16, 5.0, TRUE),
+(1239, 16, 0.0, FALSE),
+(1240, 16, 5.0, TRUE),
+(1241, 17, 0.0, FALSE),
+(1242, 17, 5.0, TRUE),
+(1243, 17, 0.0, FALSE),
+(1244, 17, 5.0, TRUE),
+(1245, 18, 0.0, FALSE),
+(1246, 18, 10.0, TRUE),
+(1247, 18, 0.0, FALSE),
+(1248, 18, 5.0, TRUE),
+(1248, 19, 0.0, FALSE),
+(1249, 19, 5.0, TRUE),
+(1250, 19, 0.0, FALSE),
+(1251, 19, 5.0, TRUE),
+(1252, 20, 10.0, TRUE),
+(1253, 20, 0.0, FALSE),
+(1254, 20, 5.0, TRUE),
+(1255, 20, 5.0, TRUE),
+(1256, 21, 0.0, FALSE),
+(1257, 21, 5.0, TRUE),
+(1258, 21, 5.0, TRUE),
+(1259, 21, 5.0, TRUE),
+(1260, 22, 0.0, FALSE),
+(1261, 22, 0.0, FALSE),
+(1262, 22, 5.0, TRUE),
+(1263, 22, 5.0, TRUE),
+(1264, 22, 0.0, FALSE),
+(1265, 22, 5.0, TRUE),
+(1266, 22, 5.0, TRUE),
+(1267, 22, 5.0, TRUE),
+(1268, 22, 0.0, FALSE),
+(1269, 22, 5.0, TRUE),
+(1270, 22, 5.0, TRUE),
+(1271, 22, 5.0, TRUE),
+(1272, 22, 0.0, FALSE),
+(1260, 23, 10.0, TRUE),
+(1261, 23, 5.0, TRUE),
+(1262, 23, 10.0, TRUE),
+(1263, 23, 0.0, FALSE),
+(1264, 23, 5.0, TRUE),
+(1265, 23, 5.0, TRUE),
+(1266, 23, 5.0, TRUE),
+(1267, 23, 5.0, TRUE),
+(1268, 23, 5.0, TRUE),
+(1269, 23, 5.0, TRUE),
+(1270, 23, 5.0, TRUE),
+(1271, 23, 0.0, FALSE),
+(1272, 23, 0.0, FALSE),
+(1260, 24, 5.0, TRUE),
+(1261, 24, 5.0, TRUE),
+(1262, 24, 5.0, TRUE),
+(1263, 24, 5.0, TRUE),
+(1264, 24, 0.0, FALSE),
+(1265, 24, 0.0, FALSE),
+(1266, 24, 0.0, FALSE),
+(1267, 24, 10.0, TRUE),
+(1268, 24, 0.0, FALSE),
+(1269, 24, 5.0, TRUE),
+(1270, 24, 10.0, TRUE),
+(1271, 24, 0.0, FALSE),
+(1272, 24, 0.0, FALSE);
 
--- Examen 6 (simulación)
-(60, 6, 6.75, TRUE),
-(100, 6, 5.00, TRUE),
-(431, 6, 9.00, TRUE),
-(432, 6, 7.50, TRUE),
-
--- Examen 7 (simulación)
-(433, 7, 6.00, TRUE),
-(435, 7, 3.75, FALSE),
-(437, 7, 5.25, TRUE),
-(438, 7, 2.50, FALSE),
-
--- Examen 8 (simulación)
-(519, 8, 7.25, TRUE),
-(530, 8, 6.00, TRUE),
-(531, 8, 4.75, FALSE),
-(610, 8, 5.50, TRUE)
-
-ON DUPLICATE KEY UPDATE
-nota = VALUES(nota),
-aprobado = VALUES(aprobado);
-
-
-
-
+INSERT INTO respondidas (id_usuario, id_examen, id_pregunta, respuesta_id, es_correcta) VALUES
+(1200, 1, 201, 2, 0),
+(1200, 1, 202, 4, 1),
+(1201, 1, 201, 2, 0),
+(1201, 1, 202, 4, 1),
+(1203, 1, 201, 1, 1),
+(1203, 1, 202, 4, 1),
+(1204, 1, 201, 2, 0),
+(1204, 1, 202, 5, 0),
+(1210, 1, 201, 1, 1),
+(1210, 1, 202, 5, 0),
+(1200, 2, 201, 1, 1),
+(1200, 2, 202, 5, 0),
+(1201, 2, 201, 2, 0),
+(1201, 2, 202, 5, 0),
+(1203, 2, 201, 1, 1),
+(1203, 2, 202, 5, 0),
+(1204, 2, 201, 2, 0),
+(1204, 2, 202, 4, 1),
+(1210, 2, 201, 2, 0),
+(1210, 2, 202, 5, 0),
+(1205, 3, 203, 8, 0),
+(1205, 3, 204, 11, 0),
+(1205, 3, 209, 26, 0),
+(1205, 3, 210, 28, 1),
+(1206, 3, 203, 8, 0),
+(1206, 3, 204, 10, 1),
+(1206, 3, 209, 26, 0),
+(1206, 3, 210, 29, 0),
+(1207, 3, 203, 8, 0),
+(1207, 3, 204, 10, 1),
+(1207, 3, 209, 26, 0),
+(1207, 3, 210, 29, 0),
+(1208, 3, 203, 8, 0),
+(1208, 3, 204, 10, 1),
+(1208, 3, 209, 26, 0),
+(1208, 3, 210, 29, 0),
+(1205, 4, 203, 8, 0),
+(1205, 4, 204, 11, 0),
+(1205, 4, 209, 26, 0),
+(1205, 4, 210, 29, 0),
+(1206, 4, 203, 7, 1),
+(1206, 4, 204, 11, 0),
+(1206, 4, 209, 26, 0),
+(1206, 4, 210, 28, 1),
+(1207, 4, 203, 8, 0),
+(1207, 4, 204, 11, 0),
+(1207, 4, 209, 26, 0),
+(1207, 4, 210, 29, 0),
+(1208, 4, 203, 8, 0),
+(1208, 4, 204, 11, 0),
+(1208, 4, 209, 26, 0),
+(1208, 4, 210, 29, 0),
+(1213, 5, 211, 32, 0),
+(1213, 5, 212, 35, 0),
+(1214, 5, 211, 31, 1),
+(1214, 5, 212, 34, 1),
+(1215, 5, 211, 31, 1),
+(1215, 5, 212, 35, 0),
+(1216, 5, 211, 32, 0),
+(1216, 5, 212, 35, 0),
+(1213, 6, 211, 31, 1),
+(1213, 6, 212, 35, 0),
+(1214, 6, 211, 31, 1),
+(1214, 6, 212, 35, 0),
+(1215, 6, 211, 31, 1),
+(1215, 6, 212, 34, 1),
+(1216, 6, 211, 32, 0),
+(1216, 6, 212, 35, 0),
+(1217, 7, 213, 37, 1),
+(1217, 7, 214, 41, 0),
+(1218, 7, 213, 38, 0),
+(1218, 7, 214, 41, 0),
+(1219, 7, 213, 37, 1),
+(1219, 7, 214, 41, 0),
+(1220, 7, 213, 38, 0),
+(1220, 7, 214, 40, 1),
+(1226, 7, 213, 38, 0),
+(1226, 7, 214, 40, 1),
+(1217, 8, 213, 38, 0),
+(1217, 8, 214, 41, 0),
+(1218, 8, 213, 38, 0),
+(1218, 8, 214, 40, 1),
+(1219, 8, 213, 38, 0),
+(1219, 8, 214, 41, 0),
+(1220, 8, 213, 37, 1),
+(1220, 8, 214, 41, 0),
+(1226, 8, 213, 38, 0),
+(1226, 8, 214, 40, 1),
+(1221, 9, 215, 43, 1),
+(1221, 9, 216, 47, 0),
+(1222, 9, 215, 44, 0),
+(1222, 9, 216, 47, 0),
+(1223, 9, 215, 44, 0),
+(1223, 9, 216, 46, 1),
+(1224, 9, 215, 43, 1),
+(1224, 9, 216, 46, 1),
+(1221, 10, 215, 44, 0),
+(1221, 10, 216, 47, 0),
+(1222, 10, 215, 44, 0),
+(1222, 10, 216, 47, 0),
+(1223, 10, 215, 43, 1),
+(1223, 10, 216, 46, 1),
+(1224, 10, 215, 44, 0),
+(1224, 10, 216, 47, 0),
+(1229, 11, 215, 44, 0),
+(1229, 11, 216, 46, 1),
+(1230, 11, 215, 44, 0),
+(1230, 11, 216, 47, 0),
+(1231, 11, 215, 44, 0),
+(1231, 11, 216, 47, 0),
+(1232, 11, 215, 43, 1),
+(1232, 11, 216, 46, 1),
+(1229, 12, 215, 43, 1),
+(1229, 12, 216, 47, 0),
+(1230, 12, 215, 43, 1),
+(1230, 12, 216, 46, 1),
+(1231, 12, 215, 43, 1),
+(1231, 12, 216, 47, 0),
+(1232, 12, 215, 43, 1),
+(1232, 12, 216, 47, 0),
+(1233, 13, 205, 13, 1),
+(1233, 13, 206, 16, 1),
+(1234, 13, 205, 13, 1),
+(1234, 13, 206, 17, 0),
+(1235, 13, 205, 13, 1),
+(1235, 13, 206, 16, 1),
+(1236, 13, 205, 13, 1),
+(1236, 13, 206, 17, 0),
+(1233, 14, 219, 56, 0),
+(1233, 14, 220, 58, 1),
+(1234, 14, 219, 55, 1),
+(1234, 14, 220, 58, 1),
+(1235, 14, 219, 55, 1),
+(1235, 14, 220, 59, 0),
+(1236, 14, 219, 56, 0),
+(1236, 14, 220, 58, 1),
+(1237, 15, 221, 61, 1),
+(1237, 15, 222, 65, 0),
+(1238, 15, 221, 62, 0),
+(1238, 15, 222, 64, 1),
+(1239, 15, 221, 62, 0),
+(1239, 15, 222, 65, 0),
+(1240, 15, 221, 62, 0),
+(1240, 15, 222, 65, 0),
+(1237, 16, 223, 68, 0),
+(1237, 16, 224, 71, 0),
+(1238, 16, 223, 67, 1),
+(1238, 16, 224, 71, 0),
+(1239, 16, 223, 68, 0),
+(1239, 16, 224, 71, 0),
+(1240, 16, 223, 67, 1),
+(1240, 16, 224, 71, 0),
+(1241, 17, 223, 68, 0),
+(1241, 17, 224, 71, 0),
+(1242, 17, 223, 67, 1),
+(1242, 17, 224, 71, 0),
+(1243, 17, 223, 68, 0),
+(1243, 17, 224, 71, 0),
+(1244, 17, 223, 68, 0),
+(1244, 17, 224, 70, 1),
+(1245, 18, 215, 44, 0),
+(1245, 18, 216, 47, 0),
+(1246, 18, 215, 43, 1),
+(1246, 18, 216, 46, 1),
+(1247, 18, 215, 44, 0),
+(1247, 18, 216, 47, 0),
+(1248, 18, 215, 44, 0),
+(1248, 18, 216, 46, 1),
+(1248, 19, 225, 74, 0),
+(1248, 19, 226, 77, 0),
+(1249, 19, 225, 74, 0),
+(1249, 19, 226, 76, 1),
+(1250, 19, 225, 74, 0),
+(1250, 19, 226, 77, 0),
+(1251, 19, 225, 74, 0),
+(1251, 19, 226, 76, 1),
+(1252, 20, 227, 79, 1),
+(1252, 20, 228, 82, 1),
+(1253, 20, 227, 80, 0),
+(1253, 20, 228, 83, 0),
+(1254, 20, 227, 80, 0),
+(1254, 20, 228, 82, 1),
+(1255, 20, 227, 79, 1),
+(1255, 20, 228, 83, 0),
+(1256, 21, 229, 86, 0),
+(1256, 21, 230, 89, 0),
+(1257, 21, 229, 85, 1),
+(1257, 21, 230, 89, 0),
+(1258, 21, 229, 85, 1),
+(1258, 21, 230, 89, 0),
+(1259, 21, 229, 86, 0),
+(1259, 21, 230, 88, 1),
+(1260, 22, 231, 92, 0),
+(1260, 22, 232, 95, 0),
+(1261, 22, 231, 92, 0),
+(1261, 22, 232, 95, 0),
+(1262, 22, 231, 92, 0),
+(1262, 22, 232, 94, 1),
+(1263, 22, 231, 91, 1),
+(1263, 22, 232, 95, 0),
+(1264, 22, 231, 92, 0),
+(1264, 22, 232, 95, 0),
+(1265, 22, 231, 91, 1),
+(1265, 22, 232, 95, 0),
+(1266, 22, 231, 91, 1),
+(1266, 22, 232, 95, 0),
+(1267, 22, 231, 91, 1),
+(1267, 22, 232, 95, 0),
+(1268, 22, 231, 92, 0),
+(1268, 22, 232, 95, 0),
+(1269, 22, 231, 91, 1),
+(1269, 22, 232, 95, 0),
+(1270, 22, 231, 92, 0),
+(1270, 22, 232, 94, 1),
+(1271, 22, 231, 91, 1),
+(1271, 22, 232, 95, 0),
+(1272, 22, 231, 92, 0),
+(1272, 22, 232, 95, 0),
+(1260, 23, 231, 91, 1),
+(1260, 23, 232, 94, 1),
+(1261, 23, 231, 92, 0),
+(1261, 23, 232, 94, 1),
+(1262, 23, 231, 91, 1),
+(1262, 23, 232, 94, 1),
+(1263, 23, 231, 92, 0),
+(1263, 23, 232, 95, 0),
+(1264, 23, 231, 92, 0),
+(1264, 23, 232, 94, 1),
+(1265, 23, 231, 91, 1),
+(1265, 23, 232, 95, 0),
+(1266, 23, 231, 91, 1),
+(1266, 23, 232, 95, 0),
+(1267, 23, 231, 92, 0),
+(1267, 23, 232, 94, 1),
+(1268, 23, 231, 92, 0),
+(1268, 23, 232, 94, 1),
+(1269, 23, 231, 92, 0),
+(1269, 23, 232, 94, 1),
+(1270, 23, 231, 91, 1),
+(1270, 23, 232, 95, 0),
+(1271, 23, 231, 92, 0),
+(1271, 23, 232, 95, 0),
+(1272, 23, 231, 92, 0),
+(1272, 23, 232, 95, 0),
+(1260, 24, 231, 92, 0),
+(1260, 24, 232, 94, 1),
+(1261, 24, 231, 91, 1),
+(1261, 24, 232, 95, 0),
+(1262, 24, 231, 92, 0),
+(1262, 24, 232, 94, 1),
+(1263, 24, 231, 92, 0),
+(1263, 24, 232, 94, 1),
+(1264, 24, 231, 92, 0),
+(1264, 24, 232, 95, 0),
+(1265, 24, 231, 92, 0),
+(1265, 24, 232, 95, 0),
+(1266, 24, 231, 92, 0),
+(1266, 24, 232, 95, 0),
+(1267, 24, 231, 91, 1),
+(1267, 24, 232, 94, 1),
+(1268, 24, 231, 92, 0),
+(1268, 24, 232, 95, 0),
+(1269, 24, 231, 91, 1),
+(1269, 24, 232, 95, 0),
+(1270, 24, 231, 91, 1),
+(1270, 24, 232, 94, 1),
+(1271, 24, 231, 92, 0),
+(1271, 24, 232, 95, 0),
+(1272, 24, 231, 92, 0),
+(1272, 24, 232, 95, 0);
