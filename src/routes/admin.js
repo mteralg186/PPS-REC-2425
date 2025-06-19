@@ -4,7 +4,7 @@ const adminController = require('../controller/adminController');
 
 function requireAdmin(req, res, next) {
   if (!req.session || !req.session.username) {
-    return res.redirect('/login');
+    return res.redirect('/');
   }
   if (req.session.rol !== 'h') {
     return res.status(403).send('Acceso denegado: necesitas ser administrador.');
