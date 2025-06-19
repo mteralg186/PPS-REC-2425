@@ -14,7 +14,7 @@ function requireAlumno(req, res, next) {
 router.use(requireAlumno);
 
 
-router.get('/alumno', (req, res) => {
+router.get('/', (req, res) => {
   res.render('alumno', {
     title: 'Panel del alumno',
     username: req.session.username 
