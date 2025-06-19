@@ -38,15 +38,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
 
-// Rutas (sin duplicados)
-app.use('/', loginRoutes);
-app.use('/', imageRoutes);
-app.use('/', clasesRoutes);
-app.use('/', preguntasRoutes);
-app.use('/', examenesRouter);
-app.use('/', alumnoRoutes);
-app.use('/', adminRoutes);
-app.use('/', profesorRoutes);
+// Rutas 
+app.use('/', loginRoutes); // Login y página principal
+app.use('/imagenes', imageRoutes); // Rutas para imágenes
+app.use('/preguntas', preguntasRoutes); // Preguntas
+app.use('/clases', clasesRoutes); // Clases
+app.use('/examenes', examenesRouter); // Exámenes
+app.use('/alumno', alumnoRoutes); // Panel del alumno
+app.use('/admin', adminRoutes); // Panel del admin
+app.use('/profesor', profesorRoutes);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
