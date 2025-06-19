@@ -1,4 +1,5 @@
 -- Creación de la base de datos
+DROP DATABASE tester;
 CREATE DATABASE IF NOT EXISTS tester;
 
 -- Usar la base de datos
@@ -122,15 +123,42 @@ CREATE TABLE IF NOT EXISTS examenes_realizados (
 
 -- Usuarios
 
-INSERT INTO usuarios (nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil)
-VALUES ('Miguel', 'Ternero Algarín', 'miguelt', 'h', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', '987654321', LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.3\\Uploads\\IMG_36290.jpg'));
-
-INSERT INTO usuarios (nombre, apellido, username, contraseña, fecha_nacimiento, telefono, foto_perfil)
-VALUES ('María', 'RuiG', 'mariar', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', '987654321', LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.3\\Uploads\\IMG_36264.jpg'));
-INSERT INTO usuarios (nombre, apellido, username, contraseña, fecha_nacimiento, telefono, foto_perfil)
-VALUES ('Ronaldo', 'de Assis Moreira', 'Ronaldinho1', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', '987654321', LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.3\\Uploads\\Ronaldinho.png'));
-INSERT INTO usuarios (nombre, apellido, username, contraseña, fecha_nacimiento, telefono, foto_perfil)
-VALUES ('Linda', 'Onotanto', 'officialLinda1', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', '987654321', LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.3\\Uploads\\IMG_36268.jpg'));
+INSERT INTO usuarios (nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil) VALUES ('Miguel', 'Ternero Algarín', 'miguelt', 'h', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', '987654321', LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.3\\Uploads\\IMG_36290.jpg'));
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (100, 'María', 'Jiménez Cruz', 'MaJiCr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 668978406, 'MaJiCr.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (431, 'Isabel', 'López Delgado', 'IsLóDe', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 637729020, 'IsLóDe.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (432, 'Ana', 'Delgado Silva', 'AnDeSi', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 616432816, 'AnDeSi.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (433, 'Sergio', 'García González', 'SeGaGo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 637713243, 'SeGaGo.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (443, 'Lucía', 'Castillo Cruz', 'LuCaCr', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 610778163, 'LuCaCr.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (435, 'Isabel', 'López Morales', 'IsLóMo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 696797573, 'IsLóMo.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (463, 'Sergio', 'Rodríguez Torres', 'SeRoTo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 628919693, 'SeRoTo.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (437, 'Diego', 'Flores Vargas', 'DiFlVa', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 693621426, 'DiFlVa.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (438, 'Fernando', 'Flores Torres', 'FeFlTo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 644350844, 'FeFlTo.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (439, 'Paula', 'Jiménez Flores', 'PaJiFl', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 695870044, 'PaJiFl.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (530, 'Paula', 'García Martínez', 'PaGaMa', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 668687550, 'PaGaMa.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (531, 'Jorge', 'López Castillo', 'JoLóCa', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 684305163, 'JoLóCa.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (52, 'Lucía', 'López González', 'LuLóGo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 696039319, 'LuLóGo.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (53, 'Carlos', 'Jiménez Castillo', 'CaJiCa', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 669011704, 'CaJiCa.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (54, 'Pedro', 'Flores Ortega', 'PeFlOr', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 610651978, 'PeFlOr.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (55, 'Andrés', 'Silva López', 'AnSiLó', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 637263361, 'AnSiLó.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (56, 'Andrés', 'Ortega Delgado', 'AnOrDe', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 673423938, 'AnOrDe.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (57, 'Sofía', 'Ramírez Flores', 'SoRaFl', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 671478007, 'SoRaFl.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (538, 'Laura', 'Jiménez Castillo', 'LaJiCa', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 615832230, 'LaJiCa.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (519, 'Laura', 'Rodríguez Ortega', 'LaRoOr', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 640282943, 'LaRoOr.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (60, 'Laura', 'Rodríguez Pérez', 'LaRoPé', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 642155485, 'LaRoPé.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (58, 'Javier', 'López Ramírez', 'JaLóRa', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 628473910, 'JaLóRa.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (59, 'Natalia', 'García Sánchez', 'NaGaSá', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 676482309, 'NaGaSá.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (610, 'Pedro', 'Morales Ortega', 'PeMoOr', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 690284761, 'PeMoOr.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (613, 'Sofía', 'Ramírez Pérez', 'SoRaPé', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 648273910, 'SoRaPé.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (622, 'Carlos', 'Silva Morales', 'CaSiMo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 617493028, 'CaSiMo.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (631, 'Lucía', 'González Sánchez', 'LuGoSá', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 635192847, 'LuGoSá.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (643, 'Andrés', 'Castillo Flores', 'AnCaFl', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 629473918, 'AnCaFl.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (651, 'Isabel', 'Rodríguez Torres', 'IsRoTo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 645928371, 'IsRoTo.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (663, 'Jorge', 'Flores Morales', 'JoFlMo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 618273945, 'JoFlMo.jpg', '1985-10-20');
+INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (672, 'Laura', 'Silva Pérez', 'LaSiPé', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 640128374, 'LaSiPé.jpg', '1985-10-20');
+INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1344, 'Carlos', 'Ramos Ramirez', 'Carara', 'p',				'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 633649874, 'foto_carlos.jpg',  '1985-10-20');
+INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (3431, 'Alfonso', 'Hernández Delgado', 'Alhede', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 636854924, 'foto_alfonso.jpg', '1985-10-20');
+INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1343, 'Daniel', 'Sánchez Jiménez', 'Dasaji', 'p', 			'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 635987494, 'foto_daniel.jpg',  '1985-10-20');
+INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1323, 'Gustavo', 'Guillen Guerrero', 'gustavo', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 626845694, 'foto_gustavo.jpg', '1985-10-20');
 
 -- Categorias
 insert into categoria (nombre) values ('Bash');
@@ -198,63 +226,27 @@ values (5,'Estado de salida del último comando o script ejecutado.',0),
 
 
 
-       INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (100, 'María', 'Jiménez Cruz', 'MaJiCr', 'a', '$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '07/10/2008', 668978406, 'MaJiCr.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (431, 'Isabel', 'López Delgado', 'IsLóDe', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '28/08/2009', 637729020, 'IsLóDe.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (432, 'Ana', 'Delgado Silva', 'AnDeSi', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '04/01/2009', 616432816, 'AnDeSi.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (433, 'Sergio', 'García González', 'SeGaGo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '21/03/2008', 637713243, 'SeGaGo.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (443, 'Lucía', 'Castillo Cruz', 'LuCaCr', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '15/05/2007', 610778163, 'LuCaCr.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (435, 'Isabel', 'López Morales', 'IsLóMo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '27/09/2008', 696797573, 'IsLóMo.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (463, 'Sergio', 'Rodríguez Torres', 'SeRoTo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '20/09/2008', 628919693, 'SeRoTo.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (437, 'Diego', 'Flores Vargas', 'DiFlVa', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '04/12/2008', 693621426, 'DiFlVa.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (438, 'Fernando', 'Flores Torres', 'FeFlTo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '08/06/2007', 644350844, 'FeFlTo.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (439, 'Paula', 'Jiménez Flores', 'PaJiFl', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '05/08/2007', 695870044, 'PaJiFl.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (530, 'Paula', 'García Martínez', 'PaGaMa', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '18/06/2007', 668687550, 'PaGaMa.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (531, 'Jorge', 'López Castillo', 'JoLóCa', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '17/01/2006', 684305163, 'JoLóCa.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (52, 'Lucía', 'López González', 'LuLóGo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '16/12/2008', 696039319, 'LuLóGo.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (53, 'Carlos', 'Jiménez Castillo', 'CaJiCa', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '10/02/2009', 669011704, 'CaJiCa.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (54, 'Pedro', 'Flores Ortega', 'PeFlOr', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '18/04/2007', 610651978, 'PeFlOr.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (55, 'Andrés', 'Silva López', 'AnSiLó', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '12/06/2009', 637263361, 'AnSiLó.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (56, 'Andrés', 'Ortega Delgado', 'AnOrDe', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '20/12/2007', 673423938, 'AnOrDe.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (57, 'Sofía', 'Ramírez Flores', 'SoRaFl', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '08/08/2008', 671478007, 'SoRaFl.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (538, 'Laura', 'Jiménez Castillo', 'LaJiCa', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '10/04/2006', 615832230, 'LaJiCa.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (519, 'Laura', 'Rodríguez Ortega', 'LaRoOr', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '08/12/2006', 640282943, 'LaRoOr.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (60, 'Laura', 'Rodríguez Pérez', 'LaRoPé', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '22/05/2008', 642155485, 'LaRoPé.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (58, 'Javier', 'López Ramírez', 'JaLóRa', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '09/07/2008', 628473910, 'JaLóRa.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (59, 'Natalia', 'García Sánchez', 'NaGaSá', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '15/05/2006', 676482309, 'NaGaSá.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (610, 'Pedro', 'Morales Ortega', 'PeMoOr', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '12/11/2007', 690284761, 'PeMoOr.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (613, 'Sofía', 'Ramírez Pérez', 'SoRaPé', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '02/08/2008', 648273910, 'SoRaPé.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (622, 'Carlos', 'Silva Morales', 'CaSiMo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '20/03/2009', 617493028, 'CaSiMo.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (631, 'Lucía', 'González Sánchez', 'LuGoSá', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '18/01/2006', 635192847, 'LuGoSá.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (643, 'Andrés', 'Castillo Flores', 'AnCaFl', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '27/09/2008', 629473918, 'AnCaFl.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (651, 'Isabel', 'Rodríguez Torres', 'IsRoTo', 'a', 	'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '14/06/2007', 645928371, 'IsRoTo.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (663, 'Jorge', 'Flores Morales', 'JoFlMo', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '03/12/2006', 618273945, 'JoFlMo.jpg', '18/06/2025');
-INSERT INTO usuarios (id, nombre, apellido, username, rol, contraseña, fecha_nacimiento, telefono, foto_perfil, fecha_registro) VALUES (672, 'Laura', 'Silva Pérez', 'LaSiPé', 'a', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '25/04/2009', 640128374, 'LaSiPé.jpg', '18/06/2025');
 
-INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1344, 'Carlos', 'Ramos Ramirez', 'Carara', 'p',				'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1978-08-12', 633649874, 'foto_carlos.jpg', '2025-06-18');
-INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (3431, 'Alfonso', 'Hernández Delgado', 'Alhede', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1973-11-05', 636854924, 'foto_alfonso.jpg', '2025-06-18');
-INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1343, 'Daniel', 'Sánchez Jiménez', 'Dasaji', 'p', 			'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1984-06-12', 635987494, 'foto_daniel.jpg', '2025-06-18');
-INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1323, 'Gustavo', 'Guillen Guerrero', 'gustavo', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1969-02-12', 626845694, 'foto_gustavo.jpg', '2025-06-18');
-
-
+select * from usuarios;
 
 INSERT INTO clases (id_clase, nombre, codigo, id_usuario, fecha_creacion) 
 VALUES (1333, 'Redes', '10', 1, '2025-06-18');
 
 INSERT INTO clases (id_clase, nombre, codigo, id_usuario, fecha_creacion) 
-VALUES (1222, 'Base de datos', '20', 2, '2025-06-18');
+VALUES (1222, 'Base de datos', '20', 52, '2025-06-18');
 
 INSERT INTO clases (id_clase, nombre, codigo, id_usuario, fecha_creacion) 
-VALUES (1334, 'Administración de Sistemas', '30', 3, '2025-06-18');
+VALUES (1334, 'Administración de Sistemas', '30', 53, '2025-06-18');
 
 INSERT INTO clases (id_clase, nombre, codigo, id_usuario, fecha_creacion) 
-VALUES (1223, 'Fundamentos de Hardware', '40', 4, '2025-06-18');
+VALUES (1223, 'Fundamentos de Hardware', '40', 54, '2025-06-18');
 
 -- Asignar usuarios a clases (clases_asignadas)
 INSERT INTO clases_asignadas (id_clase, id_alumno) VALUES
-(1333, 1),
-(1222, 2),
-(1334, 3),
-(1223, 4);
+(1333, 52),
+(1222, 53),
+(1334, 54),
+(1223, 55);
 
 -- Crear examenes para cada clase
 INSERT INTO examenes (nombre, id_categoria, id_clase, fecha_hora_disponible, fecha_hora_fin) VALUES
