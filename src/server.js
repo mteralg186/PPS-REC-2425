@@ -40,13 +40,13 @@ app.set('views', './src/views');
 
 // Rutas 
 app.use('/', loginRoutes); // Login y página principal
-app.use('/imagenes', imageRoutes); // Rutas para imágenes
-app.use('/preguntas', preguntasRoutes); // Preguntas
-app.use('/clases', clasesRoutes); // Clases
-app.use('/examenes', examenesRouter); // Exámenes
-app.use('/alumno', alumnoRoutes); // Panel del alumno
+app.use('/', imageRoutes); // Rutas para imágenes
+app.use('/', preguntasRoutes); // Preguntas
+app.use('/', clasesRoutes); // Clases
+app.use('/', examenesRouter); // Exámenes
+app.use('/', alumnoRoutes); // Panel del alumno
 app.use('/admin', adminRoutes); // Panel del admin
-app.use('/profesor', profesorRoutes);
+app.use('/', profesorRoutes);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
