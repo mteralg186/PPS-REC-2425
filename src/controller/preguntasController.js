@@ -151,7 +151,7 @@ async function crearExamen(req, res) {
 
   } catch (error) {
     await connection.promise().rollback();
-    console.error('Error por parte del usuario rellenando el examen:', error);
+    console.error('Error rellena el formulario y verificar que la hora inicio y fin de examen sean antes y despues de la hora actual :', error);
     return res.status(500).json({ error: error.message });
   }
 }

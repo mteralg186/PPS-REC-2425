@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Panel Admin</title>
+<style>
+  body { font-family: Arial, sans-serif; }
+  nav button {
+    margin: 0 5px 15px 0;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  .tabla { display: none; border-collapse: collapse; width: 100%; }
+  .tabla.activa { display: table; }
+  table, th, td { border: 1px solid #aaa; padding: 6px; }
+  input[type=text], input[type=number], input[type=datetime-local] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  form { margin: 0; }
+  button[type=submit] { padding: 4px 8px; margin: 0 2px; }
+</style>
+<script>
+  function mostrarTabla(id) {
+    document.querySelectorAll('.tabla').forEach(t => t.classList.remove('activa'));
+    document.getElementById(id).classList.add('activa');
+  }
+  window.onload = () => mostrarTabla('usuarios');
+</script>
+</head>
+<body>
+
+<h1>Panel de Administración</h1>
+
+<nav>
+  <button onclick="mostrarTabla('usuarios')">Usuarios</button>
+  <button onclick="mostrarTabla('categorias')">Categorías</button>
+  <button onclick="mostrarTabla('preguntas')">Preguntas</button>
+  <button onclick="mostrarTabla('respuestas')">Respuestas</button>
+  <button onclick="mostrarTabla('clases')">Clases</button>
+  <button onclick="mostrarTabla('examenes')">Exámenes</button>
+</nav>
+
+<!-- Usuarios -->
+<table id="usuarios" class="tabla">
+<thead><tr><th>ID</th><th>Nombre</th><th>Apellido</th><th>Username</th><th>Rol</th><th>Teléfono</th><th>Acciones</th></tr></thead>
+<tbody>
+<% usuarios.forEach(u => { %>
+  <tr>
+    <form method="POST" action="/admin/usuarios/update/<%= u.id %>">
+      <td><%= u.id %></td>
+      <td><input name="nombre" value="<%= u.nombre %>" required></td>
+      <td><input name="apellido" value="<%= u.apellido %>" required></td>
+      <td><input name="username" value="<%= u.username %>" required></td>
+      <td><input name="rol" value="<%= u.rol %>" maxlength="1" required></td>
+      <td><input name="telefono" value="<%= u.telefono || '' %>"></td>
+      <td>
+        <button type="submit">Actualizar</button>
+    </form>
+        <form method="POST" action="/admin/usuarios/delete/<%= u.id %>" style="display:inline;" onsubmit="return confirm('Eliminar usuario?');">
+          <button type="submit">Eliminar</button>
+        </form>
+      </td>
+  </tr>
+<% }) %>
+</tbody>
+</table>
+
+<!-- Categorías -->
+<table id="categorias" class="tabla">
+<thead><tr><th>ID</th><th>Nombre</th><th>Acciones</th></tr></thead>
+<tbody>
+<% categorias.forEach(c => { %>
+  <tr>
+    <form method="POST" action="/admin/categorias/update/<%= c.id %>">
+      <td><%= c.id %></td>
+      <td><input name="nombre" value="<%= c.nombre %>" required></td>
+      <td>
+        <button type="submit">Actualizar</button>
+    </form>
+        <form method="POST" action="/admin/categorias/delete/<%= c.id %>" style="display:inline;" onsubmit="return confirm('Eliminar categoría?');">
+          <button type="submit">Eliminar</button>
+        </form>
+      </td>
+  </tr>
+<% }) %>
+</tbody>
+</table>
+
+<!-- Preguntas -->
+<table id="preguntas" class="tabla">
+<thead><tr><th>ID</th><th>Nombre</th><th>ID Categoría</th><th>Acciones</th></tr></thead>
+<tbody>
+<% preguntas.forEach(p => { %>
+  <tr>
+    <form method="POST" action="/admin/preguntas/update/<%= p.id %>">
+      <td><%= p.id %></td>
+      <td><input name="nombre" value="<%= p.nombre %>" required></td>
+      <td><input name="id_categoria" type="number" value="<%= p.id_categoria %>" required></td>
+      <td>
+        <button type="submit">Actualizar</button>
+    </form>
+        <form method="POST" action="/admin/preguntas/delete/<%= p.id %>" style="display:inline;" onsubmit="return confirm('Eliminar pregunta?');">
+          <button type="submit">Eliminar</button>
+        </form>
+      </td>
+  </tr>
+<% }) %>
+</tbody>
+</table>
+
+<!-- Respuestas -->
+<table id="respuestas" class="tabla">
+<thead><tr><th>ID</th><th>ID Pregunta</th><th>Nombre</th><th>Es Correcta</th><th>Acciones</th></tr></thead>
+<tbody>
+<% respuestas.forEach(r => { %>
+  <tr>
+    <form method="POST" action="/admin/respuestas/update/<%= r.id %>">
+      <td><%= r.id %></td>
+      <td><input name="id_pregunta" type="number" value="<%= r.id_pregunta %>" required></td>
+      <td><input name="nombre" value="<%= r.nombre %>" required></td>
+      <td><input name="esCorrecta" type="checkbox" <%= r.esCorrecta ? 'checked' : '' %>></td>
+      <td>
+        <button type="submit">Actualizar</button>
+    </form>
+        <form method="POST" action="/admin/respuestas/delete/<%= r.id %>" style="display:inline;" onsubmit="return confirm('Eliminar respuesta?');">
+          <button type="submit">Eliminar</button>
+        </form>
+      </td>
+  </tr>
+<% }) %>
+</tbody>
+</table>
+
+<!-- Clases -->
+<table id="clases" class="tabla">
+<thead><tr><th>ID</th><th>Nombre</th><th>Código</th><th>ID Usuario</th><th>Acciones</th></tr></thead>
+<tbody>
+<% clases.forEach(c => { %>
+  <tr>
+    <form method="POST" action="/admin/clases/update/<%= c.id_clase %>">
+      <td><%= c.id_clase %></td>
+      <td><input name="nombre" value="<%= c.nombre %>" required></td>
+      <td><input name="codigo" value="<%= c.codigo || '' %>"></td>
+      <td><input name="id_usuario" type="number" value="<%= c.id_usuario %>"></td>
+      <td>
+        <button type="submit">Actualizar</button>
+    </form>
+        <form method="POST" action="/admin/clases/delete/<%= c.id_clase %>" style="display:inline;" onsubmit="return confirm('Eliminar clase?');">
+          <button type="submit">Eliminar</button>
+        </form>
+      </td>
+  </tr>
+<% }) %>
+</tbody>
+</table>
+
+<!-- Examenes -->
+<table id="examenes" class="tabla">
+<thead><tr><th>ID</th><th>Nombre</th><th>ID Categoría</th><th>ID Clase</th><th>Fecha Disponible</th><th>Fecha Fin</th><th>Acciones</th></tr></thead>
+<tbody>
+<% examenes.forEach(e => { %>
+  <tr>
+    <form method="POST" action="/admin/examenes/update/<%= e.id_examen %>">
+      <td><%= e.id_examen %></td>
+      <td><input name="nombre" value="<%= e.nombre %>" required></td>
+      <td><input name="id_categoria" type="number" value="<%= e.id_categoria %>"></td>
+      <td><input name="id_clase" type="number" value="<%= e.id_clase %>"></td>
+      <td><input type="datetime-local" name="fecha_hora_disponible" value="<%= e.fecha_hora_disponible %>"></td>
+      <td><input type="datetime-local" name="fecha_hora_fin" value="<%= e.fecha_hora_fin %>"></td>
+      <td>
+        <button type="submit">Actualizar</button>
+    </form>
+        <form method="POST" action="/admin/examenes/delete/<%= e.id_examen %>" style="display:inline;" onsubmit="return confirm('Eliminar examen?');">
+          <button type="submit">Eliminar</button>
+        </form>
+      </td>
+  </tr>
+<% }) %>
+</tbody>
+</table>
+
+</body>
+</html>

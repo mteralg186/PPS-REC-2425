@@ -8,7 +8,7 @@ const preguntasRoutes = require('./routes/preguntas');
 const clasesRoutes = require('./routes/clases');
 const examenesRouter = require('./routes/examenes');
 const generalRoutes = require('./routes/general');
-
+const adminRoutes = require('./routes/admin');
 const app = express();
 const port = 3001;
 
@@ -44,6 +44,7 @@ app.use('/', clasesRoutes);
 app.use('/', preguntasRoutes);
 app.use('/', examenesRouter);
 app.use('/', generalRoutes);
+app.use('/admin', adminRoutes);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
