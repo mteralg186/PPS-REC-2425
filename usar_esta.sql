@@ -119,6 +119,7 @@ CREATE TABLE IF NOT EXISTS examenes_realizados (
 
 -- usuarios
 
+INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (19303, 'Miguelt', 'Kursal Docente', 'miguelt', 'h', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 626845694, 'foto_gustavo.jpg', '1985-10-20');
 -- Profesores
 INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1100, 'Paco', 'Perez Gomez', 'perez', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 626845694, 'foto_perez.jpg', '1985-10-20');
 INSERT INTO usuarios (id,nombre,apellido,username,rol,contraseña,fecha_nacimiento,telefono,foto_perfil,fecha_registro) VALUES (1101, 'Alvaro', 'Guerrero Garcia', 'alvaro', 'p', 		'$2a$10$DxvoLNDuQpgNbheGIRb7ZuKoJA91o24LllzbEGp4fpt.JFqLJ8QUC', '1985-10-20', 626845694, 'foto_alvaro.jpg', '1985-10-20');
