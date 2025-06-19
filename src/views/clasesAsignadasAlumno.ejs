@@ -1,4 +1,3 @@
-
 <%- include('partes/headera') %>
 
 <div class="container mt-5">
@@ -39,25 +38,6 @@
   <% } %>
 </div>
 
-<!-- Modal Bootstrap de confirmación -->
-<div class="modal fade" id="modalConfirmarEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title" id="modalEliminarLabel">Confirmar eliminación</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-      <div class="modal-body">
-        ¿Estás seguro que deseas eliminar esta asignación? Esta acción no se puede deshacer.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger" id="confirmarEliminarBtn">Sí, eliminar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
   const btnFiltrar = document.getElementById('btnFiltrar');
   const selectClase = document.getElementById('id_clase');
@@ -73,38 +53,31 @@
     window.location.href = url.toString();
   });
 
-  let idParaEliminar = null;
-  const modal = new bootstrap.Modal(document.getElementById('modalConfirmarEliminar'));
-  const confirmarBtn = document.getElementById('confirmarEliminarBtn');
-
-  document.querySelectorAll('.btnEliminar').forEach(btn => {
-    btn.addEventListener('click', () => {
-      idParaEliminar = btn.getAttribute('data-id');
-      modal.show();
-    });
-  });
-
-  confirmarBtn.addEventListener('click', async () => {
-    if (!idParaEliminar) return;
+  // Eliminar asignación con confirmación
+document.querySelectorAll('.btnEliminar').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const idAsignacion = btn.getAttribute('data-id');
+    if (!confirm('¿Estás seguro que deseas eliminar esta asignación? Esta acción no se puede deshacer.')) return;
 
     try {
-      const res = await fetch(`/alumno/clases-asignadas/${idParaEliminar}`, {
+      const res = await fetch(`/alumno/clases-asignadas/${idAsignacion}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
       });
       const data = await res.json();
 
       if (res.ok) {
-        modal.hide();
         alert(data.mensaje);
         window.location.reload();
       } else {
-        alert(data.mensaje || 'No se pudo eliminar la asignación.');
+        alert(data.mensaje || 'No fue posible eliminar la asignación en este momento. Por favor, inténtalo de nuevo más tarde.');
       }
     } catch {
-      alert('Error de conexión. Inténtalo nuevamente.');
+      alert('Error de conexión. Por favor, revisa tu conexión a internet e inténtalo nuevamente.');
     }
   });
+});
+
 </script>
 
 <%- include('partes/footer') %>
