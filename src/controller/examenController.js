@@ -90,6 +90,9 @@ const mostrarExamen = (req, res) => {
 
 // Corregir respuestas
 const corregirExamen = (req, res) => {
+
+  console.log('TODO ERRORES');
+  
   const respuestasEnviadas = req.body; // pregunta_id: respuesta_id
   const idExamen = req.params.idExamen;
   const userId = req.session.userId;
@@ -287,6 +290,7 @@ const verResultadosAlumno = async (req, res) => {
     res.render('examenesRealizados', {
       title: 'Resultados de mis exámenes',
       username: req.session.username,
+      rol: req.session.rol,
       resultados,
       examenesDisponibles,
       idExamenFiltro,
@@ -297,6 +301,7 @@ const verResultadosAlumno = async (req, res) => {
     res.render('examenesRealizados', {
       title: 'Resultados de mis exámenes',
       username: req.session.username,
+      rol: req.session.rol,
       mensaje: 'Hubo un error al recuperar tus resultados.',
       resultados: [],
       examenesDisponibles: [],
@@ -466,6 +471,7 @@ const obtenerExamenFalladas = (req, res) => {
 
 // Función para procesar respuestas enviadas sin guardar en base de datos
 const procesarRespuestasExamen = (req, res) => {
+ 
   const usuarioId = req.session.userId;
   const respuestas = req.body; 
 
@@ -504,6 +510,7 @@ const procesarRespuestasExamen = (req, res) => {
       res.render('resultado', {
         title: 'Resultados del Examen',
         username: req.session.username,
+        rol: req.session.rol,
         resultados
       });
     })

@@ -37,6 +37,6 @@ router.post('/clases/delete/:id', adminController.deleteClase);
 
 router.post('/examenes/update/:id', adminController.updateExamen);
 router.post('/examenes/delete/:id', adminController.deleteExamen);
-router.get('/politica-de-cookies', adminController.politicacookies);
+
 
 module.exports = router;

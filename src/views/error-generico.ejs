@@ -1,8 +1,8 @@
-<%- include('partes/headera') %>
+<%- include('partes/cabecera') %>
 <br>
 <div class="container text-center mt-5">
     <h1>Algo fue mal</h1>
-    <p>No tienes permiso para acceder a esta página o ha ocurrido un error inesperado.</p>
+    <p>Ha ocurrido un error inesperado.</p>
                 <% let homeUrl = '/'; %>
             <% if (typeof rol !== 'undefined') { %>
                 <% if (rol === 'a') { homeUrl = '/alumno'; } %>

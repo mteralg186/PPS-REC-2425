@@ -168,6 +168,7 @@ const getPerfil = (req, res) => {
                 title: 'Inicio',
                 mensaje: '' ,
                 username: username,
+                rol: req.session.rol,
                 usuario
             }); 
             //, { username, usuario, mensaje}
@@ -196,6 +197,7 @@ const getPerfilalumno = (req, res) => {
                 title: 'Inicio',
                 mensaje: '' ,
                 username: username,
+                rol: req.session.rol,
                 usuario
             }); 
             //, { username, usuario, mensaje}
@@ -203,6 +205,13 @@ const getPerfilalumno = (req, res) => {
             res.status(404).send('Usuario no encontrado');
         }
     });
+};
+const getPoliticaCookies = (req, res) => {
+    res.render('politica-de-cookies', {
+    title: 'politica de cookies',
+    username: req.session.username,
+    rol: req.session.rol
+  });
 };
 // Exporta las funciones y el enrutador
 module.exports = {
@@ -214,6 +223,7 @@ module.exports = {
     postRegister,
     getError,
     getPerfil,
-    getPerfilalumno
+    getPerfilalumno,
+    getPoliticaCookies
 
 };

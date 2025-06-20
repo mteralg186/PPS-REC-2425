@@ -13,6 +13,7 @@ router
     .get('/registro',loginController.getRegistro)
     .get('/perfil',loginController.getPerfil)
     .get('/perfilalumno',loginController.getPerfilalumno)
-    .get('/error',loginController.getError);
+    .get('/error',loginController.getError)
+    .get('/politica-de-cookies', loginController.getPoliticaCookies);
 
 module.exports = router;

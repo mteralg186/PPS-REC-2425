@@ -27,7 +27,7 @@ const getDashboard = async (req, res) => {
     ex.fecha_hora_fin = ex.fecha_hora_fin ? new Date(ex.fecha_hora_fin).toISOString().slice(0,16) : '';
   });
 
-  res.render('admin', { usuarios, categorias, preguntas, respuestas, clases, examenes });
+  res.render('admin', { username: req.session.username, rol: req.session.rol,usuarios, categorias, preguntas, respuestas, clases, examenes });
 };
 
 
@@ -177,9 +177,7 @@ const deleteExamen = async (req, res) => {
     res.status(500).send('Error eliminando examen');
   }
 };
-const politicacookies = (req, res) => {
-    res.render('politica-de-cookies');
-};
+
 module.exports = {
   getDashboard,
   updateUsuario,
@@ -193,6 +191,5 @@ module.exports = {
   updateClase,
   deleteClase,
   updateExamen,
-  deleteExamen,
-  politicacookies
+  deleteExamen
 };

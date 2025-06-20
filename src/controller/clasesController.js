@@ -11,6 +11,7 @@ const crearClase = (req, res) => {
           title: 'Crear Clase',
           mensaje: 'Error al cargar categorías',
           username: req.session.username,
+          rol: req.session.rol,
           categorias: []
         });
       }
@@ -19,6 +20,7 @@ const crearClase = (req, res) => {
         title: 'Crear Clase',
         mensaje: '',
         username: req.session.username,
+        rol: req.session.rol,
         categorias: categorias  
       });
     });
@@ -55,6 +57,7 @@ const crearClasePost = (req, res) => {
           title: 'Crear Clase',
           mensaje: 'Error al crear la clase',
           username: req.session.username,
+          rol: req.session.rol,
           categorias: categorias || []
         });
       });
@@ -65,6 +68,7 @@ const crearClasePost = (req, res) => {
         title: 'Crear Clase',
         mensaje: `Clase creada correctamente. Código: ${codigo}`,
         username: req.session.username,
+        rol: req.session.rol,
         categorias: categorias || []
       });
     });

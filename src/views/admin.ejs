@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<title>Panel Admin</title>
+<%- include('partes/cabecera') %>
 <style>
   body { font-family: Arial, sans-serif; }
   nav button {
@@ -20,27 +16,19 @@
   form { margin: 0; }
   button[type=submit] { padding: 4px 8px; margin: 0 2px; }
 </style>
-<script>
-  function mostrarTabla(id) {
-    document.querySelectorAll('.tabla').forEach(t => t.classList.remove('activa'));
-    document.getElementById(id).classList.add('activa');
-  }
-  window.onload = () => mostrarTabla('usuarios');
-</script>
-</head>
-<body>
+<script src="/js/admin-panel.js"></script>
+
 
 <h1>Panel de Administración</h1>
 
 <nav>
-  <button onclick="mostrarTabla('usuarios')">Usuarios</button>
-  <button onclick="mostrarTabla('categorias')">Categorías</button>
-  <button onclick="mostrarTabla('preguntas')">Preguntas</button>
-  <button onclick="mostrarTabla('respuestas')">Respuestas</button>
-  <button onclick="mostrarTabla('clases')">Clases</button>
-  <button onclick="mostrarTabla('examenes')">Exámenes</button>
+  <button data-tabla="usuarios">Usuarios</button>
+  <button data-tabla="categorias">Categorías</button>
+  <button data-tabla="preguntas">Preguntas</button>
+  <button data-tabla="respuestas">Respuestas</button>
+  <button data-tabla="clases">Clases</button>
+  <button data-tabla="examenes">Exámenes</button>
 </nav>
-
 <!-- Usuarios -->
 <table id="usuarios" class="tabla">
 <thead><tr><th>ID</th><th>Nombre</th><th>Apellido</th><th>Username</th><th>Rol</th><th>Teléfono</th><th>Acciones</th></tr></thead>
@@ -180,5 +168,4 @@
 </tbody>
 </table>
 
-</body>
-</html>
+<%- include('partes/footer') %>

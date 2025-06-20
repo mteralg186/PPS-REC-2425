@@ -1,4 +1,4 @@
-<%- include('partes/header') %>
+<%- include('partes/cabecera') %>
 
 <div class="container mt-5">
   <h2 class="text-center mb-4"><%= title %></h2>
@@ -19,7 +19,7 @@
             <td><%= clase.codigo %></td>
             <td><%= new Date(clase.fecha_creacion).toLocaleDateString() %></td>
             <td>
-              <button class="btn btn-danger btn-sm" onclick="mostrarConfirmacion('clase', <%= clase.id_clase %>)">Eliminar</button>
+<button class="btn btn-danger btn-sm btn-eliminar-clase" data-id="<%= clase.id_clase %>">Eliminar</button>
             </td>
           </tr>
         <% }) %>
@@ -45,7 +45,7 @@
             <td><%= examen.fecha_hora_disponible ? new Date(examen.fecha_hora_disponible).toLocaleString() : 'No definido' %></td>
             <td><%= examen.fecha_hora_fin ? new Date(examen.fecha_hora_fin).toLocaleString() : 'No definido' %></td>
             <td>
-              <button class="btn btn-danger btn-sm" onclick="mostrarConfirmacion('examen', <%= examen.id_examen %>)">Eliminar</button>
+              <button class="btn btn-danger btn-sm btn-eliminar-examen" data-id="<%= examen.id_examen %>">Eliminar</button>
             </td>
           </tr>
         <% }) %>
@@ -72,77 +72,6 @@
     </div>
   </div>
 </div>
-
-<script>
-  let eliminarId = null;
-  let eliminarTipo = null; // 'clase' o 'examen'
-
-  function mostrarConfirmacion(tipo, id) {
-    eliminarId = id;
-    eliminarTipo = tipo;
-    const mensaje = tipo === 'clase' ? 
-      '¿Estás seguro de que quieres eliminar esta clase? Se eliminarán también sus exámenes relacionados.' : 
-      '¿Estás seguro de que quieres eliminar este examen?';
-    
-    document.getElementById('confirmModalBody').textContent = mensaje;
-
-    const modalElement = document.getElementById('confirmModal');
-    const modal = new bootstrap.Modal(modalElement);
-
-    modal.show();
-
-    const btnConfirmar = document.getElementById('confirmBtn');
-
-    // Remover event listeners anteriores para evitar llamadas repetidas
-    btnConfirmar.onclick = null;
-
-    btnConfirmar.onclick = async () => {
-      modal.hide();
-      if (eliminarTipo === 'clase') {
-        await eliminarClase(eliminarId);
-      } else {
-        await eliminarExamen(eliminarId);
-      }
-    };
-  }
-
-  async function eliminarClase(idClase) {
-    try {
-      const res = await fetch(`/profesor/clases/${idClase}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const data = await res.json();
-
-      if (data.success) {
-        alert('Clase eliminada correctamente.');
-        document.getElementById(`fila-clase-${idClase}`).remove();
-      } else {
-        alert('Error al eliminar la clase: ' + (data.error || 'Error desconocido.'));
-      }
-    } catch {
-      alert('No se pudo conectar con el servidor. Por favor, inténtalo más tarde.');
-    }
-  }
-
-  async function eliminarExamen(idExamen) {
-    try {
-      const res = await fetch(`/profesor/examenes/${idExamen}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const data = await res.json();
-
-      if (data.success) {
-        alert('Examen eliminado correctamente.');
-        document.getElementById(`fila-examen-${idExamen}`).remove();
-      } else {
-        alert('Error al eliminar el examen: ' + (data.error || 'Error desconocido.'));
-      }
-    } catch {
-      alert('No se pudo conectar con el servidor. Por favor, inténtalo más tarde.');
-    }
-  }
-</script>
+<script src="/js/clases-examen-delete.js"></script>
 
 <%- include('partes/footer') %>
