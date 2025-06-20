@@ -7,7 +7,11 @@ function requireProfesor(req, res, next) {
     return res.redirect('/');
   }
   if (req.session.rol !== 'p') {
-    return res.status(403).send('Acceso denegado: necesitas ser profesor.');
+    return res.status(403).render('error-generico', {
+    title: 'Panel del profesor',
+    username: req.session.username,
+    rol: req.session.rol
+  });
   }
   next();
 }

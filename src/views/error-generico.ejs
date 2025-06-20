@@ -1,0 +1,14 @@
+<%- include('partes/headera') %>
+<br>
+<div class="container text-center mt-5">
+    <h1>Algo fue mal</h1>
+    <p>No tienes permiso para acceder a esta página o ha ocurrido un error inesperado.</p>
+                <% let homeUrl = '/'; %>
+            <% if (typeof rol !== 'undefined') { %>
+                <% if (rol === 'a') { homeUrl = '/alumno'; } %>
+                <% if (rol === 'p') { homeUrl = '/profesor'; } %>
+                <% if (rol === 'admin') { homeUrl = '/admin'; } %>
+            <% } %>
+    <a href="<%= homeUrl %>">Volver al inicio</a>
+</div>
+<%- include('partes/footer') %>

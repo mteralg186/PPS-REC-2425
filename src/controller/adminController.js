@@ -177,7 +177,9 @@ const deleteExamen = async (req, res) => {
     res.status(500).send('Error eliminando examen');
   }
 };
-
+const politicacookies = (req, res) => {
+    res.render('politica-de-cookies');
+};
 module.exports = {
   getDashboard,
   updateUsuario,
@@ -191,5 +193,6 @@ module.exports = {
   updateClase,
   deleteClase,
   updateExamen,
-  deleteExamen
+  deleteExamen,
+  politicacookies
 };

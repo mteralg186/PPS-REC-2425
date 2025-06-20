@@ -6,7 +6,11 @@ function requireAlumno(req, res, next) {
     return res.redirect('/');
   }
   if (req.session.rol !== 'a') {
-    return res.status(403).send('Acceso denegado: necesitas ser Alumno.');
+    return res.status(403).render('error-generico', {
+    title: 'Panel del alumno',
+    username: req.session.username,
+    rol: req.session.rol
+  });
   }
   next();
 }

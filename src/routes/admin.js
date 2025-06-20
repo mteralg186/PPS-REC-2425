@@ -7,7 +7,11 @@ function requireAdmin(req, res, next) {
     return res.redirect('/');
   }
   if (req.session.rol !== 'h') {
-    return res.status(403).send('Acceso denegado: necesitas ser administrador.');
+    return res.status(403).render('error-generico', {
+    title: 'Panel del administrador',
+    username: req.session.username,
+    rol: req.session.rol
+  });
   }
   next();
 }
@@ -33,5 +37,6 @@ router.post('/clases/delete/:id', adminController.deleteClase);
 
 router.post('/examenes/update/:id', adminController.updateExamen);
 router.post('/examenes/delete/:id', adminController.deleteExamen);
+router.get('/politica-de-cookies', adminController.politicacookies);
 
 module.exports = router;
